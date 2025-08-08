@@ -299,7 +299,7 @@ function CTA() {
                 <Mail className="mr-2 h-4 w-4" /> Email Me
               </Button>
             </a>
-            <a href="https://cal.com/your-handle/intro" target="_blank" rel="noopener noreferrer">
+            <a href="https://calendar.app.google/ovfeAVX2EFt9RCUL6" target="_blank" rel="noopener noreferrer">
               <Button className="border-white/30 text-white hover:bg-white/10">
                 Book a Call <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
