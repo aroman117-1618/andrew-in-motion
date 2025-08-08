@@ -19,13 +19,13 @@ export default function App() {
         speed={0.18}
         backgroundFade={0.06}
         palette={[
-          [ 59,  98,  85], // pine       #3B6255
-          [ 17,  41,  23], // deep pine  #112917
-          [  8,  38,  31], // deep forest
-          [  6,  74,  99], // teal navy
-          [ 28, 139, 102], // emerald
-          [155, 194,  60], // lime
-          [207, 226, 142], // light lime
+          [59, 98, 85],   // pine       #3B6255
+          [17, 41, 23],   // deep pine  #112917
+          [8, 38, 31],    // deep forest
+          [6, 74, 99],    // teal navy
+          [28, 139, 102], // emerald
+          [155, 194, 60], // lime
+          [207, 226, 142] // light lime
         ]}
       />
 
@@ -127,26 +127,20 @@ function About() {
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
             <h3 className="text-lg font-semibold">Operator Origin</h3>
-            <p className="mt-2 text-zinc-300 leading-relaxed">
+            <p className="mt-2 text-base text-zinc-300 leading-relaxed">
               I didn’t start in tech — I started in the kitchen. Service, precision, and hard work weren’t just job requirements; they were survival skills. Those same principles shaped my transition into the business world, first at Equinox, where I honed a sales-driven, value-based discovery and negotiation approach. I learned how to identify key personas, align them with market-fit investment areas, and anchor conversations in proof points that mattered.
-As my career evolved, I married that commercial instinct with an analytical mindset — building customer listening systems that cut through noise, surface meaningful signals, and scale those insights across entire organizations.
+              <br /><br />
+              As my career evolved, I married that commercial instinct with an analytical mindset — building customer listening systems that cut through noise, surface meaningful signals, and scale those insights across entire organizations.
             </p>
-<div className="mt-4 backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl p-6">
-  <ul className="space-y-2 text-zinc-200">
-    <li className="flex gap-2">
-      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" />
-      Turning customer data into proactive growth strategies
-    </li>
-    <li className="flex gap-2">
-      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" />
-      Building systems that turn customer signals into scalable action
-    </li>
-    <li className="flex gap-2">
-      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" />
-      Translating value-based discovery and customer signals into real revenue
-    </li>
-  </ul>
-</div>
+
+            {/* Sub-panel matches Services "Expected Results" spacing */}
+            <div className="mt-5 rounded-xl border border-zinc-800 p-4">
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-base text-zinc-200">
+                <li>Turning customer data into proactive growth strategies</li>
+                <li>Building systems that turn customer signals into scalable action</li>
+                <li>Translating value‑based discovery and customer signals into real revenue</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
 
@@ -154,18 +148,19 @@ As my career evolved, I married that commercial instinct with an analytical mind
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
             <h3 className="text-lg font-semibold">Track Record</h3>
-            <p className="mt-4 text-zinc-300">
-              I’ve been responsible for every stage of the customer lifecycle — pre-sale through renewal, including cross-sell and upsell strategies (with a personal preference for usage-based pricing). My work consistently centers on engineering efficient systems that reduce friction, improve data quality, and help GTM teams operate as a cohesive, high-performing unit.
-For me, it’s all about storytelling with precision — finding the signal among the noise and translating objectives into scalable, real-world results.
+            <p className="mt-2 text-base text-zinc-300 leading-relaxed">
+              I’ve been responsible for every stage of the customer lifecycle — pre-sale through renewal, including cross-sell and upsell strategies (with a personal preference for usage-based pricing). My work consistently centers on engineering efficient systems that reduce friction, improve data quality, and help GTM teams operate as a cohesive, high-performing unit. For me, it’s all about storytelling with precision — finding the signal among the noise and translating objectives into scalable, real-world results.
             </p>
-<div className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl p-6">
-  <ul className="space-y-2 text-sm text-zinc-300">
-    <li><span style={{ color: '#3B6255', fontWeight: '600' }}>Nift</span> — Early-stage growth & foundational GTM build-out.</li>
-    <li><span style={{ color: '#3B6255', fontWeight: '600' }}>Robin</span> — Series A/B scaling, automation design, retention systems.</li>
-    <li><span style={{ color: '#3B6255', fontWeight: '600' }}>Datadog</span> — At-scale & FedGov GTM lifecycle automation.</li>
-    <li><span style={{ color: '#3B6255', fontWeight: '600' }}>Klaviyo</span> — RevOps automations; contract-to-cash; ROI reporting.</li>
-  </ul>
-</div>
+
+            {/* Company list sub-panel — same outline + spacing + font size */}
+            <div className="mt-5 rounded-xl border border-zinc-800 p-4">
+              <ul className="mt-2 space-y-1 text-base leading-relaxed text-zinc-200">
+                <li><span className="text-[#3B6255] font-semibold">Nift</span> — Early-stage growth & foundational GTM build-out.</li>
+                <li><span className="text-[#3B6255] font-semibold">Robin</span> — Series A/B scaling, automation design, retention systems.</li>
+                <li><span className="text-[#3B6255] font-semibold">Datadog</span> — At-scale & FedGov GTM lifecycle automation.</li>
+                <li><span className="text-[#3B6255] font-semibold">Klaviyo</span> — RevOps automations; contract-to-cash; ROI reporting.</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </div>
