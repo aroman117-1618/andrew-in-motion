@@ -69,7 +69,6 @@ function SiteNav() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden py-20 sm:py-28">
-      {/* no GradientOrb here anymore; the brain is global */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -121,7 +120,6 @@ function About() {
         subtitle="From the kitchen to the boardroom: a value-based, experience-first mindset married with analytical rigor to build customer listening systems and GTM programs that actually move revenue."
       />
 
-      {/* Two cards, same treatment as Services */}
       <div className="grid gap-6 md:grid-cols-2">
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
@@ -133,9 +131,9 @@ function About() {
               As my career evolved, I married that commercial instinct with an analytical mindset — building customer listening systems that cut through noise, surface meaningful signals, and scale those insights across entire organizations.
             </p>
 
-            {/* Sub-panel matches Services "Expected Results" spacing */}
+            {/* Sub-panel matches Services "Expected Results" spacing; bullet alignment via marker color */}
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-base text-zinc-200">
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-base text-zinc-200 marker:text-[#3B6255]">
                 <li>Turning customer data into proactive growth strategies</li>
                 <li>Building systems that turn customer signals into scalable action</li>
                 <li>Translating value‑based discovery and customer signals into real revenue</li>
@@ -152,7 +150,6 @@ function About() {
               I’ve been responsible for every stage of the customer lifecycle — pre-sale through renewal, including cross-sell and upsell strategies (with a personal preference for usage-based pricing). My work consistently centers on engineering efficient systems that reduce friction, improve data quality, and help GTM teams operate as a cohesive, high-performing unit. For me, it’s all about storytelling with precision — finding the signal among the noise and translating objectives into scalable, real-world results.
             </p>
 
-            {/* Company list sub-panel — same outline + spacing + font size */}
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
               <ul className="mt-2 space-y-1 text-base leading-relaxed text-zinc-200">
                 <li><span className="text-[#3B6255] font-semibold">Nift</span> — Early-stage growth & foundational GTM build-out.</li>
@@ -217,14 +214,14 @@ function ServiceCard({ title, tagline, bullets, results }) {
       <CardContent>
         <h3 className="text-xl font-semibold">{title}</h3>
         <p className="mt-1 text-zinc-400">{tagline}</p>
-        <div className="mt-4 grid gap-2 text-zinc-200">
+
+        {/* aligned bullets via native markers */}
+        <ul className="mt-4 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
           {bullets.map((b, i) => (
-            <div key={i} className="flex items-start gap-2">
-              <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" />
-              <p>{b}</p>
-            </div>
+            <li key={i}>{b}</li>
           ))}
-        </div>
+        </ul>
+
         <div className="mt-5 rounded-xl border border-zinc-800 p-4">
           <p className="text-xs uppercase tracking-wider text-zinc-400">Expected Results</p>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-zinc-200">
@@ -247,6 +244,7 @@ function Impact() {
         subtitle="Representative wins across GTM lifecycle automation, RevOps reporting, and occupancy‑based workflows."
       />
       <div className="grid gap-6 md:grid-cols-2">
+        {/* Left: Lifecycle (unchanged, but bullets aligned) */}
         <ImpactCard
           title="GTM Lifecycle Automation"
           items={[
@@ -256,20 +254,30 @@ function Impact() {
             "Drove lifecycle automation and API scripts through Git-based workflows, supporting best practices for testing, pull requests, and staging deployment.",
           ]}
         />
-        <ImpactCard
-          title="RevOps Reporting & Automations"
-          items={[
-            "Architected business process automations across CS, Finance, and BizOps — streamlining contract-to-cash, reducing billing disputes, and saving 200+ weekly hours via cross-system integrations.",
-            "Developed custom ROI reporting for Managed Customers to drive upgrades & committed contracts — 8x increase in contracted customers, +18% NRR (+$1.62M ARR).",
-          ]}
-        />
-        <ImpactCard
-          title="Occupancy‑Based & Personal Automations"
-          items={[
-            "Built and tested custom integrations using SQL, Java, AWS, and Postman to support global enterprise deployments, including secure RFID & Occupancy-based resource access aligned to modern authentication protocols.",
-            "Personal Workflow: “Let’s get started” morning briefing powered by Eve Occupancy Sensors + iOS Shortcuts + Pushcut Automation Server — triggers a background sequence (calendar, tasks, weather, commute, prioritized call sheet, and system checks) via secure webhooks, hands-free.",
-          ]}
-        />
+
+        {/* Right: Merged RevOps + Occupancy into one balanced panel */}
+        <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
+          <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+          <CardContent>
+            <div>
+              <h3 className="text-lg font-semibold">RevOps Reporting & Automations</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
+                <li>Architected business process automations across CS, Finance, and BizOps — streamlining contract-to-cash, reducing billing disputes, and saving 200+ weekly hours via cross-system integrations.</li>
+                <li>Developed custom ROI reporting for Managed Customers to drive upgrades & committed contracts — 8x increase in contracted customers, +18% NRR (+$1.62M ARR).</li>
+              </ul>
+            </div>
+
+            <div className="my-6 h-px bg-zinc-800" />
+
+            <div>
+              <h3 className="text-lg font-semibold">Occupancy‑Based & Personal Automations</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
+                <li>Built and tested custom integrations using SQL, Java, AWS, and Postman to support global enterprise deployments, including secure RFID & Occupancy-based resource access aligned to modern authentication protocols.</li>
+                <li>Personal Workflow: “Let’s get started” morning briefing powered by Eve Occupancy Sensors + iOS Shortcuts + Pushcut Automation Server — triggers a background sequence (calendar, tasks, weather, commute, prioritized call sheet, and system checks) via secure webhooks, hands-free.</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );
@@ -281,14 +289,12 @@ function ImpactCard({ title, items }) {
       <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
       <CardContent>
         <h3 className="text-lg font-semibold">{title}</h3>
-        <div className="mt-3 space-y-3 text-zinc-200">
+        {/* aligned bullets via native markers */}
+        <ul className="mt-3 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
           {items.map((it, i) => (
-            <div key={i} className="flex items-start gap-2">
-              <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" />
-              <p className="leading-relaxed">{it}</p>
-            </div>
+            <li key={i} className="leading-relaxed">{it}</li>
           ))}
-        </div>
+        </ul>
       </CardContent>
     </Card>
   );
