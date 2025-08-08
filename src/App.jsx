@@ -77,13 +77,13 @@ function Hero() {
         className="relative z-10 mx-auto max-w-3xl text-center"
       >
         <p className="mb-4 text-xs uppercase tracking-[0.25em] text-zinc-400">
-          GTM Systems • Customer Success • Automation
+          GTM Systems • Customer Success • Lifecycle Automation
         </p>
         <h1 className="mb-4 text-3xl font-semibold leading-tight sm:text-5xl">
           Scale your growth <span className="text-[#3B6255]">without scaling headcount</span>
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-zinc-300">
-          I design revenue-aligned systems that eliminate manual work, improve data quality, and let GTM teams operate like a single, high‑performing unit.
+          GTM Leader with a proven track record designing revenue-aligned systems that eliminate manual work, improve data quality, and let GTM teams operate like a single, high‑performing unit.
         </p>
         <div className="flex items-center justify-center gap-3">
           <a href="#services">
@@ -118,7 +118,7 @@ function About() {
       <SectionHeader
         kicker="About"
         title="Storytelling with precision, systems at scale"
-        subtitle="From the kitchen to Equinox to software: a sales-driven mindset married with analytical rigor to build customer listening systems and GTM programs that actually move revenue."
+        subtitle="From the kitchen to the boardroom: a value-based, experience-first mindset married with analytical rigor to build customer listening systems and GTM programs that actually move revenue."
       />
 
       {/* Two cards, same treatment as Services */}
@@ -128,14 +128,13 @@ function About() {
           <CardContent>
             <h3 className="text-lg font-semibold">Operator Origin</h3>
             <p className="mt-2 text-zinc-300 leading-relaxed">
-              I started in the kitchen—service, precision, and hard work. At Equinox, I learned value-based discovery
-              and negotiation, aligning personas to product-market truth. That evolved into building customer listening
-              systems that separate signal from noise and scale insight across GTM.
+              I didn’t start in tech — I started in the kitchen. Service, precision, and hard work weren’t just job requirements; they were survival skills. Those same principles shaped my transition into the business world, first at Equinox, where I honed a sales-driven, value-based discovery and negotiation approach. I learned how to identify key personas, align them with market-fit investment areas, and anchor conversations in proof points that mattered.
+As my career evolved, I married that commercial instinct with an analytical mindset — building customer listening systems that cut through noise, surface meaningful signals, and scale those insights across entire organizations.
             </p>
             <ul className="mt-4 space-y-2 text-zinc-200">
-              <li className="flex gap-2"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" /> Value-based discovery & negotiation</li>
-              <li className="flex gap-2"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" /> Persona→problem→proof alignment</li>
-              <li className="flex gap-2"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" /> Customer listening systems & telemetry</li>
+              <li className="flex gap-2"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" /> Turning customer data into proactive growth strategies</li>
+              <li className="flex gap-2"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" /> Building systems that turn customer signals into scalable action</li>
+              <li className="flex gap-2"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" /> Translating value-based discovery and customer signals into real revenue</li>
             </ul>
           </CardContent>
         </Card>
@@ -144,17 +143,16 @@ function About() {
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
             <h3 className="text-lg font-semibold">Track Record</h3>
+            <p className="mt-4 text-zinc-300">
+              I’ve been responsible for every stage of the customer lifecycle — pre-sale through renewal, including cross-sell and upsell strategies (with a personal preference for usage-based pricing). My work consistently centers on engineering efficient systems that reduce friction, improve data quality, and help GTM teams operate as a cohesive, high-performing unit.
+For me, it’s all about storytelling with precision — finding the signal among the noise and translating objectives into scalable, real-world results.
+            </p>
             <ul className="mt-3 space-y-2 text-zinc-200">
               <li><span className="text-zinc-400">Nift</span> — Early-stage growth & foundational GTM build-out.</li>
               <li><span className="text-zinc-400">Robin</span> — Series A/B scaling, automation design, retention systems.</li>
               <li><span className="text-zinc-400">Datadog</span> — At-scale & FedGov GTM lifecycle automation.</li>
               <li><span className="text-zinc-400">Klaviyo</span> — CS/Finance/BizOps automations; contract-to-cash; ROI reporting.</li>
             </ul>
-            <p className="mt-4 text-zinc-300">
-              I’ve owned pre‑sale through renewal, including cross‑sell and upsell (preference: usage-based pricing).
-              The through-line: engineer efficient systems to reduce friction, improve data quality, and help GTM teams
-              operate as one.
-            </p>
           </CardContent>
         </Card>
       </div>
@@ -244,25 +242,24 @@ function Impact() {
         <ImpactCard
           title="GTM Lifecycle Automation"
           items={[
-            "Datadog — Digital‑first adoption strategy; Snowflake SQL + ETL for usage telemetry → lifecycle segmentation & campaigns → +34% NRR and +18‑point NPS in 6 months.",
-            "Datadog — Sentiment→action pipelines across 18+ SKUs enabling tactical expansions (+45 net add‑ons/quarter).",
-            "Robin — End‑to‑end product feedback loop (Slack→Salesforce→Jira→Productboard→Intercom) → 42% churn reduction; $2M ARR retention impact.",
-            "Robin — Lifecycle automation via Git‑based workflows with testing, PRs, and staged deployments.",
+            "Partnered with Product & Engineering to architect a digital-first product adoption strategy. Wrote and tested SQL transformations in Snowflake to power ETL pipelines for usage telemetry — enabling lifecycle segmentation and campaign automation. Result: +34% NRR and +18-point NPS.",
+            "Designed sentiment → action pipelines across 18+ product SKUs, equipping CSMs with tactical expansions (+45 net add-ons per quarter).",
+            "Built end-to-end product feedback systems (Slack → Salesforce → Jira → Productboard → Intercom), integrating customer input directly into roadmap rituals and lifecycle programs — resulting in 42% churn reduction and $2M ARR retention impact.",
+            "Drove lifecycle automation and API scripts through Git-based workflows, supporting best practices for testing, pull requests, and staging deployment.",
           ]}
         />
         <ImpactCard
           title="RevOps Reporting & Automations"
           items={[
-            "Klaviyo — Cross‑system automations across CS/Finance/BizOps → streamlined contract‑to‑cash, fewer billing disputes, 200+ weekly hours saved.",
-            "Klaviyo — Managed Customer ROI reporting → 8× increase in contracted customers; +18% NRR (+$1.62M ARR).",
+            "Architected business process automations across CS, Finance, and BizOps — streamlining contract-to-cash, reducing billing disputes, and saving 200+ weekly hours via cross-system integrations.",
+            "Developed custom ROI reporting for Managed Customers to drive upgrades & committed contracts — 8x increase in contracted customers, +18% NRR (+$1.62M ARR).",
           ]}
         />
         <ImpactCard
           title="Occupancy‑Based & Personal Automations"
           items={[
-            "Home — ‘Let’s break some eggs’ / work‑call routines (Eve + webhooks).",
-            "Office — Desk check‑ins & B2B meeting reminders (VergeSense + webhooks).",
-            "Personal — ‘Let’s get started’ morning briefing: iOS Shortcuts + Pushcut Automation Server triggers calendar, tasks, weather, commute, prioritized call sheet, and system checks via secure webhooks — fully hands‑free.",
+            "Built and tested custom integrations using SQL, Java, AWS, and Postman to support global enterprise deployments, including secure RFID & Occupancy-based resource access aligned to modern authentication protocols.",
+            "Personal Workflow: “Let’s get started” morning briefing powered by Eve Occupancy Sensors + iOS Shortcuts + Pushcut Automation Server — triggers a background sequence (calendar, tasks, weather, commute, prioritized call sheet, and system checks) via secure webhooks, hands-free.",
           ]}
         />
       </div>
