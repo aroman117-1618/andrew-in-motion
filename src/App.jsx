@@ -281,11 +281,14 @@ function ImpactCard({ title, items }) {
       <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
       <CardContent>
         <h3 className="text-lg font-semibold">{title}</h3>
-        <ul className="mt-3 space-y-2 text-zinc-200">
+        <div className="mt-3 space-y-3 text-zinc-200">
           {items.map((it, i) => (
-            <li key={i} className="leading-relaxed">{it}</li>
+            <div key={i} className="flex items-start gap-2">
+              <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[#3B6255]" />
+              <p className="leading-relaxed">{it}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </CardContent>
     </Card>
   );
