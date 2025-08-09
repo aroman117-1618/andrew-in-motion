@@ -95,7 +95,7 @@ function Hero() {
           Scale your growth <span className="text-[#3B6255]">without scaling headcount</span>
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-zinc-300">
-          Partnering with leaders to remove bottlenecks, create customer‑centric systems, and turn signal into sustainable growth.
+          Partnering with leaders to remove bottlenecks, create customer‑centric systems, and turn signals into sustainable revenue growth.
         </p>
         <div className="flex items-center justify-center gap-3">
           <a href="#services">
@@ -114,26 +114,26 @@ function Hero() {
   );
 }
 
-function SectionHeader({ kicker, title, subtitle, Icon }) {
+function SectionHeader({ icon: Icon, kicker, title, subhead }) {
   return (
-    <div className="relative mb-10">
-      {/* Soft background stamp — bigger + ~30% more opaque */}
-      {Icon ? (
-        <>
-          {/* glow */}
-          <div className="pointer-events-none absolute -top-14 -left-14 h-48 w-48 sm:h-56 sm:w-56 rounded-full bg-[#3B6255]/20 blur-3xl" />
-          {/* icon */}
-          <Icon
-            className="pointer-events-none absolute -top-12 -left-12 h-36 w-36 sm:h-40 sm:w-40 text-[#3B6255]/30"
-            aria-hidden
-          />
-        </>
-      ) : null}
-      <p className="text-xs uppercase tracking-[0.25em] text-zinc-400">{kicker}</p>
-      <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">{title}</h2>
-      {subtitle && <p className="mt-3 max-w-3xl text-zinc-300">{subtitle}</p>}
+    <div className="relative mb-8">
+      {/* Background icon */}
+      <Icon
+        className="absolute -top-10 -left-10 w-40 h-40 text-green-500/20"
+        aria-hidden="true"
+      />
+      {/* Text content */}
+      <p className="text-sm uppercase tracking-wide text-green-500">{kicker}</p>
+      <h2 className="mt-2 text-2xl font-semibold sm:text-3xl text-white drop-shadow-md">
+        {title}
+      </h2>
+      {subhead && (
+        <p className="mt-2 text-base text-zinc-300 max-w-3xl">
+          {subhead}
+        </p>
+      )}
     </div>
-  );
+  )
 }
 
 function About() {
@@ -153,14 +153,14 @@ function About() {
           <CardContent>
             <h3 className="text-lg font-semibold">Operator Origin</h3>
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
-              I started in kitchens, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech — first in value‑based discovery and negotiation, then in building systems that surface real customer signal and scale insights across teams.
+              I started in kitchens, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech - first in value‑based discovery and negotiation, then in building systems that surface real customer signal and scale insights across teams.
             </p>
 
             {/* aligned green markers */}
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
               <ul className="list-disc marker:text-[#3B6255] space-y-1 pl-5 text-base text-zinc-200">
                 <li>Turning customer data into proactive growth strategies</li>
-                <li>Building systems that turn customer signals into scalable action</li>
+                <li>Building systems that turn market signals into scalable action</li>
                 <li>Translating insights into measurable revenue impact</li>
               </ul>
             </div>
@@ -173,7 +173,7 @@ function About() {
           <CardContent>
             <h3 className="text-lg font-semibold">Track Record</h3>
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
-              Led the full customer lifecycle — pre‑sale through renewal — with a focus on scalable automation and cross‑functional alignment.
+              Led the full customer lifecycle, pre‑sale through renewal, with a focus on scalable automation and cross‑functional alignment.
             </p>
 
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
@@ -190,7 +190,7 @@ function About() {
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Nift</span>
                   </a>
                   <span className="col-start-2 row-start-1">
-                    — Early‑stage growth & foundational GTM build‑out.
+                    - Early‑stage growth & foundational GTM build‑out.
                   </span>
                 </li>
 
@@ -206,7 +206,7 @@ function About() {
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Robin</span>
                   </a>
                   <span className="col-start-2 row-start-1">
-                    — Series A/B scaling, automation design, retention systems.
+                    - Series A/B scaling, automation design, retention systems.
                   </span>
                 </li>
 
@@ -222,7 +222,7 @@ function About() {
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Datadog</span>
                   </a>
                   <span className="col-start-2 row-start-1">
-                    — At‑scale & FedGov GTM lifecycle automation.
+                    - At‑scale & FedGov GTM lifecycle automation.
                   </span>
                 </li>
 
@@ -238,7 +238,7 @@ function About() {
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Klaviyo</span>
                   </a>
                   <span className="col-start-2 row-start-1">
-                    — RevOps automations; contract‑to‑cash; ROI reporting.
+                    - RevOps automations; contract‑to‑cash; ROI reporting.
                   </span>
                 </li>
               </ul>
