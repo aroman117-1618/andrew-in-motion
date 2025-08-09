@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 import { motion } from "framer-motion";
 import {
@@ -19,32 +19,29 @@ import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 import InteractiveDrift from "./components/InteractiveDrift.jsx";
 
-/* ──────────────────────────────────────────────────────────────
-   Inline Logo component (Ribbon‑A). You can move to
-   src/components/Logo.jsx later and import it.
-   ────────────────────────────────────────────────────────────── */
-function Logo({ className = "h-7 w-7", color = "#3B6255" }) {
-  return (
-    <svg viewBox="0 0 64 64" className={className} fill="none" aria-hidden>
-      <path
-        d="M12 52 30 12c2-4 8-4 10 0l12 26"
-        stroke={color}
-        strokeWidth="6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        opacity="0.95"
-      />
-      <path
-        d="M20 38c10-6 22-6 32 0"
-        stroke={color}
-        strokeWidth="6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        opacity="0.65"
-      />
-    </svg>
-  );
-}
+/** ─────────────────────────────────────────────────────────────
+ *  Favicon helper – updates the tab icon at runtime.
+ *  Keep logo files in /public: logo-mark.svg (and optional logo-32.png)
+ *  ──────────────────────────────────────────────────────────── */
+const useFavicon = (svgHref = "/logo-mark.svg", png32 = "/logo-32.png") => {
+  useEffect(() => {
+    const upsert = (rel, href, attrs = {}) => {
+      let link = document.querySelector(`head link[rel="${rel}"][data-ai=true]${attrs.sizes ? `[sizes="${attrs.sizes}"]` : ""}`);
+      if (!link) {
+        link = document.createElement("link");
+        link.setAttribute("rel", rel);
+        link.setAttribute("data-ai", "true");
+        document.head.appendChild(link);
+      }
+      Object.entries(attrs).forEach(([k, v]) => link.setAttribute(k, v));
+      link.setAttribute("href", href);
+    };
+    // SVG (modern)
+    upsert("icon", svgHref, { type: "image/svg+xml" });
+    // PNG 32x32 fallback
+    upsert("icon", png32, { sizes: "32x32", type: "image/png" });
+  }, [svgHref, png32]);
+};
 
 // External company links
 const COMPANY_LINKS = {
@@ -55,6 +52,9 @@ const COMPANY_LINKS = {
 };
 
 export default function App() {
+  // ensure the favicon swaps to your mark even without index.html edits
+  useFavicon("/logo-mark.svg", "/logo-32.png");
+
   return (
     <div className="relative min-h-screen bg-[#141414] text-zinc-100 selection:bg-[#3B6255] selection:text-white">
       <InteractiveDrift
@@ -88,20 +88,22 @@ export default function App() {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   NAV — {Logo}ndrew Lonati + subtle hover motion on the logo
+   NAV — uses your image mark ({logo}ndrew Lonati) + subtle motion
    ────────────────────────────────────────────────────────────── */
 function SiteNav() {
   return (
     <div className="sticky top-0 z-20 border-b border-zinc-800/80 bg-[#141414]/80 backdrop-blur supports-[backdrop-filter]:bg-[#141414]/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight group">
-          <motion.div
+          <motion.img
+            src="/logo-mark.svg"
+            onError={(e) => { e.currentTarget.src = "/logo-32.png"; }}
+            alt="Andrew in Motion logo"
+            className="h-9 w-9 select-none"
             initial={{ rotate: 0, scale: 1, opacity: 0.95 }}
             whileHover={{ rotate: -5, scale: 1.1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          >
-            <Logo className="h-9 w-9" />
-          </motion.div>
+          />
           <span className="text-white text-lg sm:text-xl leading-none">ndrew Lonati</span>
         </a>
 
@@ -167,7 +169,7 @@ function Hero() {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   SHARED SECTION HEADER (bigger background stamp + readable title)
+   SHARED SECTION HEADER
    ────────────────────────────────────────────────────────────── */
 function SectionHeader({ kicker, title, subtitle, Icon }) {
   return (
@@ -385,6 +387,7 @@ function Impact() {
           ]}
         />
 
+        {/* Merged panel for balance */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
@@ -460,19 +463,16 @@ function CTA() {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   FOOTER — logo far left; then resume, LinkedIn, GitHub
+   FOOTER — icons on the RIGHT, including your logo at the end
    ────────────────────────────────────────────────────────────── */
 function SiteFooter() {
   return (
     <footer className="mt-10 border-t border-zinc-800/80 py-10">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        {/* Far-left brand mark */}
-        <a href="#top" className="flex items-center gap-2 text-zinc-400 hover:text-white">
-          <Logo className="h-7 w-7" />
-          <span className="sr-only">Andrew in Motion</span>
-        </a>
+        {/* Left: copyright only */}
+        <p className="text-zinc-500">© {new Date().getFullYear()} Andrew Lonati. All rights reserved.</p>
 
-        {/* Right-side links (logo already on left) */}
+        {/* Right: Resume → LinkedIn → GitHub → Logo */}
         <div className="flex items-center gap-4">
           <a
             href="/resume-andrew-lonati.pdf"
@@ -490,10 +490,17 @@ function SiteFooter() {
           <a href="https://github.com/aroman117-1618" className="text-zinc-400 hover:text-white" aria-label="GitHub">
             <Github className="h-5 w-5" />
           </a>
+          <a href="#top" aria-label="Brand logo" className="ml-2">
+            <motion.img
+              src="/logo-mark.svg"
+              onError={(e) => { e.currentTarget.src = "/logo-32.png"; }}
+              alt="Andrew in Motion logo"
+              className="h-6 w-6"
+              whileHover={{ rotate: -5, scale: 1.08 }}
+              transition={{ type: "spring", stiffness: 300, damping: 16 }}
+            />
+          </a>
         </div>
-      </div>
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-6">
-        <p className="text-zinc-500">© {new Date().getFullYear()} Andrew Lonati. All rights reserved.</p>
       </div>
     </footer>
   );
