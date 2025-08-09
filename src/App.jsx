@@ -203,7 +203,7 @@ function Hero() {
           Scale your growth <span className="text-[#3B6255]">without scaling headcount</span>
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-zinc-300">
-          Partnering with leaders to remove bottlenecks, create customer‑centric systems, and turn signal into sustainable growth.
+          Partnering with leaders to remove bottlenecks, create customer‑centric systems, and turn signals into sustainable growth.
         </p>
         <div className="flex items-center justify-center gap-3">
           <a href="#services">
@@ -253,7 +253,7 @@ function About() {
       <SectionHeader
         kicker="About"
         title="Collaboration, precision, and adaptability"
-        subtitle="From the kitchen to the boardroom: hands‑on service instincts + data‑driven rigor to design systems that move revenue."
+        subtitle="From the kitchen to the boardroom: service instincts + data‑driven rigor to design systems that move revenue."
         Icon={Info}
       />
 
@@ -264,7 +264,7 @@ function About() {
           <CardContent>
             <h3 className="text-lg font-semibold">Operator Origin</h3>
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
-              I started in kitchens, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech — first in value‑based discovery and negotiation, then in building systems that surface real customer signal and scale insights across teams.
+              I started in fine dining, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech — first in value‑based discovery and negotiation, then in building systems that surface real customer signals and scale insights across teams.
             </p>
 
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
@@ -370,9 +370,9 @@ function Services() {
             "Renewal, expansion, and churn mitigation programs.",
           ]}
           results={[
-            "Immediate lift in retention & NRR.",
-            "More confident, higher‑performing CS teams.",
-            "Predictable, scalable customer lifecycle operations.",
+            "Integrated CX Leadership suuport",
+            "Value-based, higher‑performing CS teams.",
+            "Guidance for scalable lifecycle operations.",
           ]}
         />
         <ServiceCard
