@@ -1,14 +1,31 @@
 import React from "react";
 import "./index.css";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, Github, Linkedin, FileText } from "lucide-react";
+import {
+  ArrowRight,
+  Mail,
+  Github,
+  Linkedin,
+  FileText,
+  Gift,
+  Calendar,
+  LineChart,
+  Headset,
+  Info,
+  TrendingUp,
+} from "lucide-react";
 
-// local UI (pure Tailwind)
 import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
-
-// global background
 import InteractiveDrift from "./components/InteractiveDrift.jsx";
+
+// Company links (verify and tweak if needed)
+const COMPANY_LINKS = {
+  nift: "https://www.gonift.com",
+  robin: "https://robinpowered.com",
+  datadog: "https://www.datadoghq.com",
+  klaviyo: "https://www.klaviyo.com",
+};
 
 export default function App() {
   return (
@@ -19,8 +36,8 @@ export default function App() {
         speed={0.18}
         backgroundFade={0.06}
         palette={[
-          [59, 98, 85],   // #3B6255
-          [17, 41, 23],   // #112917
+          [59, 98, 85],
+          [17, 41, 23],
           [8, 38, 31],
           [6, 74, 99],
           [28, 139, 102],
@@ -97,9 +114,16 @@ function Hero() {
   );
 }
 
-function SectionHeader({ kicker, title, subtitle }) {
+function SectionHeader({ kicker, title, subtitle, Icon }) {
   return (
-    <div className="mb-10">
+    <div className="relative mb-10">
+      {/* soft background stamp */}
+      {Icon ? (
+        <>
+          <div className="pointer-events-none absolute -top-8 -left-8 h-28 w-28 rounded-full bg-[#3B6255]/15 blur-3xl" />
+          <Icon className="pointer-events-none absolute -top-6 -left-6 h-20 w-20 text-[#3B6255]/20" aria-hidden />
+        </>
+      ) : null}
       <p className="text-xs uppercase tracking-[0.25em] text-zinc-400">{kicker}</p>
       <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">{title}</h2>
       {subtitle && <p className="mt-3 max-w-3xl text-zinc-300">{subtitle}</p>}
@@ -114,6 +138,7 @@ function About() {
         kicker="About"
         title="Collaboration, precision, and adaptability"
         subtitle="From the kitchen to the boardroom: hands‑on service instincts + data‑driven rigor to design systems that move revenue."
+        Icon={Info}
       />
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -125,6 +150,8 @@ function About() {
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
               I started in kitchens, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech — first in value‑based discovery and negotiation, then in building systems that surface real customer signal and scale insights across teams.
             </p>
+
+            {/* aligned green markers */}
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
               <ul className="list-disc marker:text-[#3B6255] space-y-1 pl-5 text-base text-zinc-200">
                 <li>Turning customer data into proactive growth strategies</li>
@@ -135,7 +162,7 @@ function About() {
           </CardContent>
         </Card>
 
-        {/* Track Record */}
+        {/* Track Record with company icons + links */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
@@ -143,12 +170,37 @@ function About() {
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
               Led the full customer lifecycle — pre‑sale through renewal — with a focus on scalable automation and cross‑functional alignment.
             </p>
+
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
-              <ul className="space-y-1 text-base leading-relaxed text-zinc-200">
-                <li><span className="text-[#3B6255] font-semibold">Nift</span> — Early‑stage growth & foundational GTM build‑out.</li>
-                <li><span className="text-[#3B6255] font-semibold">Robin</span> — Series A/B scaling, automation design, retention systems.</li>
-                <li><span className="text-[#3B6255] font-semibold">Datadog</span> — At‑scale & FedGov GTM lifecycle automation.</li>
-                <li><span className="text-[#3B6255] font-semibold">Klaviyo</span> — RevOps automations; contract‑to‑cash; ROI reporting.</li>
+              <ul className="space-y-3 text-base leading-relaxed text-zinc-200">
+                <li className="flex items-center gap-2">
+                  <a href={COMPANY_LINKS.nift} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+                    <Gift className="h-4 w-4 text-[#3B6255]" />
+                    <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Nift</span>
+                  </a>
+                  <span>— Early‑stage growth & foundational GTM build‑out.</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <a href={COMPANY_LINKS.robin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+                    <Calendar className="h-4 w-4 text-[#3B6255]" />
+                    <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Robin</span>
+                  </a>
+                  <span>— Series A/B scaling, automation design, retention systems.</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <a href={COMPANY_LINKS.datadog} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+                    <LineChart className="h-4 w-4 text-[#3B6255]" />
+                    <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Datadog</span>
+                  </a>
+                  <span>— At‑scale & FedGov GTM lifecycle automation.</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <a href={COMPANY_LINKS.klaviyo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+                    <Mail className="h-4 w-4 text-[#3B6255]" />
+                    <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Klaviyo</span>
+                  </a>
+                  <span>— RevOps automations; contract‑to‑cash; ROI reporting.</span>
+                </li>
               </ul>
             </div>
           </CardContent>
@@ -165,6 +217,7 @@ function Services() {
         kicker="Services"
         title="Two ways to engage, endless ways to deliver."
         subtitle="Simple hourly pricing + tailored scopes to fit your growth stage."
+        Icon={Headset}
       />
       <div className="grid gap-6 md:grid-cols-2">
         <ServiceCard
@@ -207,6 +260,7 @@ function ServiceCard({ title, tagline, bullets, results }) {
       <CardContent>
         <h3 className="text-xl font-semibold">{title}</h3>
         <p className="mt-1 text-zinc-400">{tagline}</p>
+        {/* keep bullets as markers (no per-bullet icons) */}
         <ul className="mt-4 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
           {bullets.map((b, i) => (
             <li key={i}>{b}</li>
@@ -232,6 +286,7 @@ function Impact() {
         kicker="Impact"
         title="Proof in performance."
         subtitle="Selected outcomes from past projects."
+        Icon={TrendingUp}
       />
       <div className="grid gap-6 md:grid-cols-2">
         {/* Left: GTM Lifecycle Automation */}
@@ -244,7 +299,7 @@ function Impact() {
           ]}
         />
 
-        {/* Right: merged panel with two headers to balance height */}
+        {/* Right: merged RevOps + Occupancy for balance */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
