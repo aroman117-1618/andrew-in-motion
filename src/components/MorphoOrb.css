@@ -1,0 +1,263 @@
+.morpho-orb-container {
+position: relative;
+min-height: 100vh;
+background: linear-gradient(135deg, #0a1a0a 0%, #1a2f1a 50%, #0f1f0f 100%);
+overflow: hidden;
+}
+
+.morpho-orb {
+position: absolute;
+top: 50%;
+left: 50%;
+width: min(80vw, 80vh);
+height: min(80vw, 80vh);
+transform: translate(-50%, -50%);
+background: radial-gradient(
+ellipse at center,
+rgba(26, 111, 79, 0.8) 0%,
+rgba(45, 90, 39, 0.7) 25%,
+rgba(13, 79, 60, 0.6) 50%,
+rgba(30, 82, 51, 0.4) 75%,
+rgba(27, 79, 58, 0.2) 90%,
+transparent 100%
+);
+border-radius: 50%;
+filter: blur(2px);
+animation:
+morphoBreath 6s ease-in-out infinite,
+morphoShift 12s ease-in-out infinite,
+morphoFloat 8s ease-in-out infinite;
+will-change: transform, border-radius;
+}
+
+.morpho-orb::before {
+content: ‘’;
+position: absolute;
+top: -20%;
+left: -20%;
+width: 140%;
+height: 140%;
+background: radial-gradient(
+ellipse at 30% 40%,
+rgba(74, 155, 142, 0.6) 0%,
+rgba(107, 178, 106, 0.5) 30%,
+rgba(47, 82, 51, 0.3) 60%,
+transparent 80%
+);
+border-radius: inherit;
+animation:
+morphoCounter 8s ease-in-out infinite reverse,
+morphoDeform 10s ease-in-out infinite;
+filter: blur(3px);
+}
+
+.morpho-orb::after {
+content: ‘’;
+position: absolute;
+top: 10%;
+right: 10%;
+width: 60%;
+height: 60%;
+background: radial-gradient(
+circle at center,
+rgba(107, 178, 106, 0.4) 0%,
+rgba(74, 155, 142, 0.3) 40%,
+transparent 70%
+);
+border-radius: 60% 40% 30% 70%;
+animation:
+morphoPulse 4s ease-in-out infinite,
+morphoSpin 20s linear infinite;
+filter: blur(1px);
+}
+
+@keyframes morphoBreath {
+0%, 100% {
+transform: translate(-50%, -50%) scale(1);
+border-radius: 50%;
+}
+25% {
+transform: translate(-50%, -50%) scale(1.1);
+border-radius: 45% 55% 60% 40%;
+}
+50% {
+transform: translate(-50%, -50%) scale(0.95);
+border-radius: 60% 40% 45% 55%;
+}
+75% {
+transform: translate(-50%, -50%) scale(1.05);
+border-radius: 40% 60% 55% 45%;
+}
+}
+
+@keyframes morphoShift {
+0%, 100% {
+transform: translate(-50%, -50%) rotate(0deg);
+}
+33% {
+transform: translate(-45%, -55%) rotate(120deg);
+}
+66% {
+transform: translate(-55%, -45%) rotate(240deg);
+}
+}
+
+@keyframes morphoFloat {
+0%, 100% {
+transform: translate(-50%, -50%) translateY(0px);
+}
+50% {
+transform: translate(-50%, -50%) translateY(-20px);
+}
+}
+
+@keyframes morphoCounter {
+0%, 100% {
+transform: rotate(0deg) scale(1);
+border-radius: 50%;
+}
+25% {
+transform: rotate(-90deg) scale(1.2);
+border-radius: 30% 70% 45% 55%;
+}
+50% {
+transform: rotate(-180deg) scale(0.8);
+border-radius: 70% 30% 60% 40%;
+}
+75% {
+transform: rotate(-270deg) scale(1.1);
+border-radius: 45% 55% 30% 70%;
+}
+}
+
+@keyframes morphoDeform {
+0%, 100% {
+border-radius: 60% 40% 30% 70%;
+}
+20% {
+border-radius: 30% 60% 70% 40%;
+}
+40% {
+border-radius: 70% 30% 40% 60%;
+}
+60% {
+border-radius: 40% 70% 60% 30%;
+}
+80% {
+border-radius: 50% 50% 50% 50%;
+}
+}
+
+@keyframes morphoPulse {
+0%, 100% {
+opacity: 0.6;
+transform: scale(1);
+}
+50% {
+opacity: 0.8;
+transform: scale(1.3);
+}
+}
+
+@keyframes morphoSpin {
+from {
+transform: rotate(0deg);
+}
+to {
+transform: rotate(360deg);
+}
+}
+
+.content-overlay {
+position: relative;
+z-index: 10;
+padding: 2rem;
+color: #e8f5e8;
+}
+
+.site-header {
+text-align: center;
+margin-bottom: 4rem;
+padding-top: 2rem;
+}
+
+.site-header h1 {
+font-size: clamp(2rem, 5vw, 3.5rem);
+font-weight: 700;
+margin-bottom: 0.5rem;
+color: #a7d4a7;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.site-header p {
+font-size: clamp(1rem, 2.5vw, 1.25rem);
+opacity: 0.9;
+font-weight: 300;
+}
+
+.main-content {
+max-width: 800px;
+margin: 0 auto;
+text-align: center;
+}
+
+.hero-section h2 {
+font-size: clamp(1.5rem, 4vw, 2.5rem);
+margin-bottom: 1rem;
+color: #c5e4c5;
+}
+
+.hero-section p {
+font-size: clamp(1rem, 2vw, 1.125rem);
+line-height: 1.6;
+margin-bottom: 2rem;
+opacity: 0.85;
+}
+
+.cta-button {
+background: linear-gradient(135deg, #2d5a27 0%, #1e6f4f 100%);
+color: white;
+border: none;
+padding: 1rem 2rem;
+font-size: 1.125rem;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 4px 15px rgba(45, 90, 39, 0.3);
+}
+
+.cta-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(45, 90, 39, 0.4);
+background: linear-gradient(135deg, #3e7b3e 0%, #26785a 100%);
+}
+
+/* Performance optimizations */
+@media (max-width: 768px) {
+.morpho-orb {
+width: 90vw;
+height: 90vw;
+filter: blur(1px);
+}
+
+.morpho-orb::before,
+.morpho-orb::after {
+animation-duration: 12s, 16s;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+.morpho-orb,
+.morpho-orb::before,
+.morpho-orb::after {
+animation-duration: 10s;
+animation-timing-function: ease;
+}
+}
+
+/* High performance devices can handle more complex animations */
+@media (min-width: 1200px) and (min-resolution: 2dppx) {
+.morpho-orb {
+filter: blur(3px);
+}
+}
