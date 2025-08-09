@@ -506,9 +506,48 @@ function Testimonials() {
 }
 
 function TestimonialsRail({ items }) {
+  const trackRef = React.useRef(null);
+  const xRef = React.useRef(0);
+  const lastRef = React.useRef(0);
+  const pausedRef = React.useRef(false);
   const [paused, setPaused] = React.useState(false);
 
-  // Duplicate array for an infinite loop effect
+  React.useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
+
+  React.useEffect(() => {
+    let rafId;
+    const speed = 40; // px per second (tweak for faster/slower)
+
+    const tick = (t) => {
+      if (!lastRef.current) lastRef.current = t;
+      const dt = (t - lastRef.current) / 1000;
+      lastRef.current = t;
+
+      if (!pausedRef.current && trackRef.current) {
+        xRef.current -= speed * dt;
+
+        // total width of the doubled track
+        const total = trackRef.current.offsetWidth;
+        const half = total / 2; // width of a single sequence
+
+        // when we've scrolled past one full sequence, wrap forward
+        if (Math.abs(xRef.current) >= half) {
+          xRef.current += half;
+        }
+
+        trackRef.current.style.transform = `translateX(${xRef.current}px)`;
+      }
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
+  // duplicate once for seamless loop
   const loop = React.useMemo(() => [...items, ...items], [items]);
 
   return (
@@ -517,25 +556,19 @@ function TestimonialsRail({ items }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Edge fade masks (left/right) */}
+      {/* edge fades */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#141414] to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#141414] to-transparent" />
 
-      <motion.div
-        className="flex gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8"
-        animate={{ x: paused ? 0 : ["0%", "-50%"] }}
-        transition={{
-          duration: 28,         // slow + readable
-          ease: "linear",
-          repeat: paused ? 0 : Infinity,
-          repeatType: "loop",
-        }}
-        style={{ willChange: "transform" }}
+      <div
+        ref={trackRef}
+        className="flex gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8 will-change-transform"
+        style={{ transform: "translateX(0px)" }}
       >
         {loop.map((t, i) => (
           <TestimonialCard key={`${t.name}-${i}`} t={t} />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
