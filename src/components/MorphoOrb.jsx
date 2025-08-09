@@ -165,7 +165,7 @@ export default function MorphoOrb({
   return (
     <canvas
       ref={ref}
-      className="pointer-events-auto fixed inset-0 -z-10 h-full w-full bg-[#141414]"
+      className="pointer-events-auto fixed inset-0 -z-0 h-full w-full bg-[#141414]"
       aria-hidden
     />
   );
