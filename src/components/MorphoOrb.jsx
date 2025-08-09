@@ -86,11 +86,11 @@ export default function MorphoOrb({
     const rgba = (rgb, a) => `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${a})`;
     // Slightly stronger alphas for richer glow
     const paletteColors = [
-      rgba(palette[0 % palette.length], 0.28),
-      rgba(palette[1 % palette.length], 0.22),
-      rgba(palette[2 % palette.length], 0.18),
-      rgba(palette[3 % palette.length], 0.14),
-    ];
+   rgba(palette[0 % palette.length], 0.20),
+   rgba(palette[1 % palette.length], 0.16),
+   rgba(palette[2 % palette.length], 0.13),
+   rgba(palette[3 % palette.length], 0.10),
+ ];
 
     const draw = (now) => {
       const t = (now - t0.current) / 1000;
@@ -98,8 +98,10 @@ export default function MorphoOrb({
       const h = canvas.clientHeight;
 
       // Soft trail: paint translucent dark over previous frame
+			ctx.restore();
       ctx.globalCompositeOperation = "source-over";
-      ctx.globalAlpha = 0.12; // raise for longer trails
+      ctx.save();
+			ctx.globalAlpha = 0.80; // darker canvas each frame → less lingering brightness
       ctx.fillStyle = "#141414";
       ctx.fillRect(0, 0, w, h);
       ctx.globalAlpha = 1;
@@ -140,9 +142,9 @@ export default function MorphoOrb({
         const g = ctx.createRadialGradient(cx, cy, r * 0.1, cx, cy, r);
         // brighten center by bumping alpha inside the rgba()
         const toAlpha = (str, a) => str.replace(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([0-9.]+)\)/, `rgba($1,$2,$3,${a})`);
-        g.addColorStop(0.0, toAlpha(col, 0.38));
-        g.addColorStop(0.55, toAlpha(col, 0.22));
-        g.addColorStop(1.0, toAlpha(col, 0.00));
+				g.addColorStop(0.0,  toAlpha(col, 0.22)); // softer center
+				g.addColorStop(0.55, toAlpha(col, 0.14));
+      	g.addColorStop(1.0, toAlpha(col, 0.00));
 
         ctx.fillStyle = g;
         ctx.beginPath();
