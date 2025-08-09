@@ -104,18 +104,18 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#141414] text-zinc-100">
       <MorphoOrb
+  size={0.62}
+  layers={3}
+  lobes={[5, 4, 6]}
+  blur={200}
+  speed={0.085}
+  gain={0.48}  // try 0.42 if still hot
   palette={[
     [17, 41, 23],
     [59, 98, 85],
     [28, 139, 102],
     [155, 194, 60],
   ]}
-  size={0.64}
-  layers={3}
-  lobes={[5, 4, 6]}
-  blur={190}
-  speed={0.085}
-  gain={0.78}
 />
       <div className="relative z-10">
         <SiteNav />
