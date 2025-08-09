@@ -1,42 +1,107 @@
+/* Reset and base styles */
+.App {
+width: 100%;
+min-height: 100vh;
+margin: 0;
+padding: 0;
+font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, ‘Roboto’, ‘Oxygen’,
+‘Ubuntu’, ‘Cantarell’, ‘Fira Sans’, ‘Droid Sans’, ‘Helvetica Neue’,
+sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure no margin/padding interference */
+
+- {
+  box-sizing: border-box;
+  }
+
+/* Remove any default body styles that might interfere */
+body {
+margin: 0;
+padding: 0;
+}
+
+/* UPDATED: Full-width root to support your WebGL background */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+width: 100%;
+min-height: 100vh;
+margin: 0;
+padding: 0;
+/* Removed max-width, padding, and text-align that would break your layout */
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+height: 6em;
+padding: 1.5em;
+will-change: filter;
+transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+from {
+transform: rotate(0deg);
+}
+to {
+transform: rotate(360deg);
+}
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+a:nth-of-type(2) .logo {
+animation: logo-spin infinite 20s linear;
+}
 }
 
 .card {
-  padding: 2em;
+padding: 2em;
 }
 
 .read-the-docs {
-  color: #888;
+color: #888;
+}
+
+/* Performance optimizations for your site */
+html {
+scroll-behavior: smooth;
+}
+
+/* Support for reduced motion (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+}
+
+/* Optimize focus states */
+*:focus {
+outline: 2px solid #3B6255;
+outline-offset: 2px;
+}
+
+/* Ensure images are responsive */
+img {
+max-width: 100%;
+height: auto;
+}
+
+/* Performance optimization for your WebGL orb */
+canvas {
+will-change: transform;
+transform: translateZ(0);
+backface-visibility: hidden;
 }
