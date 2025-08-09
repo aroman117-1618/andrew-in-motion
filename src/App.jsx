@@ -125,8 +125,6 @@ function About() {
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
               I started in kitchens, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech — first in value‑based discovery and negotiation, then in building systems that surface real customer signal and scale insights across teams.
             </p>
-
-            {/* Sub-panel (glass) with aligned bullets */}
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
               <ul className="list-disc marker:text-[#3B6255] space-y-1 pl-5 text-base text-zinc-200">
                 <li>Turning customer data into proactive growth strategies</li>
@@ -145,7 +143,6 @@ function About() {
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
               Led the full customer lifecycle — pre‑sale through renewal — with a focus on scalable automation and cross‑functional alignment.
             </p>
-
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
               <ul className="space-y-1 text-base leading-relaxed text-zinc-200">
                 <li><span className="text-[#3B6255] font-semibold">Nift</span> — Early‑stage growth & foundational GTM build‑out.</li>
@@ -166,36 +163,36 @@ function Services() {
     <section id="services" className="py-16 sm:py-24">
       <SectionHeader
         kicker="Services"
-        title="Two high‑impact offerings"
-        subtitle="Simple hourly model, custom‑scoped projects."
+        title="Two ways to engage, endless ways to deliver."
+        subtitle="Simple hourly pricing + tailored scopes to fit your growth stage."
       />
       <div className="grid gap-6 md:grid-cols-2">
         <ServiceCard
           title="CS Advisor Retainer"
-          tagline="Embedded partnership to keep your CS strategy sharp (weekly sync + async access)."
+          tagline="Ongoing, high‑leverage leadership without the full‑time headcount."
           bullets={[
-            "Customer journey mapping & retention strategy",
-            "KPI definition, reporting design, and operational reviews",
-            "Leadership coaching & cross‑functional alignment",
+            "Strategic planning & execution support.",
+            "Team coaching & playbook development.",
+            "Renewal, expansion, and churn mitigation programs.",
           ]}
           results={[
-            "Clear, actionable CS strategy",
-            "Improved retention & expansion",
-            "Stronger alignment between CS, Sales, and Product",
+            "Immediate lift in retention & NRR.",
+            "More confident, higher‑performing CS teams.",
+            "Predictable, scalable customer lifecycle operations.",
           ]}
         />
         <ServiceCard
           title="GTM System Automation / Architecture"
-          tagline="Design and automate GTM workflows to remove bottlenecks."
+          tagline="Design, implement, and optimize the systems your team relies on."
           bullets={[
-            "Audit & blueprint of current GTM stack",
-            "AI‑powered processes: CRM automation, CS ticket routing, lead scoring, onboarding triggers",
-            "Cross‑system integrations + documentation & enablement",
+            "End‑to‑end GTM workflow mapping.",
+            "AI & automation: CRM, CS platforms, comms.",
+            "Cross‑system integrations for data integrity & reporting.",
           ]}
           results={[
-            "10–20+ hours/week saved per GTM rep",
-            "Accurate, real‑time data without manual upkeep",
-            "Scalable systems ready for growth",
+            "10–20 hours saved per GTM rep per week.",
+            "SLA compliance + customer satisfaction gains.",
+            "Real‑time data for faster decision‑making.",
           ]}
         />
       </div>
@@ -210,14 +207,11 @@ function ServiceCard({ title, tagline, bullets, results }) {
       <CardContent>
         <h3 className="text-xl font-semibold">{title}</h3>
         <p className="mt-1 text-zinc-400">{tagline}</p>
-
-        {/* Aligned bullets via native markers */}
         <ul className="mt-4 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
           {bullets.map((b, i) => (
             <li key={i}>{b}</li>
           ))}
         </ul>
-
         <div className="mt-5 rounded-xl border border-zinc-800 p-4">
           <p className="text-xs uppercase tracking-wider text-zinc-400">Expected Results</p>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-zinc-200 marker:text-[#3B6255]">
@@ -235,31 +229,30 @@ function Impact() {
   return (
     <section id="impact" className="py-16 sm:py-24">
       <SectionHeader
-        kicker="Impact & Results"
-        title="Proving value"
-        subtitle="Representative wins across lifecycle automation, RevOps reporting, and operational architecture."
+        kicker="Impact"
+        title="Proof in performance."
+        subtitle="Selected outcomes from past projects."
       />
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Left: Lifecycle Automation */}
+        {/* Left: GTM Lifecycle Automation */}
         <ImpactCard
           title="GTM Lifecycle Automation"
           items={[
-            "Architected digital‑first adoption strategy powered by usage telemetry (+34% NRR, +18‑point NPS).",
-            "Designed sentiment → action pipelines across 18+ SKUs enabling +45 net add‑ons/quarter.",
-            "Built integrated feedback loops (Slack → Salesforce → Jira → Productboard → Intercom) driving 42% churn reduction and $2M ARR retention.",
-            "Drove lifecycle automation and API scripts via Git‑based workflows with testing/PRs/staging.",
+            "+34% NRR, +18‑point NPS from lifecycle segmentation & adoption campaigns.",
+            "+45 add‑ons/quarter via sentiment→action pipelines.",
+            "42% churn reduction, $2M ARR retention impact from integrated feedback loops.",
           ]}
         />
 
-        {/* Right: Merged RevOps + Occupancy */}
+        {/* Right: merged panel with two headers to balance height */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
             <div>
-              <h3 className="text-lg font-semibold">RevOps Reporting & Automations</h3>
+              <h3 className="text-lg font-semibold">RevOps & CS Automations</h3>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
-                <li>Automated contract‑to‑cash across CS/Finance/BizOps — saving 200+ weekly hours.</li>
-                <li>Developed ROI reporting for Managed Customers — 8× increase in committed contracts; +18% NRR (+$1.62M ARR).</li>
+                <li>200+ weekly hours saved via contract‑to‑cash automations.</li>
+                <li>8x increase in committed customers; +18% NRR (+$1.62M ARR).</li>
               </ul>
             </div>
 
@@ -268,8 +261,8 @@ function Impact() {
             <div>
               <h3 className="text-lg font-semibold">Occupancy‑Based & Personal Automations</h3>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
-                <li>Enterprise‑scale RFID/occupancy‑based access integrations (SQL/Java/AWS/Postman) aligned to modern auth.</li>
-                <li>“Let’s get started” morning briefing: Eve sensors + iOS Shortcuts + Pushcut Automation Server for hands‑free calendar/tasks/weather/commute/system checks.</li>
+                <li>Enterprise‑scale secure RFID access integrations.</li>
+                <li>Hands‑free daily briefing sequence via IoT & automation server.</li>
               </ul>
             </div>
           </CardContent>
@@ -303,7 +296,7 @@ function CTA() {
         <div className="relative">
           <h3 className="text-2xl font-semibold">Ready to remove bottlenecks and surface real signal?</h3>
           <p className="mt-2 max-w-2xl text-zinc-100/90">
-            Book a short intro. We’ll identify 1–2 high‑leverage automations or dashboard rollouts you can deploy within 30–45 days.
+            Book a short intro call. We’ll pinpoint 1–2 high‑leverage automations or CS plays you can deploy within 30–45 days.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <a href="mailto:Andrew.roman117@gmail.com">
