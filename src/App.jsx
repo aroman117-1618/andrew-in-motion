@@ -19,7 +19,7 @@ import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 import InteractiveDrift from "./components/InteractiveDrift.jsx";
 
-// Company links (verify and tweak if needed)
+// Company links (adjust if you prefer different URLs)
 const COMPANY_LINKS = {
   nift: "https://www.gonift.com",
   robin: "https://robinpowered.com",
@@ -36,8 +36,8 @@ export default function App() {
         speed={0.18}
         backgroundFade={0.06}
         palette={[
-          [59, 98, 85],
-          [17, 41, 23],
+          [59, 98, 85],   // #3B6255
+          [17, 41, 23],   // #112917
           [8, 38, 31],
           [6, 74, 99],
           [28, 139, 102],
@@ -117,11 +117,16 @@ function Hero() {
 function SectionHeader({ kicker, title, subtitle, Icon }) {
   return (
     <div className="relative mb-10">
-      {/* soft background stamp */}
+      {/* Soft background stamp — bigger + ~30% more opaque */}
       {Icon ? (
         <>
-          <div className="pointer-events-none absolute -top-8 -left-8 h-28 w-28 rounded-full bg-[#3B6255]/15 blur-3xl" />
-          <Icon className="pointer-events-none absolute -top-6 -left-6 h-20 w-20 text-[#3B6255]/20" aria-hidden />
+          {/* glow */}
+          <div className="pointer-events-none absolute -top-14 -left-14 h-48 w-48 sm:h-56 sm:w-56 rounded-full bg-[#3B6255]/20 blur-3xl" />
+          {/* icon */}
+          <Icon
+            className="pointer-events-none absolute -top-12 -left-12 h-36 w-36 sm:h-40 sm:w-40 text-[#3B6255]/30"
+            aria-hidden
+          />
         </>
       ) : null}
       <p className="text-xs uppercase tracking-[0.25em] text-zinc-400">{kicker}</p>
@@ -162,7 +167,7 @@ function About() {
           </CardContent>
         </Card>
 
-        {/* Track Record with company icons + links */}
+        {/* Track Record with company icons + links (aligned grid) */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
@@ -172,34 +177,69 @@ function About() {
             </p>
 
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
-              <ul className="space-y-3 text-base leading-relaxed text-zinc-200">
-                <li className="flex items-center gap-2">
-                  <a href={COMPANY_LINKS.nift} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+              <ul className="space-y-2 text-base leading-relaxed text-zinc-200">
+                {/* Nift */}
+                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3 gap-y-1">
+                  <a
+                    href={COMPANY_LINKS.nift}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="col-start-1 row-start-1 flex items-center gap-2 hover:text-white"
+                  >
                     <Gift className="h-4 w-4 text-[#3B6255]" />
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Nift</span>
                   </a>
-                  <span>— Early‑stage growth & foundational GTM build‑out.</span>
+                  <span className="col-start-2 row-start-1">
+                    — Early‑stage growth & foundational GTM build‑out.
+                  </span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <a href={COMPANY_LINKS.robin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+
+                {/* Robin */}
+                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3 gap-y-1">
+                  <a
+                    href={COMPANY_LINKS.robin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="col-start-1 row-start-1 flex items-center gap-2 hover:text-white"
+                  >
                     <Calendar className="h-4 w-4 text-[#3B6255]" />
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Robin</span>
                   </a>
-                  <span>— Series A/B scaling, automation design, retention systems.</span>
+                  <span className="col-start-2 row-start-1">
+                    — Series A/B scaling, automation design, retention systems.
+                  </span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <a href={COMPANY_LINKS.datadog} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+
+                {/* Datadog */}
+                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3 gap-y-1">
+                  <a
+                    href={COMPANY_LINKS.datadog}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="col-start-1 row-start-1 flex items-center gap-2 hover:text-white"
+                  >
                     <LineChart className="h-4 w-4 text-[#3B6255]" />
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Datadog</span>
                   </a>
-                  <span>— At‑scale & FedGov GTM lifecycle automation.</span>
+                  <span className="col-start-2 row-start-1">
+                    — At‑scale & FedGov GTM lifecycle automation.
+                  </span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <a href={COMPANY_LINKS.klaviyo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-white">
+
+                {/* Klaviyo */}
+                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3 gap-y-1">
+                  <a
+                    href={COMPANY_LINKS.klaviyo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="col-start-1 row-start-1 flex items-center gap-2 hover:text-white"
+                  >
                     <Mail className="h-4 w-4 text-[#3B6255]" />
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Klaviyo</span>
                   </a>
-                  <span>— RevOps automations; contract‑to‑cash; ROI reporting.</span>
+                  <span className="col-start-2 row-start-1">
+                    — RevOps automations; contract‑to‑cash; ROI reporting.
+                  </span>
                 </li>
               </ul>
             </div>
@@ -260,7 +300,6 @@ function ServiceCard({ title, tagline, bullets, results }) {
       <CardContent>
         <h3 className="text-xl font-semibold">{title}</h3>
         <p className="mt-1 text-zinc-400">{tagline}</p>
-        {/* keep bullets as markers (no per-bullet icons) */}
         <ul className="mt-4 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
           {bullets.map((b, i) => (
             <li key={i}>{b}</li>
@@ -353,7 +392,7 @@ function CTA() {
           <p className="mt-2 max-w-2xl text-zinc-100/90">
             Book a short intro call. We’ll pinpoint 1–2 high‑leverage automations or CS plays you can deploy within 30–45 days.
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-3">
+        <div className="mt-5 flex flex-wrap items-center gap-3">
             <a href="mailto:Andrew.roman117@gmail.com">
               <Button className="bg-black/50 text-white hover:bg-black/70">
                 <Mail className="mr-2 h-4 w-4" /> Email Me
