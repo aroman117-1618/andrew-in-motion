@@ -485,6 +485,9 @@ function ImpactCard({ title, items }) {
 /* ──────────────────────────────────────────────────────────────
    TESTIMONIALS — slow auto‑rotate, hover fill to brand green
    ────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────────
+   TESTIMONIALS — continuous scroll rail, edge‑fade, hover fill
+   ────────────────────────────────────────────────────────────── */
 function Testimonials() {
   return (
     <section id="testimonials" className="py-16 sm:py-24">
@@ -493,89 +496,69 @@ function Testimonials() {
         title="Trusted by operators and partners"
         subtitle="Condensed notes from people I’ve worked with—focused on outcomes, clarity, and how teams felt supported."
       />
-      <TestimonialsCarousel items={TESTIMONIALS} />
+
+      {/* Full‑bleed rail: pull to screen edges */}
+      <div className="-mx-4 sm:-mx-6 lg:-mx-8">
+        <TestimonialsRail items={TESTIMONIALS} />
+      </div>
     </section>
   );
 }
 
-function TestimonialsCarousel({ items }) {
-  const [index, setIndex] = React.useState(0);
+function TestimonialsRail({ items }) {
   const [paused, setPaused] = React.useState(false);
 
-  // auto‑advance every 7s unless paused
-  React.useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % items.length);
-    }, 7000);
-    return () => clearInterval(id);
-  }, [paused, items.length]);
+  // Duplicate array for an infinite loop effect
+  const loop = React.useMemo(() => [...items, ...items], [items]);
 
   return (
     <div
-      className="relative mx-auto max-w-3xl"
+      className="relative overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.45 }}
-          className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6"
-        >
-          {/* green hover fill */}
-          <div
-            className="pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style={{ background: "#3B6255" }}
-          />
-          <figure className="relative">
-            <blockquote className="text-lg leading-relaxed text-zinc-200 group-hover:text-white transition-colors">
-              “{items[index].quote}”
-            </blockquote>
-            <figcaption className="mt-4 text-sm text-zinc-400 group-hover:text-white/90 transition-colors">
-              <span className="font-medium text-zinc-200 group-hover:text-white">{items[index].name}</span>
-              <span className="mx-2 text-zinc-500 group-hover:text-white/70">•</span>
-              <span>{items[index].title}</span>
-            </figcaption>
-          </figure>
-        </motion.div>
-      </AnimatePresence>
+      {/* Edge fade masks (left/right) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#141414] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#141414] to-transparent" />
 
-      {/* indicators */}
-      <div className="mt-4 flex items-center justify-center gap-2">
-        {items.map((_, i) => (
-          <button
-            key={i}
-            aria-label={`Go to testimonial ${i + 1}`}
-            onClick={() => setIndex(i)}
-            className={`h-2 rounded-full transition-all ${
-              i === index ? "bg-[#3B6255] w-5" : "bg-zinc-600 hover:bg-zinc-500 w-2"
-            }`}
-          />
+      <motion.div
+        className="flex gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8"
+        animate={{ x: paused ? 0 : ["0%", "-50%"] }}
+        transition={{
+          duration: 28,         // slow + readable
+          ease: "linear",
+          repeat: paused ? 0 : Infinity,
+          repeatType: "loop",
+        }}
+        style={{ willChange: "transform" }}
+      >
+        {loop.map((t, i) => (
+          <TestimonialCard key={`${t.name}-${i}`} t={t} />
         ))}
-      </div>
-
-      {/* optional prev/next (desktop) */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 right-0 hidden justify-between px-2 md:flex">
-        <button
-          onClick={() => setIndex((i) => (i - 1 + items.length) % items.length)}
-          className="pointer-events-auto h-10 w-10 rounded-full bg-black/40 text-white hover:bg-black/60"
-          aria-label="Previous"
-        >
-          ‹
-        </button>
-        <button
-          onClick={() => setIndex((i) => (i + 1) % items.length)}
-          className="pointer-events-auto h-10 w-10 rounded-full bg-black/40 text-white hover:bg-black/60"
-          aria-label="Next"
-        >
-          ›
-        </button>
-      </div>
+      </motion.div>
     </div>
+  );
+}
+
+function TestimonialCard({ t }) {
+  return (
+    <article
+      className="group relative min-w-[260px] sm:min-w-[360px] lg:min-w-[420px] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5"
+    >
+      {/* hover green fill */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ background: "#3B6255" }}
+      />
+      <blockquote className="text-base sm:text-lg leading-relaxed text-zinc-200 group-hover:text-white transition-colors">
+        “{t.quote}”
+      </blockquote>
+      <footer className="mt-4 text-sm text-zinc-400 group-hover:text-white/90 transition-colors">
+        <span className="font-medium text-zinc-200 group-hover:text-white">{t.name}</span>
+        <span className="mx-2 text-zinc-500 group-hover:text-white/70">•</span>
+        <span>{t.title}</span>
+      </footer>
+    </article>
   );
 }
 
