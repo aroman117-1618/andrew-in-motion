@@ -9,7 +9,6 @@ build: {
 // Enable source maps for production debugging
 sourcemap: true,
 
-```
 // Optimize chunk splitting
 rollupOptions: {
   output: {
@@ -34,7 +33,7 @@ cssCodeSplit: true,
 
 // Set chunk size warnings
 chunkSizeWarningLimit: 600,
-```
+
 
 },
 
