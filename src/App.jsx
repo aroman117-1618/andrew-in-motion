@@ -19,7 +19,7 @@ import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 import InteractiveDrift from "./components/InteractiveDrift.jsx";
 
-// Company links (adjust if you prefer different URLs)
+// Verify these URLs suit you
 const COMPANY_LINKS = {
   nift: "https://www.gonift.com",
   robin: "https://robinpowered.com",
@@ -95,7 +95,7 @@ function Hero() {
           Scale your growth <span className="text-[#3B6255]">without scaling headcount</span>
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-zinc-300">
-          Partnering with leaders to remove bottlenecks, create customer‑centric systems, and turn signals into sustainable revenue growth.
+          Partnering with leaders to remove bottlenecks, create customer‑centric systems, and turn signal into sustainable growth.
         </p>
         <div className="flex items-center justify-center gap-3">
           <a href="#services">
@@ -114,26 +114,25 @@ function Hero() {
   );
 }
 
-function SectionHeader({ icon: Icon, kicker, title, subhead }) {
+/** Section header with big background stamp icon */
+function SectionHeader({ kicker, title, subtitle, Icon }) {
   return (
-    <div className="relative mb-8">
-      {/* Background icon */}
-      <Icon
-        className="absolute -top-10 -left-10 w-40 h-40 text-green-500/20"
-        aria-hidden="true"
-      />
-      {/* Text content */}
-      <p className="text-sm uppercase tracking-wide text-green-500">{kicker}</p>
-      <h2 className="mt-2 text-2xl font-semibold sm:text-3xl text-white drop-shadow-md">
-        {title}
-      </h2>
-      {subhead && (
-        <p className="mt-2 text-base text-zinc-300 max-w-3xl">
-          {subhead}
-        </p>
-      )}
+    <div className="relative mb-10">
+      {/* enlarged glow + icon; ~30% more opaque */}
+      {Icon ? (
+        <>
+          <div className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 sm:h-64 sm:w-64 rounded-full bg-[#3B6255]/20 blur-3xl" />
+          <Icon
+            className="pointer-events-none absolute -top-14 -left-14 h-44 w-44 sm:h-52 sm:w-52 text-[#3B6255]/30"
+            aria-hidden
+          />
+        </>
+      ) : null}
+      <p className="text-xs uppercase tracking-[0.25em] text-zinc-400">{kicker}</p>
+      <h2 className="mt-2 text-2xl font-semibold sm:text-3xl text-white drop-shadow-md">{title}</h2>
+      {subtitle && <p className="mt-3 max-w-3xl text-zinc-300">{subtitle}</p>}
     </div>
-  )
+  );
 }
 
 function About() {
@@ -153,33 +152,31 @@ function About() {
           <CardContent>
             <h3 className="text-lg font-semibold">Operator Origin</h3>
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
-              I started in kitchens, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech - first in value‑based discovery and negotiation, then in building systems that surface real customer signal and scale insights across teams.
+              I started in kitchens, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech — first in value‑based discovery and negotiation, then in building systems that surface real customer signal and scale insights across teams.
             </p>
 
-            {/* aligned green markers */}
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
               <ul className="list-disc marker:text-[#3B6255] space-y-1 pl-5 text-base text-zinc-200">
                 <li>Turning customer data into proactive growth strategies</li>
-                <li>Building systems that turn market signals into scalable action</li>
+                <li>Building systems that turn customer signals into scalable action</li>
                 <li>Translating insights into measurable revenue impact</li>
               </ul>
             </div>
           </CardContent>
         </Card>
 
-        {/* Track Record with company icons + links (aligned grid) */}
+        {/* Track Record — grid-aligned rows with icons + links */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
             <h3 className="text-lg font-semibold">Track Record</h3>
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
-              Led the full customer lifecycle, pre‑sale through renewal, with a focus on scalable automation and cross‑functional alignment.
+              Led the full customer lifecycle — pre‑sale through renewal — with a focus on scalable automation and cross‑functional alignment.
             </p>
 
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
               <ul className="space-y-2 text-base leading-relaxed text-zinc-200">
-                {/* Nift */}
-                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3 gap-y-1">
+                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3">
                   <a
                     href={COMPANY_LINKS.nift}
                     target="_blank"
@@ -189,13 +186,10 @@ function About() {
                     <Gift className="h-4 w-4 text-[#3B6255]" />
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Nift</span>
                   </a>
-                  <span className="col-start-2 row-start-1">
-                    - Early‑stage growth & foundational GTM build‑out.
-                  </span>
+                  <span className="col-start-2 row-start-1">— Early‑stage growth & foundational GTM build‑out.</span>
                 </li>
 
-                {/* Robin */}
-                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3 gap-y-1">
+                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3">
                   <a
                     href={COMPANY_LINKS.robin}
                     target="_blank"
@@ -205,13 +199,10 @@ function About() {
                     <Calendar className="h-4 w-4 text-[#3B6255]" />
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Robin</span>
                   </a>
-                  <span className="col-start-2 row-start-1">
-                    - Series A/B scaling, automation design, retention systems.
-                  </span>
+                  <span className="col-start-2 row-start-1">— Series A/B scaling, automation design, retention systems.</span>
                 </li>
 
-                {/* Datadog */}
-                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3 gap-y-1">
+                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3">
                   <a
                     href={COMPANY_LINKS.datadog}
                     target="_blank"
@@ -221,13 +212,10 @@ function About() {
                     <LineChart className="h-4 w-4 text-[#3B6255]" />
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Datadog</span>
                   </a>
-                  <span className="col-start-2 row-start-1">
-                    - At‑scale & FedGov GTM lifecycle automation.
-                  </span>
+                  <span className="col-start-2 row-start-1">— At‑scale & FedGov GTM lifecycle automation.</span>
                 </li>
 
-                {/* Klaviyo */}
-                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3 gap-y-1">
+                <li className="grid grid-cols-[auto,1fr] items-start gap-x-3">
                   <a
                     href={COMPANY_LINKS.klaviyo}
                     target="_blank"
@@ -237,9 +225,7 @@ function About() {
                     <Mail className="h-4 w-4 text-[#3B6255]" />
                     <span className="text-[#3B6255] font-semibold underline-offset-4 hover:underline">Klaviyo</span>
                   </a>
-                  <span className="col-start-2 row-start-1">
-                    - RevOps automations; contract‑to‑cash; ROI reporting.
-                  </span>
+                  <span className="col-start-2 row-start-1">— RevOps automations; contract‑to‑cash; ROI reporting.</span>
                 </li>
               </ul>
             </div>
@@ -338,7 +324,7 @@ function Impact() {
           ]}
         />
 
-        {/* Right: merged RevOps + Occupancy for balance */}
+        {/* Right: merged panel for balance */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
@@ -392,7 +378,7 @@ function CTA() {
           <p className="mt-2 max-w-2xl text-zinc-100/90">
             Book a short intro call. We’ll pinpoint 1–2 high‑leverage automations or CS plays you can deploy within 30–45 days.
           </p>
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <div className="mt-5 flex flex-wrap items-center gap-3">
             <a href="mailto:Andrew.roman117@gmail.com">
               <Button className="bg-black/50 text-white hover:bg-black/70">
                 <Mail className="mr-2 h-4 w-4" /> Email Me
