@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./index.css";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Mail,
@@ -50,6 +50,54 @@ const COMPANY_LINKS = {
   klaviyo: "https://www.klaviyo.com",
 };
 
+/* ──────────────────────────────────────────────────────────────
+   Condensed testimonials (no company names shown)
+   ────────────────────────────────────────────────────────────── */
+const TESTIMONIALS = [
+  {
+    name: "Rahat Rahman",
+    title: "Senior Strategy Manager",
+    quote:
+      "Andrew brought clarity to complex change management—owning handoffs, dashboards, and process templates that simplified the work and raised the bar.",
+  },
+  {
+    name: "Natalia Wyatt",
+    title: "Billing Operations Manager",
+    quote:
+      "He bridges customer needs with operational rigor. The billing workflow improvements boosted productivity across teams.",
+  },
+  {
+    name: "Allie Guertin",
+    title: "Senior Manager, Customer Success",
+    quote:
+      "Analytical and impact‑driven. Andrew’s reporting and approach influence not just CSMs—leaders learn from him too.",
+  },
+  {
+    name: "Junya Kato",
+    title: "Collections Manager",
+    quote:
+      "Proactive and relentlessly improvement‑minded. His work reduced unnecessary effort and empowered partner teams.",
+  },
+  {
+    name: "Rob Allen Jr",
+    title: "Principal Customer Success Manager",
+    quote:
+      "A mentor who creates space to grow. His guidance built confidence and accelerated my development.",
+  },
+  {
+    name: "Jina Algarin",
+    title: "Director of Business Operations",
+    quote:
+      "Technical acumen + genuine customer care. A culture builder who quickly becomes the go‑to resource.",
+  },
+  {
+    name: "Omkar Waghe",
+    title: "Customer Success Engineer",
+    quote:
+      "Built a high‑trust, high‑performing team and broke down information silos with scalable process and enablement.",
+  },
+];
+
 export default function App() {
   useFavicon("/logo-mark.svg", "/logo-32.png");
 
@@ -77,6 +125,7 @@ export default function App() {
           <About />
           <Services />
           <Impact />
+          <Testimonials />
           <CTA />
         </main>
         <SiteFooter />
@@ -86,14 +135,13 @@ export default function App() {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   NAV — {logo}ndrew Lonati with tighter spacing
+   NAV — {logo}ndrew Lonati with tighter spacing + Testimonials link
    ────────────────────────────────────────────────────────────── */
 function SiteNav() {
   return (
     <div className="sticky top-0 z-20 border-b border-zinc-800/80 bg-[#141414]/80 backdrop-blur supports-[backdrop-filter]:bg-[#141414]/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <a href="#top" className="flex items-center font-semibold tracking-tight group">
-          {/* Tighter spacing: remove big gap, nudge text slightly left */}
           <motion.img
             src="/logo-mark.svg"
             onError={(e) => { e.currentTarget.src = "/logo-32.png"; }}
@@ -103,6 +151,7 @@ function SiteNav() {
             whileHover={{ rotate: -5, scale: 1.08, opacity: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           />
+          {/* tightened spacing */}
           <span className="ml-1 -ml-0.5 text-white text-lg sm:text-xl leading-none">
             ndrew Lonati
           </span>
@@ -112,6 +161,7 @@ function SiteNav() {
           <a href="#about" className="text-zinc-300 hover:text-white">About</a>
           <a href="#services" className="text-zinc-300 hover:text-white">Services</a>
           <a href="#impact" className="text-zinc-300 hover:text-white">Impact</a>
+          <a href="#testimonials" className="text-zinc-300 hover:text-white">Testimonials</a>
           <a href="#contact" className="text-zinc-300 hover:text-white">Contact</a>
         </nav>
 
@@ -429,6 +479,103 @@ function ImpactCard({ title, items }) {
         </ul>
       </CardContent>
     </Card>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────
+   TESTIMONIALS — slow auto‑rotate, hover fill to brand green
+   ────────────────────────────────────────────────────────────── */
+function Testimonials() {
+  return (
+    <section id="testimonials" className="py-16 sm:py-24">
+      <SectionHeader
+        kicker="Testimonials"
+        title="Trusted by operators and partners"
+        subtitle="Condensed notes from people I’ve worked with—focused on outcomes, clarity, and how teams felt supported."
+      />
+      <TestimonialsCarousel items={TESTIMONIALS} />
+    </section>
+  );
+}
+
+function TestimonialsCarousel({ items }) {
+  const [index, setIndex] = React.useState(0);
+  const [paused, setPaused] = React.useState(false);
+
+  // auto‑advance every 7s unless paused
+  React.useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % items.length);
+    }, 7000);
+    return () => clearInterval(id);
+  }, [paused, items.length]);
+
+  return (
+    <div
+      className="relative mx-auto max-w-3xl"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.45 }}
+          className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6"
+        >
+          {/* green hover fill */}
+          <div
+            className="pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{ background: "#3B6255" }}
+          />
+          <figure className="relative">
+            <blockquote className="text-lg leading-relaxed text-zinc-200 group-hover:text-white transition-colors">
+              “{items[index].quote}”
+            </blockquote>
+            <figcaption className="mt-4 text-sm text-zinc-400 group-hover:text-white/90 transition-colors">
+              <span className="font-medium text-zinc-200 group-hover:text-white">{items[index].name}</span>
+              <span className="mx-2 text-zinc-500 group-hover:text-white/70">•</span>
+              <span>{items[index].title}</span>
+            </figcaption>
+          </figure>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* indicators */}
+      <div className="mt-4 flex items-center justify-center gap-2">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Go to testimonial ${i + 1}`}
+            onClick={() => setIndex(i)}
+            className={`h-2 rounded-full transition-all ${
+              i === index ? "bg-[#3B6255] w-5" : "bg-zinc-600 hover:bg-zinc-500 w-2"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* optional prev/next (desktop) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 right-0 hidden justify-between px-2 md:flex">
+        <button
+          onClick={() => setIndex((i) => (i - 1 + items.length) % items.length)}
+          className="pointer-events-auto h-10 w-10 rounded-full bg-black/40 text-white hover:bg-black/60"
+          aria-label="Previous"
+        >
+          ‹
+        </button>
+        <button
+          onClick={() => setIndex((i) => (i + 1) % items.length)}
+          className="pointer-events-auto h-10 w-10 rounded-full bg-black/40 text-white hover:bg-black/60"
+          aria-label="Next"
+        >
+          ›
+        </button>
+      </div>
+    </div>
   );
 }
 
