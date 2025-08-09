@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import "./index.css";
 import { motion } from "framer-motion";
-
-// ⬇️ NEW: GPU shader background
 import MorphoOrbGL from "./components/MorphoOrbGL.jsx";
-
 import {
   ArrowRight,
   Mail,
@@ -102,34 +99,27 @@ const TESTIMONIALS = [
 ];
 
 export default function App() {
-  useFavicon("/logo-mark.svg","/logo-32.png");
+  useFavicon("/logo-mark.svg", "/logo-32.png");
 
   return (
     <div className="relative min-h-screen bg-[#141414] text-zinc-100">
-      {/* ───────────────────────────────────────────────
-          NEW BACKGROUND: MorphoOrbGL (GPU shader)
-          - lower intensity to avoid white blowout
-          - reacts to pointer/touch with springy offset
-         ─────────────────────────────────────────────── */}
+      {/* WebGL Orb — center, subtle, interactive (mouse/touch) */}
       <MorphoOrbGL
-        /* brightness / falloff */
-        intensity={0.22}      // center brightness (lower = dimmer)
-        radius={0.56}         // normalized size of the orb
-        feather={0.55}        // edge softness
-        /* motion / texture */
-        speed={0.10}          // base lobe animation speed
-        wobble={1.25}         // organic deformation
-        grain={0.10}          // film grain / dithering amount
-        /* brand palette (emerald / pine) */
+        className="fixed inset-0 -z-10"
         palette={[
           [17, 41, 23],   // deep pine
           [59, 98, 85],   // pine
           [28, 139, 102], // emerald
-          [155, 194, 60], // lime edge
+          [155, 194, 60], // lime
         ]}
-        /* pointer response (px offset w/ spring) */
+        /** Tunables – safe defaults are set inside the component;
+            these nudge brightness + randomness without blowing out text */
+        brightness={0.32}
+        falloff={1.45}
+        grain={0.5}
+        speed={0.06}
         pointerStrength={0.18}
-        pointerSmoothing={0.12}
+        seed={7}
       />
 
       <div className="relative z-10">
@@ -165,7 +155,6 @@ function SiteNav() {
             whileHover={{ rotate: -5, scale: 1.08, opacity: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           />
-          {/* tightened spacing */}
           <span className="ml-1 -ml-0.5 text-white text-lg sm:text-xl leading-none">
             ndrew Lonati
           </span>
@@ -507,8 +496,6 @@ function Testimonials() {
         title="Trusted by operators and partners"
         subtitle="Condensed notes from people I’ve worked with—focused on outcomes, clarity, and how teams felt supported."
       />
-
-      {/* Full‑bleed rail: pull to screen edges */}
       <div className="-mx-4 sm:-mx-6 lg:-mx-8">
         <TestimonialsRail items={TESTIMONIALS} />
       </div>
@@ -529,7 +516,7 @@ function TestimonialsRail({ items }) {
 
   React.useEffect(() => {
     let rafId;
-    const speed = 40; // px per second
+    const speed = 40; // px/s
 
     const tick = (t) => {
       if (!lastRef.current) lastRef.current = t;
@@ -543,7 +530,7 @@ function TestimonialsRail({ items }) {
         const half = total / 2;
 
         if (Math.abs(xRef.current) >= half) {
-          xRef.current += half; // wrap seamlessly
+          xRef.current += half;
         }
 
         trackRef.current.style.transform = `translateX(${xRef.current}px)`;
@@ -564,7 +551,6 @@ function TestimonialsRail({ items }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* edge fades */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#141414] to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#141414] to-transparent" />
 
@@ -584,7 +570,6 @@ function TestimonialsRail({ items }) {
 function TestimonialCard({ t }) {
   return (
     <article className="group relative min-w-[260px] sm:min-w-[360px] lg:min-w-[420px] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
-      {/* hover green fill */}
       <div
         className="pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{ background: "#3B6255" }}
@@ -633,7 +618,7 @@ function CTA() {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   FOOTER — logo placed before the three icons (as requested)
+   FOOTER — logo placed before the three icons
    ────────────────────────────────────────────────────────────── */
 function SiteFooter() {
   return (
@@ -642,7 +627,6 @@ function SiteFooter() {
         <p className="text-zinc-500">© {new Date().getFullYear()} Andrew Lonati. All rights reserved.</p>
 
         <div className="flex items-center gap-4">
-          {/* Logo FIRST in the icon row */}
           <a href="#top" aria-label="Brand logo">
             <motion.img
               src="/logo-mark.svg"
