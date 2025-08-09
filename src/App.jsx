@@ -19,6 +19,33 @@ import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 import InteractiveDrift from "./components/InteractiveDrift.jsx";
 
+/* ──────────────────────────────────────────────────────────────
+   Inline Logo component (Ribbon‑A). If you prefer, move to
+   src/components/Logo.jsx and import instead.
+   ────────────────────────────────────────────────────────────── */
+function Logo({ className = "h-7 w-7", color = "#3B6255" }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} fill="none">
+      <path
+        d="M12 52 30 12c2-4 8-4 10 0l12 26"
+        stroke={color}
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0.95"
+      />
+      <path
+        d="M20 38c10-6 22-6 32 0"
+        stroke={color}
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0.65"
+      />
+    </svg>
+  );
+}
+
 // Verify these URLs suit you
 const COMPANY_LINKS = {
   nift: "https://www.gonift.com",
@@ -36,8 +63,8 @@ export default function App() {
         speed={0.18}
         backgroundFade={0.06}
         palette={[
-          [59, 98, 85],   // #3B6255
-          [17, 41, 23],   // #112917
+          [59, 98, 85], // #3B6255
+          [17, 41, 23], // #112917
           [8, 38, 31],
           [6, 74, 99],
           [28, 139, 102],
@@ -60,25 +87,46 @@ export default function App() {
   );
 }
 
+/* ──────────────────────────────────────────────────────────────
+   NAV (brand uses {Logo}ndrew Lonati; ~30% larger typography)
+   ────────────────────────────────────────────────────────────── */
 function SiteNav() {
   return (
     <div className="sticky top-0 z-20 border-b border-zinc-800/80 bg-[#141414]/80 backdrop-blur supports-[backdrop-filter]:bg-[#141414]/60">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <a href="#top" className="font-semibold tracking-tight">Andrew Lonati</a>
-        <nav className="hidden gap-6 text-sm sm:flex">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight">
+          <Logo className="h-9 w-9" />
+          <span className="text-white text-lg sm:text-xl leading-none">ndrew Lonati</span>
+        </a>
+
+        {/* Desktop nav */}
+        <nav className="hidden gap-8 text-base sm:flex">
           <a href="#about" className="text-zinc-300 hover:text-white">About</a>
           <a href="#services" className="text-zinc-300 hover:text-white">Services</a>
           <a href="#impact" className="text-zinc-300 hover:text-white">Impact</a>
           <a href="#contact" className="text-zinc-300 hover:text-white">Contact</a>
         </nav>
-        <a href="#contact">
-          <Button className="bg-[#3B6255] hover:bg-[#112917] text-white">Get in touch</Button>
+
+        <a href="#contact" className="hidden sm:block">
+          <button className="rounded-xl px-4 py-2 text-base bg-[#3B6255] hover:bg-[#112917] text-white">
+            Get in touch
+          </button>
+        </a>
+
+        {/* Mobile: keep brand + small CTA */}
+        <a href="#contact" className="sm:hidden">
+          <button className="rounded-lg px-3 py-2 text-sm bg-[#3B6255] hover:bg-[#112917] text-white">
+            Contact
+          </button>
         </a>
       </div>
     </div>
   );
 }
 
+/* ──────────────────────────────────────────────────────────────
+   HERO
+   ────────────────────────────────────────────────────────────── */
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden py-20 sm:py-28">
@@ -114,11 +162,12 @@ function Hero() {
   );
 }
 
-/** Section header with big background stamp icon */
+/* ──────────────────────────────────────────────────────────────
+   SHARED SECTION HEADER (bigger background stamp + legible title)
+   ────────────────────────────────────────────────────────────── */
 function SectionHeader({ kicker, title, subtitle, Icon }) {
   return (
     <div className="relative mb-10">
-      {/* enlarged glow + icon; ~30% more opaque */}
       {Icon ? (
         <>
           <div className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 sm:h-64 sm:w-64 rounded-full bg-[#3B6255]/20 blur-3xl" />
@@ -135,6 +184,9 @@ function SectionHeader({ kicker, title, subtitle, Icon }) {
   );
 }
 
+/* ──────────────────────────────────────────────────────────────
+   ABOUT
+   ────────────────────────────────────────────────────────────── */
 function About() {
   return (
     <section id="about" className="py-16 sm:py-24">
@@ -165,7 +217,7 @@ function About() {
           </CardContent>
         </Card>
 
-        {/* Track Record — grid-aligned rows with icons + links */}
+        {/* Track Record — aligned rows with icons + links */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
@@ -236,6 +288,9 @@ function About() {
   );
 }
 
+/* ──────────────────────────────────────────────────────────────
+   SERVICES
+   ────────────────────────────────────────────────────────────── */
 function Services() {
   return (
     <section id="services" className="py-16 sm:py-24">
@@ -304,6 +359,9 @@ function ServiceCard({ title, tagline, bullets, results }) {
   );
 }
 
+/* ──────────────────────────────────────────────────────────────
+   IMPACT
+   ────────────────────────────────────────────────────────────── */
 function Impact() {
   return (
     <section id="impact" className="py-16 sm:py-24">
@@ -324,7 +382,7 @@ function Impact() {
           ]}
         />
 
-        {/* Right: merged panel for balance */}
+        {/* Right: merged RevOps + Occupancy for balance */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
@@ -368,6 +426,9 @@ function ImpactCard({ title, items }) {
   );
 }
 
+/* ──────────────────────────────────────────────────────────────
+   CTA
+   ────────────────────────────────────────────────────────────── */
 function CTA() {
   return (
     <section id="contact" className="py-16 sm:py-24">
@@ -396,22 +457,41 @@ function CTA() {
   );
 }
 
+/* ──────────────────────────────────────────────────────────────
+   FOOTER (logo far left; then resume, LinkedIn, GitHub)
+   ────────────────────────────────────────────────────────────── */
 function SiteFooter() {
   return (
     <footer className="mt-10 border-t border-zinc-800/80 py-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
-        <p className="text-zinc-500">© {new Date().getFullYear()} Andrew Lonati. All rights reserved.</p>
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        {/* Far-left brand mark */}
+        <a href="#top" className="flex items-center gap-2 text-zinc-400 hover:text-white">
+          <Logo className="h-7 w-7" />
+          <span className="sr-only">Andrew in Motion</span>
+        </a>
+
+        {/* Right-side links in requested order */}
         <div className="flex items-center gap-4">
-          <a href="https://github.com/aroman117-1618" className="text-zinc-400 hover:text-white" aria-label="GitHub">
-            <Github className="h-5 w-5" />
+          <a
+            href="/resume-andrew-lonati.pdf"
+            className="text-zinc-400 hover:text-white"
+            aria-label="Resume"
+            title="Resume (PDF)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FileText className="h-5 w-5" />
           </a>
           <a href="https://www.linkedin.com/in/andrewroman117/" className="text-zinc-400 hover:text-white" aria-label="LinkedIn">
             <Linkedin className="h-5 w-5" />
           </a>
-          <a href="/resume-andrew-lonati.pdf" className="text-zinc-400 hover:text-white" aria-label="Resume" title="Resume (PDF)" target="_blank" rel="noopener noreferrer">
-            <FileText className="h-5 w-5" />
+          <a href="https://github.com/aroman117-1618" className="text-zinc-400 hover:text-white" aria-label="GitHub">
+            <Github className="h-5 w-5" />
           </a>
         </div>
+      </div>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-6">
+        <p className="text-zinc-500">© {new Date().getFullYear()} Andrew Lonati. All rights reserved.</p>
       </div>
     </footer>
   );
