@@ -19,19 +19,6 @@ import {
 import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 
-<MorphoOrb
-  lobes={7}
-  size={0.62}
-  blur={140}
-  speed={0.10}
-  palette={[
-    [59, 98, 85],   // #3B6255 pine
-    [17, 41, 23],   // #112917 deep
-    [28, 139, 102], // emerald
-    [155, 194, 60], // lime
-  ]}
-/>
-
 /* ──────────────────────────────────────────────────────────────
    Favicon helper – swaps tab icon to your mark at runtime
    ────────────────────────────────────────────────────────────── */
@@ -112,23 +99,20 @@ const TESTIMONIALS = [
 ];
 
 export default function App() {
-  useFavicon("/logo-mark.svg", "/logo-32.png");
+  useFavicon("/logo-mark.svg","/logo-32.png");
 
   return (
-    <div className="relative min-h-screen bg-[#141414] text-zinc-100 selection:bg-[#3B6255] selection:text-white">
-      <InteractiveDrift
-        ribbons={12}
-        thickness={2.0}
-        speed={0.18}
-        backgroundFade={0.06}
+    <div className="relative min-h-screen bg-[#141414] text-zinc-100">
+      <MorphoOrb
+        lobes={7}
+        size={0.62}
+        blur={140}
+        speed={0.10}
         palette={[
-          [59, 98, 85], // #3B6255
-          [17, 41, 23], // #112917
-          [8, 38, 31],
-          [6, 74, 99],
+          [59, 98, 85],
+          [17, 41, 23],
           [28, 139, 102],
           [155, 194, 60],
-          [207, 226, 142],
         ]}
       />
       <div className="relative z-10">
