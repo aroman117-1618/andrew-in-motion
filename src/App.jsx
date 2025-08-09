@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import "./index.css";
-import { motion, AnimatePresence } from "framer-motion";
-import MorphoOrb from "./components/MorphoOrb.jsx";
+import { motion } from "framer-motion";
+
+// ⬇️ NEW: GPU shader background
+import MorphoOrbGL from "./components/MorphoOrbGL.jsx";
+
 import {
   ArrowRight,
   Mail,
@@ -103,20 +106,32 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#141414] text-zinc-100">
-      <MorphoOrb
-  size={0.62}
-  layers={3}
-  lobes={[5, 4, 6]}
-  blur={200}
-  speed={0.085}
-  gain={0.48}  // try 0.42 if still hot
-  palette={[
-    [17, 41, 23],
-    [59, 98, 85],
-    [28, 139, 102],
-    [155, 194, 60],
-  ]}
-/>
+      {/* ───────────────────────────────────────────────
+          NEW BACKGROUND: MorphoOrbGL (GPU shader)
+          - lower intensity to avoid white blowout
+          - reacts to pointer/touch with springy offset
+         ─────────────────────────────────────────────── */}
+      <MorphoOrbGL
+        /* brightness / falloff */
+        intensity={0.22}      // center brightness (lower = dimmer)
+        radius={0.56}         // normalized size of the orb
+        feather={0.55}        // edge softness
+        /* motion / texture */
+        speed={0.10}          // base lobe animation speed
+        wobble={1.25}         // organic deformation
+        grain={0.10}          // film grain / dithering amount
+        /* brand palette (emerald / pine) */
+        palette={[
+          [17, 41, 23],   // deep pine
+          [59, 98, 85],   // pine
+          [28, 139, 102], // emerald
+          [155, 194, 60], // lime edge
+        ]}
+        /* pointer response (px offset w/ spring) */
+        pointerStrength={0.18}
+        pointerSmoothing={0.12}
+      />
+
       <div className="relative z-10">
         <SiteNav />
         <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -482,9 +497,6 @@ function ImpactCard({ title, items }) {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   TESTIMONIALS — slow auto‑rotate, hover fill to brand green
-   ────────────────────────────────────────────────────────────── */
-/* ──────────────────────────────────────────────────────────────
    TESTIMONIALS — continuous scroll rail, edge‑fade, hover fill
    ────────────────────────────────────────────────────────────── */
 function Testimonials() {
@@ -517,7 +529,7 @@ function TestimonialsRail({ items }) {
 
   React.useEffect(() => {
     let rafId;
-    const speed = 40; // px per second (tweak for faster/slower)
+    const speed = 40; // px per second
 
     const tick = (t) => {
       if (!lastRef.current) lastRef.current = t;
@@ -527,13 +539,11 @@ function TestimonialsRail({ items }) {
       if (!pausedRef.current && trackRef.current) {
         xRef.current -= speed * dt;
 
-        // total width of the doubled track
         const total = trackRef.current.offsetWidth;
-        const half = total / 2; // width of a single sequence
+        const half = total / 2;
 
-        // when we've scrolled past one full sequence, wrap forward
         if (Math.abs(xRef.current) >= half) {
-          xRef.current += half;
+          xRef.current += half; // wrap seamlessly
         }
 
         trackRef.current.style.transform = `translateX(${xRef.current}px)`;
@@ -546,7 +556,6 @@ function TestimonialsRail({ items }) {
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // duplicate once for seamless loop
   const loop = React.useMemo(() => [...items, ...items], [items]);
 
   return (
@@ -574,9 +583,7 @@ function TestimonialsRail({ items }) {
 
 function TestimonialCard({ t }) {
   return (
-    <article
-      className="group relative min-w-[260px] sm:min-w-[360px] lg:min-w-[420px] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5"
-    >
+    <article className="group relative min-w-[260px] sm:min-w-[360px] lg:min-w-[420px] overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
       {/* hover green fill */}
       <div
         className="pointer-events-none absolute inset-0 -z-10 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
