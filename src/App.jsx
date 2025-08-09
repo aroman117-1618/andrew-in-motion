@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./index.css";
 import { motion, AnimatePresence } from "framer-motion";
+import MorphoOrb from "./components/MorphoOrb.jsx";
 import {
   ArrowRight,
   Mail,
@@ -17,7 +18,19 @@ import {
 
 import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
-import InteractiveDrift from "./components/InteractiveDrift.jsx";
+
+<MorphoOrb
+  lobes={7}
+  size={0.62}
+  blur={140}
+  speed={0.10}
+  palette={[
+    [59, 98, 85],   // #3B6255 pine
+    [17, 41, 23],   // #112917 deep
+    [28, 139, 102], // emerald
+    [155, 194, 60], // lime
+  ]}
+/>
 
 /* ──────────────────────────────────────────────────────────────
    Favicon helper – swaps tab icon to your mark at runtime
