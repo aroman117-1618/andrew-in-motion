@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, Mail, Github, Linkedin, FileText } from "lucide-react";
+import { ArrowRight, Mail, Github, Linkedin, FileText } from "lucide-react";
 
 // local UI (pure Tailwind)
 import { Card, CardContent } from "./components/ui/card";
@@ -19,17 +19,15 @@ export default function App() {
         speed={0.18}
         backgroundFade={0.06}
         palette={[
-          [59, 98, 85],   // pine       #3B6255
-          [17, 41, 23],   // deep pine  #112917
-          [8, 38, 31],    // deep forest
-          [6, 74, 99],    // teal navy
-          [28, 139, 102], // emerald
-          [155, 194, 60], // lime
-          [207, 226, 142] // light lime
+          [59, 98, 85],   // #3B6255
+          [17, 41, 23],   // #112917
+          [8, 38, 31],
+          [6, 74, 99],
+          [28, 139, 102],
+          [155, 194, 60],
+          [207, 226, 142],
         ]}
       />
-
-      {/* Site content sits above */}
       <div className="relative z-10">
         <SiteNav />
         <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -56,11 +54,9 @@ function SiteNav() {
           <a href="#impact" className="text-zinc-300 hover:text-white">Impact</a>
           <a href="#contact" className="text-zinc-300 hover:text-white">Contact</a>
         </nav>
-        <div className="flex items-center gap-2">
-          <a href="#contact">
-            <Button className="bg-[#3B6255] hover:bg-[#112917] text-white">Get in touch</Button>
-          </a>
-        </div>
+        <a href="#contact">
+          <Button className="bg-[#3B6255] hover:bg-[#112917] text-white">Get in touch</Button>
+        </a>
       </div>
     </div>
   );
@@ -76,13 +72,13 @@ function Hero() {
         className="relative z-10 mx-auto max-w-3xl text-center"
       >
         <p className="mb-4 text-xs uppercase tracking-[0.25em] text-zinc-400">
-          GTM Systems • Customer Success • Lifecycle Automation
+          CS Advisory • GTM Automation • Lifecycle Systems
         </p>
         <h1 className="mb-4 text-3xl font-semibold leading-tight sm:text-5xl">
           Scale your growth <span className="text-[#3B6255]">without scaling headcount</span>
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-zinc-300">
-          GTM Leader with a proven track record designing revenue-aligned systems that eliminate manual work, improve data quality, and let GTM teams operate like a single, high‑performing unit.
+          Partnering with leaders to remove bottlenecks, create customer‑centric systems, and turn signal into sustainable growth.
         </p>
         <div className="flex items-center justify-center gap-3">
           <a href="#services">
@@ -116,46 +112,46 @@ function About() {
     <section id="about" className="py-16 sm:py-24">
       <SectionHeader
         kicker="About"
-        title="Storytelling with precision, systems at scale"
-        subtitle="From the kitchen to the boardroom: a value-based, experience-first mindset married with analytical rigor to build customer listening systems and GTM programs that actually move revenue."
+        title="Collaboration, precision, and adaptability"
+        subtitle="From the kitchen to the boardroom: hands‑on service instincts + data‑driven rigor to design systems that move revenue."
       />
 
       <div className="grid gap-6 md:grid-cols-2">
+        {/* Operator Origin */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
             <h3 className="text-lg font-semibold">Operator Origin</h3>
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
-              I didn’t start in tech — I started in the kitchen. Service, precision, and hard work weren’t just job requirements; they were survival skills. Those same principles shaped my transition into the business world, first at Equinox, where I honed a sales-driven, value-based discovery and negotiation approach. I learned how to identify key personas, align them with market-fit investment areas, and anchor conversations in proof points that mattered.
-              <br /><br />
-              As my career evolved, I married that commercial instinct with an analytical mindset — building customer listening systems that cut through noise, surface meaningful signals, and scale those insights across entire organizations.
+              I started in kitchens, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech — first in value‑based discovery and negotiation, then in building systems that surface real customer signal and scale insights across teams.
             </p>
 
-            {/* Sub-panel matches Services "Expected Results" spacing; bullet alignment via marker color */}
+            {/* Sub-panel (glass) with aligned bullets */}
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-base text-zinc-200 marker:text-[#3B6255]">
+              <ul className="list-disc marker:text-[#3B6255] space-y-1 pl-5 text-base text-zinc-200">
                 <li>Turning customer data into proactive growth strategies</li>
                 <li>Building systems that turn customer signals into scalable action</li>
-                <li>Translating value‑based discovery and customer signals into real revenue</li>
+                <li>Translating insights into measurable revenue impact</li>
               </ul>
             </div>
           </CardContent>
         </Card>
 
+        {/* Track Record */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
             <h3 className="text-lg font-semibold">Track Record</h3>
             <p className="mt-2 text-base text-zinc-300 leading-relaxed">
-              I’ve been responsible for every stage of the customer lifecycle — pre-sale through renewal, including cross-sell and upsell strategies (with a personal preference for usage-based pricing). My work consistently centers on engineering efficient systems that reduce friction, improve data quality, and help GTM teams operate as a cohesive, high-performing unit. For me, it’s all about storytelling with precision — finding the signal among the noise and translating objectives into scalable, real-world results.
+              Led the full customer lifecycle — pre‑sale through renewal — with a focus on scalable automation and cross‑functional alignment.
             </p>
 
             <div className="mt-5 rounded-xl border border-zinc-800 p-4">
-              <ul className="mt-2 space-y-1 text-base leading-relaxed text-zinc-200">
-                <li><span className="text-[#3B6255] font-semibold">Nift</span> — Early-stage growth & foundational GTM build-out.</li>
+              <ul className="space-y-1 text-base leading-relaxed text-zinc-200">
+                <li><span className="text-[#3B6255] font-semibold">Nift</span> — Early‑stage growth & foundational GTM build‑out.</li>
                 <li><span className="text-[#3B6255] font-semibold">Robin</span> — Series A/B scaling, automation design, retention systems.</li>
-                <li><span className="text-[#3B6255] font-semibold">Datadog</span> — At-scale & FedGov GTM lifecycle automation.</li>
-                <li><span className="text-[#3B6255] font-semibold">Klaviyo</span> — RevOps automations; contract-to-cash; ROI reporting.</li>
+                <li><span className="text-[#3B6255] font-semibold">Datadog</span> — At‑scale & FedGov GTM lifecycle automation.</li>
+                <li><span className="text-[#3B6255] font-semibold">Klaviyo</span> — RevOps automations; contract‑to‑cash; ROI reporting.</li>
               </ul>
             </div>
           </CardContent>
@@ -170,36 +166,36 @@ function Services() {
     <section id="services" className="py-16 sm:py-24">
       <SectionHeader
         kicker="Services"
-        title="Focused, high‑leverage engagements"
-        subtitle="Two offers that compound: automate the GTM surface area and centralize the CS signal."
+        title="Two high‑impact offerings"
+        subtitle="Simple hourly model, custom‑scoped projects."
       />
       <div className="grid gap-6 md:grid-cols-2">
         <ServiceCard
-          title="AI‑Driven GTM Automation Consulting"
-          tagline="Scale your growth without scaling your headcount."
+          title="CS Advisor Retainer"
+          tagline="Embedded partnership to keep your CS strategy sharp (weekly sync + async access)."
           bullets={[
-            "GTM workflow audit to identify time sinks",
-            "AI‑powered processes: CRM automation, CS ticket routing, lead scoring, onboarding triggers",
-            "End‑to‑end documentation & team training",
+            "Customer journey mapping & retention strategy",
+            "KPI definition, reporting design, and operational reviews",
+            "Leadership coaching & cross‑functional alignment",
           ]}
           results={[
-            "Save 10–20 hours/week per GTM rep",
-            "Improve SLA compliance & customer satisfaction",
-            "Real‑time, accurate GTM data without extra admin",
+            "Clear, actionable CS strategy",
+            "Improved retention & expansion",
+            "Stronger alignment between CS, Sales, and Product",
           ]}
         />
         <ServiceCard
-          title="Productized Customer Insights Dashboard"
-          tagline="Your CX health, revenue impact, and retention metrics — all in one place."
+          title="GTM System Automation / Architecture"
+          tagline="Design and automate GTM workflows to remove bottlenecks."
           bullets={[
-            "Pre‑built, customizable dashboard (Tableau or Notion)",
-            "Integrations: Salesforce, Gainsight, Slack, Intercom and more",
-            "Guided onboarding + quick‑start video; live in 48 hours",
+            "Audit & blueprint of current GTM stack",
+            "AI‑powered processes: CRM automation, CS ticket routing, lead scoring, onboarding triggers",
+            "Cross‑system integrations + documentation & enablement",
           ]}
           results={[
-            "Single source of truth for health, churn risk, expansion",
-            "Decision‑ready metrics in minutes, not hours",
-            "Improved accountability & performance across CS",
+            "10–20+ hours/week saved per GTM rep",
+            "Accurate, real‑time data without manual upkeep",
+            "Scalable systems ready for growth",
           ]}
         />
       </div>
@@ -215,7 +211,7 @@ function ServiceCard({ title, tagline, bullets, results }) {
         <h3 className="text-xl font-semibold">{title}</h3>
         <p className="mt-1 text-zinc-400">{tagline}</p>
 
-        {/* aligned bullets via native markers */}
+        {/* Aligned bullets via native markers */}
         <ul className="mt-4 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
           {bullets.map((b, i) => (
             <li key={i}>{b}</li>
@@ -224,7 +220,7 @@ function ServiceCard({ title, tagline, bullets, results }) {
 
         <div className="mt-5 rounded-xl border border-zinc-800 p-4">
           <p className="text-xs uppercase tracking-wider text-zinc-400">Expected Results</p>
-          <ul className="mt-2 list-disc space-y-1 pl-5 text-zinc-200">
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-zinc-200 marker:text-[#3B6255]">
             {results.map((r, i) => (
               <li key={i}>{r}</li>
             ))}
@@ -241,29 +237,29 @@ function Impact() {
       <SectionHeader
         kicker="Impact & Results"
         title="Proving value"
-        subtitle="Representative wins across GTM lifecycle automation, RevOps reporting, and occupancy‑based workflows."
+        subtitle="Representative wins across lifecycle automation, RevOps reporting, and operational architecture."
       />
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Left: Lifecycle (unchanged, but bullets aligned) */}
+        {/* Left: Lifecycle Automation */}
         <ImpactCard
           title="GTM Lifecycle Automation"
           items={[
-            "Partnered with Product & Engineering to architect a digital-first product adoption strategy. Wrote and tested SQL transformations in Snowflake to power ETL pipelines for usage telemetry — enabling lifecycle segmentation and campaign automation. Result: +34% NRR and +18-point NPS.",
-            "Designed sentiment → action pipelines across 18+ product SKUs, equipping CSMs with tactical expansions (+45 net add-ons per quarter).",
-            "Built end-to-end product feedback systems (Slack → Salesforce → Jira → Productboard → Intercom), integrating customer input directly into roadmap rituals and lifecycle programs — resulting in 42% churn reduction and $2M ARR retention impact.",
-            "Drove lifecycle automation and API scripts through Git-based workflows, supporting best practices for testing, pull requests, and staging deployment.",
+            "Architected digital‑first adoption strategy powered by usage telemetry (+34% NRR, +18‑point NPS).",
+            "Designed sentiment → action pipelines across 18+ SKUs enabling +45 net add‑ons/quarter.",
+            "Built integrated feedback loops (Slack → Salesforce → Jira → Productboard → Intercom) driving 42% churn reduction and $2M ARR retention.",
+            "Drove lifecycle automation and API scripts via Git‑based workflows with testing/PRs/staging.",
           ]}
         />
 
-        {/* Right: Merged RevOps + Occupancy into one balanced panel */}
+        {/* Right: Merged RevOps + Occupancy */}
         <Card className="group relative overflow-hidden border-zinc-800 bg-zinc-900/60">
           <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
           <CardContent>
             <div>
               <h3 className="text-lg font-semibold">RevOps Reporting & Automations</h3>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
-                <li>Architected business process automations across CS, Finance, and BizOps — streamlining contract-to-cash, reducing billing disputes, and saving 200+ weekly hours via cross-system integrations.</li>
-                <li>Developed custom ROI reporting for Managed Customers to drive upgrades & committed contracts — 8x increase in contracted customers, +18% NRR (+$1.62M ARR).</li>
+                <li>Automated contract‑to‑cash across CS/Finance/BizOps — saving 200+ weekly hours.</li>
+                <li>Developed ROI reporting for Managed Customers — 8× increase in committed contracts; +18% NRR (+$1.62M ARR).</li>
               </ul>
             </div>
 
@@ -272,8 +268,8 @@ function Impact() {
             <div>
               <h3 className="text-lg font-semibold">Occupancy‑Based & Personal Automations</h3>
               <ul className="mt-3 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
-                <li>Built and tested custom integrations using SQL, Java, AWS, and Postman to support global enterprise deployments, including secure RFID & Occupancy-based resource access aligned to modern authentication protocols.</li>
-                <li>Personal Workflow: “Let’s get started” morning briefing powered by Eve Occupancy Sensors + iOS Shortcuts + Pushcut Automation Server — triggers a background sequence (calendar, tasks, weather, commute, prioritized call sheet, and system checks) via secure webhooks, hands-free.</li>
+                <li>Enterprise‑scale RFID/occupancy‑based access integrations (SQL/Java/AWS/Postman) aligned to modern auth.</li>
+                <li>“Let’s get started” morning briefing: Eve sensors + iOS Shortcuts + Pushcut Automation Server for hands‑free calendar/tasks/weather/commute/system checks.</li>
               </ul>
             </div>
           </CardContent>
@@ -289,7 +285,6 @@ function ImpactCard({ title, items }) {
       <div className="pointer-events-none absolute -inset-1 -z-10 rounded-2xl bg-gradient-to-br from-[#3B6255]/15 via-transparent to-[#112917]/15 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
       <CardContent>
         <h3 className="text-lg font-semibold">{title}</h3>
-        {/* aligned bullets via native markers */}
         <ul className="mt-3 list-disc space-y-2 pl-6 text-zinc-200 marker:text-[#3B6255]">
           {items.map((it, i) => (
             <li key={i} className="leading-relaxed">{it}</li>
@@ -308,7 +303,7 @@ function CTA() {
         <div className="relative">
           <h3 className="text-2xl font-semibold">Ready to remove bottlenecks and surface real signal?</h3>
           <p className="mt-2 max-w-2xl text-zinc-100/90">
-            Book a short intro. We’ll identify 1–2 high‑leverage automations or a dashboard rollout you can deploy within 30–45 days.
+            Book a short intro. We’ll identify 1–2 high‑leverage automations or dashboard rollouts you can deploy within 30–45 days.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <a href="mailto:Andrew.roman117@gmail.com">
