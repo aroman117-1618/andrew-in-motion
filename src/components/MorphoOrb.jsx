@@ -1,74 +1,115 @@
+// src/components/MorphoOrb.jsx
 import React from "react";
 
 /**
- * MorphoOrb — centered, blurred, additive “neural” orb.
- * - Additive blending + radial gradients (no hard edges)
- * - Soft trail for volumetric feel
- * - Pointer attractor + click pulse
+ * MorphoOrb (Emerald)
+ *  - Multi-layer, additive/screen glow with heavy blur (no hard edges)
+ *  - Radial gradients per lobe; capped alphas to avoid white blowout
+ *  - Soft trail fade (volumetric feel)
+ *  - Organic wobble + slow drift; cursor attractor + click pulse
+ *  - Grain overlay + vignette to match Morpho's textured look
  *
- * Props:
- *  - palette: Array of RGB triplets [[r,g,b], ...]
- *  - size: 0..1 relative to min(viewportW, viewportH)
- *  - lobes: number of overlapping blobs
- *  - blur: base blur radius in px
- *  - speed: base angular speed (radians/sec)
+ * Tunables via props at the bottom of this file (see default export signature).
  */
+
 export default function MorphoOrb({
+  // Emerald-forward palette (dark → light)
   palette = [
-    [59, 98, 85],    // #3B6255 pine
-    [17, 41, 23],    // #112917 deep
-    [28, 139, 102],  // emerald
-    [155, 194, 60],  // lime
+    [17, 41, 23],   // deep pine   #112917
+    [59, 98, 85],   // pine        #3B6255
+    [28, 139, 102], // emerald
+    [155, 194, 60], // lime accent
   ],
-  size = 0.68,
-  lobes = 5,
-  blur = 180,
-  speed = 0.09,
+  // Size relative to min(viewportW, viewportH)
+  size = 0.64,
+  // Layers of blobs; each layer has its own small differences
+  layers = 3,
+  // Lobes per layer (array or single number)
+  lobes = [5, 4, 6],
+  // Base blur in px (each layer scales from this)
+  blur = 190,
+  // Base angular speed
+  speed = 0.085,
+  // Master gain (overall brightness clamp)
+  gain = 0.78,
 }) {
   const canvasRef = React.useRef(null);
   const rafRef = React.useRef(0);
   const t0 = React.useRef(performance.now());
 
-  // normalized 0..1
-  const center = React.useRef({ x: 0.5, y: 0.45 }); // slightly above center
-  const target = React.useRef({ x: 0.5, y: 0.45 });
-  const pulse = React.useRef(0); // 0..1
-  const baseAngle = React.useRef(Math.random() * Math.PI * 2);
+  // Centers (normalized)
+  const center = React.useRef({ x: 0.5, y: 0.47 });
+  const target = React.useRef({ x: 0.5, y: 0.47 });
 
-  // Hi‑DPI scaling
+  // Interaction state
+  const pulse = React.useRef(0); // 0..1 (click burst)
+  const baseAngles = React.useRef(
+    Array.from({ length: layers }, () => Math.random() * Math.PI * 2)
+  );
+
+  // Grain (generated once, reused)
+  const grainCanvas = React.useRef(null);
+
+  // --- Utilities ---
+  const rgba = (rgb, a) => `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${a})`;
+
+  // Small helper to generate film grain on an offscreen canvas
+  const genGrain = React.useCallback((w = 512, h = 512) => {
+    const off = document.createElement("canvas");
+    off.width = w;
+    off.height = h;
+    const ictx = off.getContext("2d");
+    const id = ictx.createImageData(w, h);
+    const data = id.data;
+    for (let i = 0; i < data.length; i += 4) {
+      // 0..255 but stay dark to avoid whitening
+      const v = 28 + (Math.random() * 40) | 0; // ~dark gray noise
+      data[i] = v;
+      data[i + 1] = v;
+      data[i + 2] = v;
+      data[i + 3] = 255;
+    }
+    ictx.putImageData(id, 0, 0);
+    return off;
+  }, []);
+
+  // Hi-DPI scaling
   React.useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const c = canvasRef.current;
+    const ctx = c.getContext("2d");
     const resize = () => {
-      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1)); // cap DPR for perf
-      const { width, height } = canvas.getBoundingClientRect();
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      const { width, height } = c.getBoundingClientRect();
+      c.width = Math.floor(width * dpr);
+      c.height = Math.floor(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
     const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
+    ro.observe(c);
     return () => ro.disconnect();
   }, []);
+
+  // Generate grain once
+  React.useEffect(() => {
+    grainCanvas.current = genGrain(512, 512);
+  }, [genGrain]);
 
   // Pointer interactions
   React.useEffect(() => {
     const el = canvasRef.current;
-
     const onMove = (e) => {
-      const rect = el.getBoundingClientRect();
-      target.current.x = (e.clientX - rect.left) / rect.width;
-      target.current.y = (e.clientY - rect.top) / rect.height;
+      const r = el.getBoundingClientRect();
+      target.current.x = (e.clientX - r.left) / r.width;
+      target.current.y = (e.clientY - r.top) / r.height;
     };
     const onLeave = () => {
       target.current.x = 0.5;
-      target.current.y = 0.45;
+      target.current.y = 0.47;
     };
     const onClick = () => {
-      pulse.current = 1; // burst
+      pulse.current = 1;
     };
-
     el.addEventListener("pointermove", onMove);
     el.addEventListener("pointerleave", onLeave);
     el.addEventListener("click", onClick);
@@ -80,71 +121,72 @@ export default function MorphoOrb({
   }, []);
 
   React.useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d", { alpha: true });
+    const c = canvasRef.current;
+    const ctx = c.getContext("2d", { alpha: true });
 
-    const rgba = (rgb, a) => `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${a})`;
-    // Slightly stronger alphas for richer glow
-    const paletteColors = [
-   rgba(palette[0 % palette.length], 0.20),
-   rgba(palette[1 % palette.length], 0.16),
-   rgba(palette[2 % palette.length], 0.13),
-   rgba(palette[3 % palette.length], 0.10),
- ];
+    // Build color set (no high alphas → avoid white blowout)
+    const cols = [
+      rgba(palette[0 % palette.length], 0.18),
+      rgba(palette[1 % palette.length], 0.14),
+      rgba(palette[2 % palette.length], 0.12),
+      rgba(palette[3 % palette.length], 0.10),
+    ];
+    const toAlpha = (str, a) =>
+      str.replace(
+        /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([0-9.]+)\)/,
+        `rgba($1,$2,$3,${a})`
+      );
 
-    const draw = (now) => {
-      const t = (now - t0.current) / 1000;
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
+    const drawLayer = (t, layerIdx, w, h) => {
+      const nLobes =
+        Array.isArray(lobes) ? (lobes[layerIdx] ?? lobes[0]) : lobes;
+      const theta = baseAngles.current[layerIdx] + t * (speed * (0.8 + layerIdx * 0.12));
+      const layerGain = gain * (0.9 + layerIdx * 0.05);
 
-      // Soft trail: paint translucent dark over previous frame
-			ctx.restore();
-      ctx.globalCompositeOperation = "source-over";
-      ctx.save();
-			ctx.globalAlpha = 0.80; // darker canvas each frame → less lingering brightness
-      ctx.fillStyle = "#141414";
-      ctx.fillRect(0, 0, w, h);
-      ctx.globalAlpha = 1;
-
-      // Follow cursor slightly (lean, not chase)
-      const ease = 0.08;
+      // Slightly different radii per layer
+      const baseR = Math.min(w, h) * size * (0.48 + layerIdx * 0.06);
+      // Click “burst” decays
+      if (pulse.current > 0) pulse.current *= 0.92;
+      const burst = 1 + pulse.current * 0.22;
+      const ease = 0.085;
       center.current.x += (target.current.x - center.current.x) * ease;
       center.current.y += (target.current.y - center.current.y) * ease;
 
-      // Base radius & pulse scale
-      const baseR = Math.min(w, h) * size * 0.5;
-      if (pulse.current > 0) pulse.current *= 0.92;
-      const pulseScale = 1 + pulse.current * 0.28;
-
-      // Additive blending for glow
+      // Additive glow, then clamp by layerGain
+      ctx.save();
       ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = layerGain;
 
-      const theta = baseAngle.current + t * (speed * (1 + pulse.current * 0.6));
+      for (let i = 0; i < nLobes; i++) {
+        const phase = theta + (i * Math.PI * 2) / nLobes;
 
-      for (let i = 0; i < lobes; i++) {
-        const phase = theta + (i * Math.PI * 2) / lobes;
-
-        // Lower orbit so lobes overlap (unified mass)
-        const orbit = baseR * 0.42;
-        const wobble = Math.sin(t * 0.8 + i * 1.3) * baseR * 0.045;
+        // Lower orbit so lobes overlap heavily (unified mass)
+        const orbit = baseR * 0.40 * (1 + 0.03 * Math.sin(t * 0.7 + i));
+        // Organic wobble
+        const wobble =
+          Math.sin(t * (0.7 + 0.05 * i) + i * 1.3) * baseR * 0.035 +
+          Math.cos(t * 0.5 + i * 0.7) * baseR * 0.02;
 
         const cx = center.current.x * w + Math.cos(phase) * (orbit + wobble);
         const cy = center.current.y * h + Math.sin(phase) * (orbit + wobble * 0.6);
 
         // Larger, breathing lobes
-        const r = baseR * pulseScale * (0.70 + 0.10 * Math.sin(t * 0.9 + i * 1.4));
+        const r =
+          baseR *
+          burst *
+          (0.72 +
+            0.08 * Math.sin(t * (0.8 + 0.07 * i) + i * 1.4) +
+            0.02 * Math.cos(t * 0.6 + i));
 
-        // Radial gradient with strong inner energy → smooth falloff
+        // Radial gradient: brighter core -> smooth falloff (no white)
         ctx.save();
-        ctx.filter = `blur(${blur}px)`;
-        const col = paletteColors[i % paletteColors.length];
+        ctx.filter = `blur(${(blur * (0.9 + layerIdx * 0.15)) | 0}px)`;
 
-        const g = ctx.createRadialGradient(cx, cy, r * 0.1, cx, cy, r);
-        // brighten center by bumping alpha inside the rgba()
-        const toAlpha = (str, a) => str.replace(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([0-9.]+)\)/, `rgba($1,$2,$3,${a})`);
-				g.addColorStop(0.0,  toAlpha(col, 0.22)); // softer center
-				g.addColorStop(0.55, toAlpha(col, 0.14));
-      	g.addColorStop(1.0, toAlpha(col, 0.00));
+        const col = cols[(i + layerIdx) % cols.length];
+        const g = ctx.createRadialGradient(cx, cy, r * 0.08, cx, cy, r);
+        g.addColorStop(0.0, toAlpha(col, 0.20)); // keep color in the core
+        g.addColorStop(0.5, toAlpha(col, 0.12));
+        g.addColorStop(1.0, toAlpha(col, 0.00));
 
         ctx.fillStyle = g;
         ctx.beginPath();
@@ -153,15 +195,61 @@ export default function MorphoOrb({
         ctx.restore();
       }
 
-      // Reset composite for next frame
-      ctx.globalCompositeOperation = "source-over";
-
-      rafRef.current = requestAnimationFrame(draw);
+      ctx.restore();
     };
 
-    rafRef.current = requestAnimationFrame(draw);
+    const render = (now) => {
+      const t = (now - t0.current) / 1000;
+      const w = c.clientWidth;
+      const h = c.clientHeight;
+
+      // Soft trail: fade toward black each frame
+      ctx.globalCompositeOperation = "source-over";
+      ctx.globalAlpha = 0.22; // darker = less lingering brightness
+      ctx.fillStyle = "#141414";
+      ctx.fillRect(0, 0, w, h);
+      ctx.globalAlpha = 1;
+
+      // Draw layers
+      for (let L = 0; L < layers; L++) drawLayer(t, L, w, h);
+
+      // Grain overlay (soft-light): repeats to fill
+      if (grainCanvas.current) {
+        ctx.save();
+        ctx.globalCompositeOperation = "soft-light";
+        ctx.globalAlpha = 0.25; // grain strength (0.18–0.3)
+        const g = grainCanvas.current;
+        // tile it
+        for (let y = 0; y < h; y += g.height) {
+          for (let x = 0; x < w; x += g.width) {
+            ctx.drawImage(g, x, y);
+          }
+        }
+        ctx.restore();
+      }
+
+      // Subtle vignette to aid legibility
+      ctx.save();
+      const vg = ctx.createRadialGradient(
+        w * 0.5,
+        h * 0.52,
+        Math.min(w, h) * 0.36,
+        w * 0.5,
+        h * 0.52,
+        Math.min(w, h) * 0.70
+      );
+      vg.addColorStop(0.0, "rgba(20,20,20,0.00)");
+      vg.addColorStop(1.0, "rgba(20,20,20,0.22)");
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, 0, w, h);
+      ctx.restore();
+
+      rafRef.current = requestAnimationFrame(render);
+    };
+
+    rafRef.current = requestAnimationFrame(render);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [palette, size, lobes, blur, speed]);
+  }, [palette, size, layers, lobes, blur, speed, gain]);
 
   return (
     <canvas
