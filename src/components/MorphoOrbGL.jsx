@@ -1,5 +1,5 @@
 import React from "react";
-import reglFactory from "regl";
+import createREGL from "regl";
 
 /**
  * Morpho-like orb with domain-warped fBM, center clamp, grain, vignette,
@@ -9,8 +9,6 @@ import reglFactory from "regl";
  *  - size (0..1)         : normalized radius of the orb (default 0.62)
  *  - speed               : base time speed (default 0.085)
  *  - gain                : overall brightness gain (default 0.45)
- *  - layers              : not used here (kept for API compat)
- *  - lobes               : not used here (kept for API compat)
  *  - palette             : array of RGB triplets [ [r,g,b], ... ] (0-255)
  */
 export default function MorphoOrbGL({
@@ -28,6 +26,9 @@ export default function MorphoOrbGL({
   const destroyRef = React.useRef(null);
 
   React.useEffect(() => {
+    // SSR guard (Vite can prerender in some setups)
+    if (typeof window === "undefined") return;
+
     const canvas = document.createElement("canvas");
     canvas.style.position = "fixed";
     canvas.style.inset = "0";
@@ -37,10 +38,9 @@ export default function MorphoOrbGL({
     canvas.style.pointerEvents = "none"; // keep page interactive
     ref.current?.appendChild(canvas);
 
-    const regl = reglFactory({
+    const regl = createREGL({
       canvas,
       attributes: { antialias: true, alpha: true },
-      extensions: [],
     });
 
     // handle resize
@@ -98,21 +98,14 @@ export default function MorphoOrbGL({
         uniform vec3  u_c2;
         uniform vec3  u_c3;
 
-        // ==== helpers ====
         #define PI 3.14159265359
 
-        // hash + noise (2D simplex)
-        vec3 hash3(vec2 p) {
-          vec3 q = vec3( dot(p,vec2(127.1,311.7)),
-                         dot(p,vec2(269.5,183.3)),
-                         dot(p,vec2(419.2,371.9)) );
-          return fract(sin(q)*43758.5453);
-        }
+        vec3 permute(vec3 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+
+        // Simplex noise helpers
         float snoise(vec2 v){
-          const vec4 C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
-                              0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
-                             -0.577350269189626,  // -1.0 + 2.0 * C.x
-                              0.024390243902439); // 1.0 / 41.0
+          const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                             -0.577350269189626, 0.024390243902439);
           vec2 i  = floor(v + dot(v, C.yy));
           vec2 x0 = v -   i + dot(i, C.xx);
           vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
@@ -138,7 +131,6 @@ export default function MorphoOrbGL({
 
           return 130.0 * dot(m, g);
         }
-        vec3 permute(vec3 x){return mod(((x*34.0)+1.0)*x, 289.0);}
 
         float fbm(vec2 p) {
           float f=0.0;
@@ -189,7 +181,7 @@ export default function MorphoOrbGL({
                          fbm(pw*2.1 + vec2(t*0.09, t*0.12)));
           pw += 0.25*w1 + 0.15*w2;
 
-          // pointer attraction (eases in shader so it's cheap)
+          // pointer attraction
           float attract = exp(-6.0*length(p - m));
           pw += (m - pw) * (0.15*attract);
 
@@ -200,8 +192,8 @@ export default function MorphoOrbGL({
           float sdf = length(pw) - (R + lobes*0.6);
 
           // body and cloudy interior
-          float body = 1.0 - smoothstep(-0.02, 0.22, sdf);      // soft shell
-          float cloud = fbm(pw*2.6 + t*0.4);                     // volume feel
+          float body = 1.0 - smoothstep(-0.02, 0.22, sdf);
+          float cloud = fbm(pw*2.6 + t*0.4);
           float vol = smoothstep(0.0, 1.0, body) * (0.55 + 0.45*cloud);
 
           // center clamp -> avoid white core
@@ -215,18 +207,17 @@ export default function MorphoOrbGL({
           // tone
           vec3 col = grad(clamp(inten * u_gain, 0.0, 1.0));
 
-          // final
           gl_FragColor = vec4(col, 0.92); // alpha so site bleeds through
         }
       `,
       attributes: {
         position: [
           [-1, -1],
-          [1, -1],
-          [-1, 1],
-          [1, 1],
-          [-1, 1],
-          [1, -1],
+          [ 1, -1],
+          [-1,  1],
+          [ 1,  1],
+          [-1,  1],
+          [ 1, -1],
         ],
       },
       uniforms: {
@@ -247,7 +238,6 @@ export default function MorphoOrbGL({
     // RAF loop: ease pointer + draw
     let raf;
     const loop = () => {
-      // ease pointer (critical for “living” feel)
       pointer.x += (pointer.tx - pointer.x) * 0.08;
       pointer.y += (pointer.ty - pointer.y) * 0.08;
 
@@ -267,6 +257,7 @@ export default function MorphoOrbGL({
     };
 
     return () => destroyRef.current?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size, speed, gain, JSON.stringify(palette)]);
 
   return <div ref={ref} aria-hidden />;
