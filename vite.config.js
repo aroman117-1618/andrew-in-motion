@@ -1,74 +1,59 @@
-import { defineConfig } from ‘vite’
-import react from ‘@vitejs/plugin-react’
+// vite.config.js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-plugins: [react()],
+  plugins: [react()],
 
-// Performance optimizations
-build: {
-// Enable source maps for production debugging
-sourcemap: true,
+  // Production build
+  build: {
+    sourcemap: true, // keep if you actually use prod debugging; otherwise set false
+    // Use esbuild (faster) instead of terser, but still drop console/debugger
+    minify: 'esbuild',
+    esbuild: {
+      drop: ['console', 'debugger'],
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        },
+      },
+    },
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 600,
+  },
 
-// Optimize chunk splitting
-rollupOptions: {
-  output: {
-    manualChunks: {
-      // Separate vendor chunks for better caching
-      vendor: ['react', 'react-dom'],
+  // Dev server (ignored on Netlify, but fine locally)
+  server: {
+    hmr: {
+      overlay: true,
     },
   },
-},
 
-// Compress assets
-minify: 'terser',
-terserOptions: {
-  compress: {
-    drop_console: true, // Remove console.log in production
-    drop_debugger: true,
+  // Preview server (local only; Netlify doesn’t use this)
+  preview: {
+    port: 3000,
+    host: true,
   },
-},
 
-// Optimize CSS
-cssCodeSplit: true,
+  // Dependency optimization (runs in dev, not during Netlify’s prod build)
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+    // force: true can slow dev startup and is rarely needed; remove unless you truly need it
+    // force: true,
+  },
 
-// Set chunk size warnings
-chunkSizeWarningLimit: 600,
+  css: {
+    devSourcemap: true,
+    preprocessorOptions: {
+      // add options if you actually use Sass/Less/etc.
+    },
+  },
 
+  // Extra asset globs (Vite already handles these, so this is optional)
+  assetsInclude: ['**/*.svg', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif'],
 
-},
-
-// Development server optimizations
-server: {
-// Faster HMR
-hmr: {
-overlay: true,
-},
-},
-
-// Preview server for production builds
-preview: {
-port: 3000,
-host: true,
-},
-
-// Optimize dependencies
-optimizeDeps: {
-include: [‘react’, ‘react-dom’],
-// Pre-bundle heavy dependencies
-force: true,
-},
-
-// CSS preprocessing
-css: {
-devSourcemap: true,
-preprocessorOptions: {
-// Add any CSS preprocessor options here
-},
-},
-
-// Asset handling
-assetsInclude: [’**/*.svg’, ’**/*.png’, ’**/*.jpg’, ‘**/*.jpeg’, ’**/*.gif’],
-
-// Base URL for deployment (adjust for your domain)
-base: ‘/’,
+  // Base is '/' by default; keep only if you’re deploying under a subpath
+  // base: '/',
 })
