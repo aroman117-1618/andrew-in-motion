@@ -9,13 +9,13 @@ useEffect(() => {
 const prefersReducedMotion = window.matchMedia(’(prefers-reduced-motion: reduce)’);
 const isLowPerformanceDevice = navigator.hardwareConcurrency < 4;
 
-```
+
 if (orbRef.current) {
   if (prefersReducedMotion.matches || isLowPerformanceDevice) {
     orbRef.current.style.animationDuration = '8s'; // Slower for accessibility/performance
   }
 }
-```
+
 
 }, []);
 
