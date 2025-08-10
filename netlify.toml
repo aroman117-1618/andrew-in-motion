@@ -1,82 +1,11 @@
 [build]
-
-# Build command
-
 command = “npm run build”
-
-# Output directory
-
 publish = “dist”
 
-# Node version (specify for consistency)
-
-environment = { NODE_VERSION = “18” }
-
 [build.environment]
-
-# Optimize build performance
-
-NODE_OPTIONS = “–max_old_space_size=4096”
-
-# Enable experimental features if needed
-
-VITE_BUILD_TARGET = “esnext”
-
-# Redirect rules for SPA
+NODE_VERSION = “18”
 
 [[redirects]]
 from = “/*”
 to = “/index.html”
 status = 200
-
-# Security headers
-
-[[headers]]
-for = “/*”
-[headers.values]
-# Security headers
-X-Frame-Options = “DENY”
-X-Content-Type-Options = “nosniff”
-X-XSS-Protection = “1; mode=block”
-Referrer-Policy = “strict-origin-when-cross-origin”
-
-```
-# Performance headers
-Cache-Control = "public, max-age=31536000, immutable"
-```
-
-# Specific caching for HTML
-
-[[headers]]
-for = “/*.html”
-[headers.values]
-Cache-Control = “public, max-age=0, must-revalidate”
-
-# Optimize asset caching
-
-[[headers]]
-for = “/assets/*”
-[headers.values]
-Cache-Control = “public, max-age=31536000, immutable”
-
-# Compress files
-
-[[headers]]
-for = “*.js”
-[headers.values]
-Content-Encoding = “gzip”
-
-[[headers]]
-for = “*.css”
-[headers.values]
-Content-Encoding = “gzip”
-
-# Error page (optional)
-
-# [[redirects]]
-
-# from = “/404”
-
-# to = “/404.html”
-
-# status = 404
