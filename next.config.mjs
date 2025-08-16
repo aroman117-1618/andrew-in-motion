@@ -1,15 +1,11 @@
-/**
- * @type {import('next').NextConfig}
- */
+// next.config.mjs
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-    turbopack: true
-  },
+  reactStrictMode: true,
   images: {
-    // No external domains by default; add here if needed
-    domains: []
-  }
+    domains: [], // add remote domains here if you use next/image
+  },
 };
 
 export default nextConfig;
