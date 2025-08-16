@@ -1,0 +1,28 @@
+{
+  "pages": {
+    "/": {
+      "sections": [
+        "Hero",
+        "Clients",
+        "Value Props",
+        "Services",
+        "Testimonials",
+        "CTA",
+        "Footer"
+      ],
+      "links": [
+        "/resume-andrew-lonati.pdf",
+        "mailto:Andrew.roman117@gmail.com",
+        "https://calendar.app.google/ovfeAVX2EFt9RCUL6",
+        "https://www.linkedin.com/in/andrewroman117/",
+        "https://github.com/aroman117-1618"
+      ],
+      "assets": [
+        "/logo-32.png",
+        "/wisp.mp4",
+        "/resume-andrew-lonati.pdf",
+        "/vite.svg"
+      ]
+    }
+  }
+}

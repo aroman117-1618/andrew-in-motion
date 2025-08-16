@@ -251,7 +251,7 @@ export default function MorphoOrbGL({
           window.removeEventListener("resize", fit);
           window.removeEventListener("pointermove", onMove);
           window.removeEventListener("touchmove", onMove);
-          try { regl.destroy(); } catch {}
+          try { regl.destroy(); } catch { /* noop */ }
           canvas.remove();
         };
       })
