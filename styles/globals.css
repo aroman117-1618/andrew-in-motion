@@ -1,24 +1,33 @@
-/* globals.css – Global styles for the Andrew in Motion site */
+/* globals.css – Global styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Ensure text is always readable on the animated background */
-body {
-  @apply bg-green-950 text-white;
-}
+body { @apply bg-green-950 text-white; }
 
-/* Provide consistent styling for section containers */
-section {
-  @apply backdrop-blur-md bg-green-950/60 rounded-xl my-8 p-8;
-}
+section { @apply backdrop-blur-md bg-green-950/60 rounded-xl my-8 p-8; }
 
-/* Utility classes for headings */
-h1, h2, h3, h4 {
-  @apply font-bold;
-}
+h1, h2, h3, h4 { @apply font-bold; }
 
-/* Hide scrollbars on the animated background to avoid jarring bars */
-canvas::-webkit-scrollbar {
-  display: none;
+canvas::-webkit-scrollbar { display: none; }
+
+/* CSS fallback "drift" (lightweight) */
+@keyframes drift-fallback {
+  0% { transform: translate3d(0,0,0) scale(1); filter: blur(60px); }
+  50% { transform: translate3d(2%, -1%, 0) scale(1.05); filter: blur(70px); }
+  100% { transform: translate3d(0,0,0) scale(1); filter: blur(60px); }
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -1;
+  background: radial-gradient(120% 80% at 20% 30%, #0b3d2e 0%, transparent 60%),
+              radial-gradient(120% 80% at 80% 70%, #165a4a 0%, transparent 60%),
+              radial-gradient(120% 80% at 50% 50%, #2e8b57 0%, transparent 55%),
+              radial-gradient(140% 100% at 50% 100%, #9bd5b0 0%, transparent 65%),
+              radial-gradient(140% 100% at 50% 0%,   #e8f5f0 0%, transparent 55%);
+  animation: drift-fallback 18s ease-in-out infinite;
+  will-change: transform, filter;
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
 }
