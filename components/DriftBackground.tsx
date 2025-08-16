@@ -16,27 +16,29 @@ export default function DriftBackground() {
       return;
     }
 
-    // Get WebGL2 context and ensure proper type
+    // Grab WebGL2 context and cast for TypeScript
     const gl = canvas.getContext("webgl2", {
       antialias: false,
       depth: false,
       stencil: false,
     }) as WebGL2RenderingContext | null;
 
-    // Fallback to CSS animation if WebGL2 isn’t available
+    // Fallback if WebGL2 isn’t available
     if (!gl) {
       canvas.style.display = "none";
       return;
     }
 
-    // Keep canvas and viewport sizes in sync
-    let width = canvas.clientWidth;
-    let height = canvas.clientHeight;
-    canvas.width = width;
-    canvas.height = height;
+    // Cache non-null canvas in a new variable so TS knows it's safe
+    const c = canvas;
+
+    let width = c.clientWidth;
+    let height = c.clientHeight;
+    c.width = width;
+    c.height = height;
     gl.viewport(0, 0, width, height);
 
-    // Vertex shader
+    // Shader sources (same as before)
     const vsSource = `#version 300 es
     precision highp float;
     in vec2 position;
@@ -46,7 +48,6 @@ export default function DriftBackground() {
       gl_Position = vec4(position, 0.0, 1.0);
     }`;
 
-    // Fragment shader (noise, pointer, ripple)
     const fsSource = `#version 300 es
     precision highp float;
     out vec4 fragColor;
@@ -66,10 +67,10 @@ export default function DriftBackground() {
       vec2 f = fract(p);
       float a = dot(sin(i), vec2(127.1,311.7));
       float b = dot(sin(i + vec2(1.0,0.0)), vec2(269.5,183.3));
-      float c = dot(sin(i + vec2(0.0,1.0)), vec2(419.2,371.9));
+      float c2 = dot(sin(i + vec2(0.0,1.0)), vec2(419.2,371.9));
       float d = dot(sin(i + vec2(1.0,1.0)), vec2(219.7,438.4));
       vec2 u = f*f*(3.0-2.0*f);
-      return mix(mix(sin(a), sin(b), u.x), mix(sin(c), sin(d), u.x), u.y);
+      return mix(mix(sin(a), sin(b), u.x), mix(sin(c2), sin(d), u.x), u.y);
     }
     vec3 paletteLookup(float t) {
       float x = clamp(t, 0.0, 0.999);
@@ -100,7 +101,7 @@ export default function DriftBackground() {
       fragColor = vec4(color, 1.0);
     }`;
 
-    // Compile shaders with typed gl
+    // Compile shaders
     function createShader(
       gl: WebGL2RenderingContext,
       type: number,
@@ -142,47 +143,47 @@ export default function DriftBackground() {
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
-    // Uniform locations
+    // Uniforms
     const timeLoc = gl.getUniformLocation(program, "uTime");
     const pointerLoc = gl.getUniformLocation(program, "uPointer");
     const rippleLoc = gl.getUniformLocation(program, "uRipple");
 
-    // State holders
+    // State
     let pointer = { x: 0.5, y: 0.5 };
     let ripple = { x: 0.5, y: 0.5, age: 10.0 };
 
-    // Resize handler
+    // Resize handler with null check
     function resize(): void {
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
-      canvas.width = width;
-      canvas.height = height;
+      width = c.clientWidth;
+      height = c.clientHeight;
+      c.width = width;
+      c.height = height;
       gl.viewport(0, 0, width, height);
     }
     resize();
     window.addEventListener("resize", resize);
 
-    // Pointer movement and ripple start
+    // Pointer movement and click handlers with null check
     function setPointer(e: PointerEvent): void {
-      const rect = canvas.getBoundingClientRect();
+      const rect = c.getBoundingClientRect();
       pointer.x = (e.clientX - rect.left) / rect.width;
       pointer.y = 1.0 - (e.clientY - rect.top) / rect.height;
     }
     function click(e: PointerEvent): void {
-      const rect = canvas.getBoundingClientRect();
+      const rect = c.getBoundingClientRect();
       ripple.x = (e.clientX - rect.left) / rect.width;
       ripple.y = 1.0 - (e.clientY - rect.top) / rect.height;
       ripple.age = 0.0;
     }
-    canvas.addEventListener("pointermove", setPointer);
-    canvas.addEventListener("pointerdown", click);
+    c.addEventListener("pointermove", setPointer);
+    c.addEventListener("pointerdown", click);
 
     // Animation loop
-    let start = performance.now();
-    let lastTime = start;
+    let startTime = performance.now();
+    let lastTime = startTime;
     let rafId: number;
     const render = (now: number): void => {
-      const time = (now - start) / 1000;
+      const time = (now - startTime) / 1000;
       const dt = (now - lastTime) / 1000;
       lastTime = now;
       ripple.age += dt;
@@ -194,7 +195,7 @@ export default function DriftBackground() {
     };
     rafId = requestAnimationFrame(render);
 
-    // Pause animation on tab hidden
+    // Pause when tab is hidden
     function handleVisibility(): void {
       if (document.hidden) {
         cancelAnimationFrame(rafId);
@@ -205,11 +206,11 @@ export default function DriftBackground() {
     }
     document.addEventListener("visibilitychange", handleVisibility);
 
-    // Cleanup
+    // Cleanup on unmount
     return () => {
       window.removeEventListener("resize", resize);
-      canvas.removeEventListener("pointermove", setPointer);
-      canvas.removeEventListener("pointerdown", click);
+      c.removeEventListener("pointermove", setPointer);
+      c.removeEventListener("pointerdown", click);
       document.removeEventListener("visibilitychange", handleVisibility);
       cancelAnimationFrame(rafId);
       gl.deleteProgram(program);
@@ -220,7 +221,7 @@ export default function DriftBackground() {
     };
   }, []);
 
-  // Canvas element only; CSS fallback handled via global styles
+  // Canvas element only; fallback animation is handled via CSS if needed
   return (
     <canvas
       ref={canvasRef}
