@@ -1,35 +1,42 @@
+// components/DriftBackground.tsx
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-/**
- * DriftBackground implements a subtle, continuous motion backdrop using WebGL2.
- * When WebGL or motion is unavailable it falls back to a simple radial-gradient animation.
- */
 export default function DriftBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    // Respect prefers-reduced-motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      canvas.style.display = 'none';
+
+    // Respect prefers‑reduced‑motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      canvas.style.display = "none";
       return;
     }
-    const gl = canvas.getContext('webgl2', { antialias: false, depth: false, stencil: false });
+
+    // Get WebGL2 context and ensure proper type
+    const gl = canvas.getContext("webgl2", {
+      antialias: false,
+      depth: false,
+      stencil: false,
+    }) as WebGL2RenderingContext | null;
+
+    // Fallback to CSS animation if WebGL2 isn’t available
     if (!gl) {
-      // WebGL unsupported; hide canvas and let CSS fallback take over
-      canvas.style.display = 'none';
+      canvas.style.display = "none";
       return;
     }
+
+    // Keep canvas and viewport sizes in sync
     let width = canvas.clientWidth;
     let height = canvas.clientHeight;
     canvas.width = width;
     canvas.height = height;
     gl.viewport(0, 0, width, height);
 
-    // Vertex shader: full screen triangle
+    // Vertex shader
     const vsSource = `#version 300 es
     precision highp float;
     in vec2 position;
@@ -37,9 +44,9 @@ export default function DriftBackground() {
     void main() {
       vUv = position * 0.5 + 0.5;
       gl_Position = vec4(position, 0.0, 1.0);
-    }
-    `;
-    // Fragment shader: layered noise and pointer ripple
+    }`;
+
+    // Fragment shader (noise, pointer, ripple)
     const fsSource = `#version 300 es
     precision highp float;
     out vec4 fragColor;
@@ -54,11 +61,9 @@ export default function DriftBackground() {
       vec3(0.607843,0.835294,0.690196),
       vec3(0.909803,0.960784,0.941176)
     );
-    // Simple 2D value noise based on cosines; not true simplex but cheap
     float valueNoise(vec2 p) {
       vec2 i = floor(p);
       vec2 f = fract(p);
-      // Four corners
       float a = dot(sin(i), vec2(127.1,311.7));
       float b = dot(sin(i + vec2(1.0,0.0)), vec2(269.5,183.3));
       float c = dot(sin(i + vec2(0.0,1.0)), vec2(419.2,371.9));
@@ -77,15 +82,12 @@ export default function DriftBackground() {
     }
     void main() {
       vec2 uv = vUv;
-      // time-based motion on noise coordinate
       float t = uTime * 0.05;
       float n = valueNoise((uv + t) * 3.0);
       float n2 = valueNoise((uv - t*0.7) * 6.0);
       float combined = mix(n, n2, 0.5);
-      // Pointer attraction: radial falloff
       float distPointer = distance(uv, uPointer);
       float pointerEffect = exp(-distPointer * 8.0);
-      // Ripple: radial wave emanating from uRipple.x/y, damped over time
       float rippleAge = uRipple.z;
       float rippleDist = distance(uv, uRipple.xy);
       float ripple = 0.0;
@@ -96,38 +98,42 @@ export default function DriftBackground() {
       finalVal = clamp(finalVal * 0.5 + 0.5, 0.0, 1.0);
       vec3 color = paletteLookup(finalVal);
       fragColor = vec4(color, 1.0);
-    }
-    `;
-    // Compile shaders
-    function createShader(gl, type, source) {
+    }`;
+
+    // Compile shaders with typed gl
+    function createShader(
+      gl: WebGL2RenderingContext,
+      type: number,
+      source: string,
+    ): WebGLShader {
       const shader = gl.createShader(type);
-      if (!shader) throw new Error('shader');
+      if (!shader) throw new Error("shader creation failed");
       gl.shaderSource(shader, source);
       gl.compileShader(shader);
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
         console.error(gl.getShaderInfoLog(shader));
-        throw new Error('Shader compile failed');
+        throw new Error("Shader compile failed");
       }
       return shader;
     }
+
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
     const program = gl.createProgram();
-    if (!program) throw new Error('program');
+    if (!program) throw new Error("program creation failed");
     gl.attachShader(program, vertexShader);
     gl.attachShader(program, fragmentShader);
-    gl.bindAttribLocation(program, 0, 'position');
+    gl.bindAttribLocation(program, 0, "position");
     gl.linkProgram(program);
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       console.error(gl.getProgramInfoLog(program));
-      throw new Error('Program link failed');
+      throw new Error("Program link failed");
     }
     gl.useProgram(program);
-    // Provide geometry: two triangles covering full screen
-    const positions = new Float32Array([
-      -1, -1,   1, -1,  -1, 1,
-      -1, 1,    1, -1,   1, 1
-    ]);
+
+    // Full-screen geometry
+    const positions = new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]);
     const vao = gl.createVertexArray();
     gl.bindVertexArray(vao);
     const vbo = gl.createBuffer();
@@ -135,15 +141,18 @@ export default function DriftBackground() {
     gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
     // Uniform locations
-    const timeLoc = gl.getUniformLocation(program, 'uTime');
-    const pointerLoc = gl.getUniformLocation(program, 'uPointer');
-    const rippleLoc = gl.getUniformLocation(program, 'uRipple');
-    // State
+    const timeLoc = gl.getUniformLocation(program, "uTime");
+    const pointerLoc = gl.getUniformLocation(program, "uPointer");
+    const rippleLoc = gl.getUniformLocation(program, "uRipple");
+
+    // State holders
     let pointer = { x: 0.5, y: 0.5 };
     let ripple = { x: 0.5, y: 0.5, age: 10.0 };
+
     // Resize handler
-    function resize() {
+    function resize(): void {
       width = canvas.clientWidth;
       height = canvas.clientHeight;
       canvas.width = width;
@@ -151,26 +160,28 @@ export default function DriftBackground() {
       gl.viewport(0, 0, width, height);
     }
     resize();
-    window.addEventListener('resize', resize);
-    // Pointer movement and ripple
-    function setPointer(e) {
+    window.addEventListener("resize", resize);
+
+    // Pointer movement and ripple start
+    function setPointer(e: PointerEvent): void {
       const rect = canvas.getBoundingClientRect();
       pointer.x = (e.clientX - rect.left) / rect.width;
       pointer.y = 1.0 - (e.clientY - rect.top) / rect.height;
     }
-    function click(e) {
+    function click(e: PointerEvent): void {
       const rect = canvas.getBoundingClientRect();
       ripple.x = (e.clientX - rect.left) / rect.width;
       ripple.y = 1.0 - (e.clientY - rect.top) / rect.height;
       ripple.age = 0.0;
     }
-    canvas.addEventListener('pointermove', setPointer);
-    canvas.addEventListener('pointerdown', click);
+    canvas.addEventListener("pointermove", setPointer);
+    canvas.addEventListener("pointerdown", click);
+
     // Animation loop
     let start = performance.now();
     let lastTime = start;
-    let rafId;
-    const render = (now) => {
+    let rafId: number;
+    const render = (now: number): void => {
       const time = (now - start) / 1000;
       const dt = (now - lastTime) / 1000;
       lastTime = now;
@@ -182,8 +193,9 @@ export default function DriftBackground() {
       rafId = requestAnimationFrame(render);
     };
     rafId = requestAnimationFrame(render);
-    // Pause on tab hidden to save resources
-    function handleVisibility() {
+
+    // Pause animation on tab hidden
+    function handleVisibility(): void {
       if (document.hidden) {
         cancelAnimationFrame(rafId);
       } else {
@@ -191,12 +203,14 @@ export default function DriftBackground() {
         rafId = requestAnimationFrame(render);
       }
     }
-    document.addEventListener('visibilitychange', handleVisibility);
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    // Cleanup
     return () => {
-      window.removeEventListener('resize', resize);
-      canvas.removeEventListener('pointermove', setPointer);
-      canvas.removeEventListener('pointerdown', click);
-      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("pointermove", setPointer);
+      canvas.removeEventListener("pointerdown", click);
+      document.removeEventListener("visibilitychange", handleVisibility);
       cancelAnimationFrame(rafId);
       gl.deleteProgram(program);
       gl.deleteShader(vertexShader);
@@ -206,11 +220,12 @@ export default function DriftBackground() {
     };
   }, []);
 
-  // CSS fallback: radial gradient animation via inline style
+  // Canvas element only; CSS fallback handled via global styles
   return (
-    <>
-      <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none select-none" />
-      <div className="fixed inset-0 -z-10 animate-gradient bg-gradient-radial from-primary/40 via-background to-background" />
-    </>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 -z-10 w-full h-full"
+      style={{ display: "block" }}
+    />
   );
 }
