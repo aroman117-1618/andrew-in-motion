@@ -1,0 +1,70 @@
+{
+  "about": {
+    "title": "Operator Origin",
+    "paragraph": "I started in fine dining, where survival meant collaboration, precision, and adaptability. Those values shaped my approach in tech — first in value‑based discovery and negotiation, then in building systems that surface real customer signals and scale insights across teams.",
+    "bullets": [
+      "Turning customer data into proactive growth strategies",
+      "Building systems that turn customer signals into scalable action",
+      "Translating insights into measurable revenue impact"
+    ],
+    "trackRecord": [
+      { "company": "Nift", "description": "Early‑stage growth & foundational GTM build‑out." },
+      { "company": "Robin", "description": "Series A/B scaling, automation design, retention systems." },
+      { "company": "Datadog", "description": "At‑scale & FedGov GTM lifecycle automation." },
+      { "company": "Klaviyo", "description": "RevOps automations; contract‑to‑cash; ROI reporting." }
+    ]
+  },
+  "impact": {
+    "automations": {
+      "title": "RevOps & CS Automations",
+      "items": [
+        "200+ weekly hours saved via contract‑to‑cash automations.",
+        "8x increase in committed customers; +18% NRR (+$1.62M ARR)."
+      ]
+    },
+    "occupancy": {
+      "title": "Occupancy‑Based & Personal Automations",
+      "items": [
+        "Enterprise‑scale secure RFID access integrations.",
+        "Hands‑free daily briefing sequence via IoT & automation server."
+      ]
+    }
+  },
+  "testimonials": [
+    {
+      "name": "Rahat Rahman",
+      "title": "Senior Strategy Manager",
+      "quote": "Andrew brought clarity to complex change management—owning handoffs, dashboards, and process templates that simplified the work and raised the bar."
+    },
+    {
+      "name": "Natalia Wyatt",
+      "title": "Billing Operations Manager",
+      "quote": "He bridges customer needs with operational rigor. The billing workflow improvements boosted productivity across teams."
+    },
+    {
+      "name": "Allie Guertin",
+      "title": "Senior Manager, Customer Success",
+      "quote": "Analytical and impact‑driven. Andrew’s reporting and approach influence not just CSMs—leaders learn from him too."
+    },
+    {
+      "name": "Junya Kato",
+      "title": "Collections Manager",
+      "quote": "Proactive and relentlessly improvement‑minded. His work reduced unnecessary effort and empowered partner teams."
+    },
+    {
+      "name": "Rob Allen Jr",
+      "title": "Principal Customer Success Manager",
+      "quote": "A mentor who creates space to grow. His guidance built confidence and accelerated my development."
+    },
+    {
+      "name": "Jina Algarin",
+      "title": "Director of Business Operations",
+      "quote": "Technical acumen + genuine customer care. A culture builder who quickly becomes the go‑to resource."
+    },
+    {
+      "name": "Omkar Waghe",
+      "title": "Customer Success Engineer",
+      "quote": "Built a high‑trust, high‑performing team and broke down information silos with scalable process and enablement."
+    }
+  ]
+}

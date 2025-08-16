@@ -1,12 +1,6 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "pnpm build"
+  publish = ".next"
 
-[build.environment]
-  NODE_VERSION = "20"   # 18 is fine, 20 is safer on Netlify's current image
-
-# Vite/React SPA: route everything to index.html
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

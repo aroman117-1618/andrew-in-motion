@@ -1,0 +1,11 @@
+{
+  "generated": "2025-08-16T00:00:00Z",
+  "routes": [
+    { "url": "/", "description": "Home page with all sections" },
+    { "url": "/#about", "description": "About section" },
+    { "url": "/#services", "description": "Services section" },
+    { "url": "/#impact", "description": "Impact section" },
+    { "url": "/#testimonials", "description": "Testimonials section" },
+    { "url": "/#contact", "description": "Contact section" }
+  ]
+}
