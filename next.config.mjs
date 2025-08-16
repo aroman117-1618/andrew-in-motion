@@ -1,7 +1,12 @@
-@type {import('next').NextConfig} */
+// next.config.mjs
+// Simple, valid ESM Next.js config for Next 14
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: { domains: [] } // add any remote domains if you use next/image from external hosts
+  images: {
+    domains: [],     // add allowed external image domains here if you use next/image
+  },
 };
-export default nextConfig;
 
+export default nextConfig;
