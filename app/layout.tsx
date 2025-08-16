@@ -6,7 +6,13 @@ import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'Andrew in Motion',
-  description: 'Operational advisory and automation services by Andrew Lonati',
+  description: 'Operational advisory and automation services by Andrew InMotion',
+  icons: {
+    icon: '/favicon/favicon.ico',
+    apple: '/favicon/apple-touch-icon.png',
+    shortcut: '/favicon/favicon.ico'
+  },
+  manifest: '/favicon/site.webmanifest'
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
