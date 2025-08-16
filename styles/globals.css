@@ -1,19 +1,24 @@
+/* globals.css – Global styles for the Andrew in Motion site */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom utilities for the radial gradient fallback */
-@layer utilities {
-  .bg-gradient-radial {
-    background-image: radial-gradient(circle at center, theme('colors.secondary') 0%, theme('colors.background') 100%);
-  }
-  .animate-gradient {
-    animation: driftGradient 10s linear infinite;
-    background-size: 200% 200%;
-  }
-  @keyframes driftGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+/* Ensure text is always readable on the animated background */
+body {
+  @apply bg-green-950 text-white;
+}
+
+/* Provide consistent styling for section containers */
+section {
+  @apply backdrop-blur-md bg-green-950/60 rounded-xl my-8 p-8;
+}
+
+/* Utility classes for headings */
+h1, h2, h3, h4 {
+  @apply font-bold;
+}
+
+/* Hide scrollbars on the animated background to avoid jarring bars */
+canvas::-webkit-scrollbar {
+  display: none;
 }
