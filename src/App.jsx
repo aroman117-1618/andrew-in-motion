@@ -142,11 +142,12 @@ export default function App() {
    NAV — {logo}ndrew Lonati with tighter spacing + Testimonials link
    ────────────────────────────────────────────────────────────── */
 function SiteNav() {
+  const MotionImg = motion.img;
   return (
     <div className="sticky top-0 z-20 border-b border-zinc-800/80 bg-[#141414]/80 backdrop-blur supports-[backdrop-filter]:bg-[#141414]/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <a href="#top" className="flex items-center font-semibold tracking-tight group">
-          <motion.img
+          <MotionImg
             src="/logo-mark.svg"
             onError={(e) => { e.currentTarget.src = "/logo-32.png"; }}
             alt="Andrew in Motion logo"
@@ -621,6 +622,7 @@ function CTA() {
    FOOTER — logo placed before the three icons
    ────────────────────────────────────────────────────────────── */
 function SiteFooter() {
+  const MotionImg = motion.img;
   return (
     <footer className="mt-10 border-t border-zinc-800/80 py-10">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
@@ -628,7 +630,7 @@ function SiteFooter() {
 
         <div className="flex items-center gap-4">
           <a href="#top" aria-label="Brand logo">
-            <motion.img
+            <MotionImg
               src="/logo-mark.svg"
               onError={(e) => { e.currentTarget.src = "/logo-32.png"; }}
               alt="Andrew in Motion logo"
