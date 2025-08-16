@@ -1,7 +1,5 @@
-# netlify.toml
 [build]
-  # Use the npm script defined in package.json
-  command = "npm run build"
+  command = "npm ci || npm install && npm run build"
   publish = ".next"
 
 [[plugins]]
