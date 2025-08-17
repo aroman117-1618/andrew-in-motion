@@ -15,7 +15,7 @@ const NAV_ITEMS = [
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative z-20 mt-16 px-6 py-12 text-white bg-green-950/80 backdrop-blur-md">
+    <footer className="relative z-20 mt-16 px-6 py-12 text-white bg-transparent backdrop-blur-md">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex items-center space-x-2">
           <Link href="/" className="flex items-center space-x-2">

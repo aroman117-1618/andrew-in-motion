@@ -18,7 +18,7 @@ const NAV_ITEMS = [
 
 export default function Nav() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-4 backdrop-blur-md bg-green-950/70 text-white">
+    <nav className="fixed top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-4 backdrop-blur-md bg-transparent text-white">
       <Link href="/" className="flex items-center space-x-2">
         <Image unoptimized src="/logo-32.png" alt="Andrew in Motion logo" width={32} height={32} priority />
         <span className="hidden md:inline font-semibold">Andrew Lonati</span>
