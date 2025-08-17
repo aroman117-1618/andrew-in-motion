@@ -62,7 +62,7 @@ export default function Testimonials() {
           {loop.map((t, i) => (
             <div
               key={i}
-              className="min-w-[280px] max-w-sm flex-shrink-0 bg-background/60 border border-primary/20 rounded-lg p-4 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10"
+              className="min-w-[280px] max-w-sm flex-shrink-0 bg-background/60 border border-primary/20 rounded-lg p-4 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10 bg-black/25 backdrop-blur-md ring-1 ring-white/10"
             >
               <p className="italic mb-2">“{t.quote}”</p>
               <p className="font-medium">
