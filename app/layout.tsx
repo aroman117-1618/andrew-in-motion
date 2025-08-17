@@ -15,26 +15,14 @@ export const metadata = {
  * animated background and footer. A skip link is provided for
  * accessibility. The main content is layered above the background.
  */
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="text-white bg-green-950">
-        {/* Skip to main content for screen readers */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only absolute top-0 left-0 bg-green-900 text-white p-2 z-30"
-        >
-          Skip to content
-        </a>
-
-        <Nav />
+    <html lang="en" className="h-full">
+      <body className="min-h-dvh">
+        {/* add this */}
         <DriftBackground />
-
-        <main id="main-content" className="relative z-10">
-          {children}
-        </main>
-
-        <Footer />
+        <a href="#content" className="sr-only focus:not-sr-only">Skip to content</a>
+        <main id="content">{children}</main>
       </body>
     </html>
   );
