@@ -62,7 +62,7 @@ export default function Testimonials() {
           {loop.map((t, i) => (
             <div
               key={i}
-              className="min-w-[280px] max-w-sm flex-shrink-0 bg-background/60 border border-primary/20 rounded-lg p-4 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10 bg-black/25 backdrop-blur-md ring-1 ring-white/10"
+              className="min-w-[280px] max-w-sm flex-shrink-0 bg-background/60 border border-primary/20 rounded-lg p-4 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10 bg-black/25 backdrop-blur-md ring-1 ring-white/10 max-w-4xl mx-auto"
             >
               <p className="italic mb-2">“{t.quote}”</p>
               <p className="font-medium">
@@ -72,8 +72,6 @@ export default function Testimonials() {
           ))}
         </div>
         {/* edge fade gradient */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background via-background/70 to-transparent"></div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background via-background/70 to-transparent"></div>
       </div>
     </div>
   );
