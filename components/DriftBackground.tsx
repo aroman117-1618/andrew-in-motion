@@ -23,6 +23,7 @@ export default function DriftBackground() {
     const gl: WebGL2RenderingContext = tempGl;
     document.documentElement.classList.add("has-gl");
 document.documentElement.classList.add("has-gl");
+document.documentElement.classList.add("has-gl");
 
     const c = canvas;
     let width = c.clientWidth;
@@ -164,6 +165,7 @@ gl.uniform3fv(paletteLoc, new Float32Array(currentPalette.flat()));
     document.addEventListener('visibilitychange', onVis);
 
     return () => {
+      document.documentElement.classList.remove("has-gl");
       document.documentElement.classList.remove("has-gl");
 document.documentElement.classList.remove("has-gl");
       window.removeEventListener('resize', resize);
