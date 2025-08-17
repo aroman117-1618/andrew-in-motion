@@ -19,11 +19,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="h-full">
       <body className="min-h-dvh">
+        <DriftBackground />
         <Nav />
         {/* add this */}
         <DriftBackground />
         <a href="#content" className="sr-only focus:not-sr-only">Skip to content</a>
-        <main id="content">{children}</main>
+        <main className="pt-16" id="content">{children}</main>
       </body>
     </html>
   );
