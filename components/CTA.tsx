@@ -29,7 +29,7 @@ export default function CTA() {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.4 }}
         href="mailto:andrew@example.com"
-        className="inline-block px-8 py-3 rounded-full bg-accent text-background font-semibold hover:bg-secondary focus:bg-secondary transition backdrop-blur-md bg-white/5 ring-1 ring-white/10"
+        className="inline-block px-8 py-3 rounded-full bg-accent text-background font-semibold hover:bg-secondary focus:bg-secondary transition backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10"
       >
         Get in touch
       </motion.a>

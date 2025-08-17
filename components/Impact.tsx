@@ -21,7 +21,7 @@ export default function Impact() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: idx * 0.2 }}
-            className="bg-background/60 border border-primary/20 rounded-lg p-6 backdrop-blur-md bg-white/5 ring-1 ring-white/10"
+            className="bg-background/60 border border-primary/20 rounded-lg p-6 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10"
           >
             <h3 className="text-xl font-semibold mb-4">{card.title}</h3>
             <ul className="list-disc list-inside space-y-2">
