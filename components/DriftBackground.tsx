@@ -77,8 +77,7 @@ document.documentElement.classList.add("has-gl");
           rippleVal=sin(d*20.-age*6.2831)*exp(-d*10.)*(1.-age/4.); }
         float colVal=clamp(base+pointerFx*0.3+rippleVal*0.5,0.,1.);
         vec3 color=paletteLookup(colVal);
-        fragColor = vec4(1.0, 0.0, 1.0, 1.0);
-      }
+        fragColor=vec4(color,1.);}
     `;
 
     function createShader(glCtx: WebGL2RenderingContext, type: number, source: string): WebGLShader {
@@ -137,7 +136,9 @@ gl.uniform3fv(paletteLoc, new Float32Array(currentPalette.flat()));
     })();
 
     gl.useProgram(program);
-    gl.uniform3fv(paletteLoc, new Float32Array(currentPalette.flat()));
+    gl.disable(gl.DEPTH_TEST);
+    gl.disable(gl.CULL_FACE);
+gl.uniform3fv(paletteLoc, new Float32Array(currentPalette.flat()));
 
     let pointer = { x: 0.5, y: 0.5 };
     let ripple  = { x: 0.5, y: 0.5, age: 10.0 };
