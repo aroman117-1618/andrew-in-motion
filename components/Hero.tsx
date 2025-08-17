@@ -41,13 +41,13 @@ export default function Hero() {
         >
           <a
             href="#services"
-            className="px-6 py-3 rounded-full bg-primary text-white hover:bg-secondary focus:bg-secondary transition backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10"
+            className="px-6 py-3 rounded-full bg-primary text-white hover:bg-secondary focus:bg-secondary transition backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10"
           >
             Explore Services
           </a>
           <a
             href="#about"
-            className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-white focus:bg-primary transition backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10"
+            className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-white focus:bg-primary transition backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10"
           >
             Learn More
           </a>

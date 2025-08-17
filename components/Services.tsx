@@ -38,7 +38,7 @@ export default function Services() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: idx * 0.2 }}
-            className="bg-background/60 border border-primary/20 rounded-lg p-6 hover:shadow-lg transition backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10"
+            className="bg-background/60 border border-primary/20 rounded-lg p-6 hover:shadow-lg transition backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10"
           >
             <h3 className="text-xl font-semibold mb-2">{svc.title}</h3>
             <p className="text-sm text-foreground/80 mb-4">{svc.tagline}</p>
