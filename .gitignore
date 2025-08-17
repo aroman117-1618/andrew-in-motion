@@ -10,3 +10,7 @@ pnpm-debug.log*
 # macOS
 .DS_Store
 .next
+*.bak
+*.bak.*
+*.tgz
+.local_backups/
