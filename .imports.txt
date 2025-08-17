@@ -1,0 +1,6 @@
+@eslint/js
+eslint-plugin-react-hooks
+eslint-plugin-react-refresh
+eslint/config
+framer-motion
+globals
