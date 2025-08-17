@@ -1,79 +1,79 @@
-"u e client";
+"use client";
 
-import { u eRef, u eEffect, u eState, u eMemo } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import content from '../content-map.j on';
+import content from '../content-map.json';
 
-con t te timonial  = (content a  any).te timonial ;
+const testimonials = (content as any).testimonials;
 
-export default function Te timonial () {
-  con t trackRef = u eRef<HTMLDivElement>(null);
-  con t xRef = u eRef(0);
-  con t la tRef = u eRef(0);
-  con t pau edRef = u eRef(fal e);
-  con t [pau ed,  etPau ed] = u eState(fal e);
+export default function Testimonials() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const xRef = useRef(0);
+  const lastRef = useRef(0);
+  const pausedRef = useRef(false);
+  const [paused, setPaused] = useState(false);
 
-  u eEffect(() => {
-    pau edRef.current = pau ed;
-  }, [pau ed]);
+  useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
 
-  u eEffect(() => {
+  useEffect(() => {
     let rafId: number;
-    con t  peed = 40; // px/ 
-    con t tick = (t: number) => {
-      if (!la tRef.current) la tRef.current = t;
-      con t dt = (t - la tRef.current) / 1000;
-      la tRef.current = t;
-      if (!pau edRef.current && trackRef.current) {
-        xRef.current -=  peed * dt;
-        con t total = trackRef.current. crollWidth;
-        con t half = total / 2;
-        if (Math.ab (xRef.current) >= half) {
+    const speed = 40; // px/s
+    const tick = (t: number) => {
+      if (!lastRef.current) lastRef.current = t;
+      const dt = (t - lastRef.current) / 1000;
+      lastRef.current = t;
+      if (!pausedRef.current && trackRef.current) {
+        xRef.current -= speed * dt;
+        const total = trackRef.current.scrollWidth;
+        const half = total / 2;
+        if (Math.abs(xRef.current) >= half) {
           xRef.current += half;
         }
-        trackRef.current. tyle.tran form = `tran lateX(${xRef.current}px)`;
+        trackRef.current.style.transform = `translateX(${xRef.current}px)`;
       }
-      rafId = reque tAnimationFrame(tick);
+      rafId = requestAnimationFrame(tick);
     };
-    rafId = reque tAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // duplicate li t to loop  eamle ly
-  con t loop = u eMemo(() => [...te timonial , ...te timonial ], []);
+  // duplicate list to loop seamlessly
+  const loop = useMemo(() => [...testimonials, ...testimonials], []);
 
   return (
-    <div cla Name="max-w-6xl mx-auto px-4">
+    <div className="max-w-6xl mx-auto px-4">
       <motion.h2
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        tran ition={{ duration: 0.6 }}
-        cla Name="text-2xl  m:text-3xl font-bold mb-6 text-center"
+        transition={{ duration: 0.6 }}
+        className="text-2xl sm:text-3xl font-bold mb-6 text-center"
       >
-        Te timonial 
+        Testimonials
       </motion.h2>
       <div
-        onMou eEnter={() =>  etPau ed(true)}
-        onMou eLeave={() =>  etPau ed(fal e)}
-        cla Name="overflow-hidden relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        className="overflow-hidden relative"
       >
-        <div ref={trackRef} cla Name="flex gap-8">
+        <div ref={trackRef} className="flex gap-8">
           {loop.map((t, i) => (
             <div
               key={i}
-              cla Name="min-w-[280px] max-w- m flex- hrink-0 bg-background/60 border border-primary/20 rounded-lg p-4 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10 bg-black/25 backdrop-blur-md ring-1 ring-white/10 max-w-3xl mx-auto"
+              className="min-w-[280px] max-w-sm flex-shrink-0 bg-background/60 border border-primary/20 rounded-lg p-4 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10 bg-black/25 backdrop-blur-md ring-1 ring-white/10"
             >
-              <p cla Name="italic mb-2">“{t.quote}”</p>
-              <p cla Name="font-medium">
-                {t.name} < pan cla Name="text-foreground/70">• {t.title}</ pan>
+              <p className="italic mb-2">“{t.quote}”</p>
+              <p className="font-medium">
+                {t.name} <span className="text-foreground/70">• {t.title}</span>
               </p>
             </div>
           ))}
         </div>
         {/* edge fade gradient */}
-        <div cla Name="pointer-event -none ab olute in et-y-0 left-0 w-16 bg-gradient-to-r from-background via-background/70 to-tran parent"></div>
-        <div cla Name="pointer-event -none ab olute in et-y-0 right-0 w-16 bg-gradient-to-l from-background via-background/70 to-tran parent"></div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background via-background/70 to-transparent"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background via-background/70 to-transparent"></div>
       </div>
     </div>
   );
