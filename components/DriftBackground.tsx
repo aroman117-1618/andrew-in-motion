@@ -22,6 +22,7 @@ export default function DriftBackground() {
     }
     const gl: WebGL2RenderingContext = tempGl;
     document.documentElement.classList.add("has-gl");
+document.documentElement.classList.add("has-gl");
 
     const c = canvas;
     let width = c.clientWidth;
@@ -125,7 +126,9 @@ const positions = new Float32Array([ -1,-1,  1,-1,  -1,1,  -1,1,  1,-1,  1,1 ]);
           const d = ctx.getImageData(0,0,stops,1).data; const cols: number[][] = [];
           for (let i=0;i<stops;i++) { const k=i*4; cols.push([d[k]/255,d[k+1]/255,d[k+2]/255]); }
           currentPalette = cols; gl.useProgram(program);
-          gl.uniform3fv(paletteLoc, new Float32Array(currentPalette.flat()));
+          gl.disable(gl.DEPTH_TEST);
+    gl.disable(gl.CULL_FACE);
+gl.uniform3fv(paletteLoc, new Float32Array(currentPalette.flat()));
         };
         img.onerror = () => {};
         img.src = '/palette.png';
@@ -152,6 +155,8 @@ const positions = new Float32Array([ -1,-1,  1,-1,  -1,1,  -1,1,  1,-1,  1,1 ]);
       gl.uniform1f(timeLoc, t); gl.uniform2f(pointerLoc, pointer.x, pointer.y); gl.uniform3f(rippleLoc, ripple.x, ripple.y, ripple.age);
       gl.clearColor(0.0,0.0,0.0,1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.clearColor(0.0,0.0,0.0,1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 6); raf=requestAnimationFrame(render); };
     raf=requestAnimationFrame(render);
 
@@ -160,6 +165,7 @@ const positions = new Float32Array([ -1,-1,  1,-1,  -1,1,  -1,1,  1,-1,  1,1 ]);
 
     return () => {
       document.documentElement.classList.remove("has-gl");
+document.documentElement.classList.remove("has-gl");
       window.removeEventListener('resize', resize);
       c.removeEventListener('pointermove', onPointerMove);
       c.removeEventListener('pointerdown', onPointerDown);
