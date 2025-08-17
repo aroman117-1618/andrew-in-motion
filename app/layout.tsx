@@ -22,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <DriftBackground />
         <Nav />
         {/* add this */}
-        <DriftBackground />
         <a href="#content" className="sr-only focus:not-sr-only">Skip to content</a>
         <main className="pt-16" id="content">{children}</main>
       </body>
