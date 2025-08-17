@@ -21,6 +21,7 @@ export default function DriftBackground() {
       return;
     }
     const gl: WebGL2RenderingContext = tempGl;
+    document.documentElement.classList.add("has-gl");
 
     const c = canvas;
     let width = c.clientWidth;
@@ -91,7 +92,9 @@ export default function DriftBackground() {
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) { console.error(gl.getProgramInfoLog(program)); throw new Error('Program link failed'); }
     gl.useProgram(program);
 
-    const positions = new Float32Array([ -1,-1,  1,-1,  -1,1,  -1,1,  1,-1,  1,1 ]);
+    gl.disable(gl.DEPTH_TEST);
+gl.disable(gl.CULL_FACE);
+const positions = new Float32Array([ -1,-1,  1,-1,  -1,1,  -1,1,  1,-1,  1,1 ]);
     const vao = gl.createVertexArray()!; gl.bindVertexArray(vao);
     const vbo = gl.createBuffer()!; gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
     gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
@@ -100,7 +103,7 @@ export default function DriftBackground() {
     const timeLoc    = gl.getUniformLocation(program, 'uTime');
     const pointerLoc = gl.getUniformLocation(program, 'uPointer');
     const rippleLoc  = gl.getUniformLocation(program, 'uRipple');
-    const paletteLoc = gl.getUniformLocation(program, 'uPalette');
+    const paletteLoc = gl.getUniformLocation(program, 'uPalette[0]');
 
     // Fallback biophilic palette (matches your spec)
     let currentPalette: number[][] = [
@@ -147,6 +150,8 @@ export default function DriftBackground() {
     let start=performance.now(), last=start, raf=0 as unknown as number;
     const render=(now:number)=>{ const t=(now-start)/1000, dt=(now-last)/1000; last=now; ripple.age+=dt;
       gl.uniform1f(timeLoc, t); gl.uniform2f(pointerLoc, pointer.x, pointer.y); gl.uniform3f(rippleLoc, ripple.x, ripple.y, ripple.age);
+      gl.clearColor(0.0,0.0,0.0,1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 6); raf=requestAnimationFrame(render); };
     raf=requestAnimationFrame(render);
 
@@ -154,6 +159,7 @@ export default function DriftBackground() {
     document.addEventListener('visibilitychange', onVis);
 
     return () => {
+      document.documentElement.classList.remove("has-gl");
       window.removeEventListener('resize', resize);
       c.removeEventListener('pointermove', onPointerMove);
       c.removeEventListener('pointerdown', onPointerDown);

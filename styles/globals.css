@@ -31,3 +31,5 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   body::before { animation: none; }
 }
+
+.has-gl body::before { display: none; }
