@@ -77,7 +77,7 @@ document.documentElement.classList.add("has-gl");
           rippleVal=sin(d*20.-age*6.2831)*exp(-d*10.)*(1.-age/4.); }
         float colVal=clamp(base+pointerFx*0.3+rippleVal*0.5,0.,1.);
         vec3 color=paletteLookup(colVal);
-        fragColor=vec4(color,1.);
+        fragColor = vec4(1.0, 0.0, 1.0, 1.0);
       }
     `;
 
@@ -154,6 +154,8 @@ gl.uniform3fv(paletteLoc, new Float32Array(currentPalette.flat()));
     let start=performance.now(), last=start, raf=0 as unknown as number;
     const render=(now:number)=>{ const t=(now-start)/1000, dt=(now-last)/1000; last=now; ripple.age+=dt;
       gl.uniform1f(timeLoc, t); gl.uniform2f(pointerLoc, pointer.x, pointer.y); gl.uniform3f(rippleLoc, ripple.x, ripple.y, ripple.age);
+      gl.clearColor(0.0,0.0,0.0,1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
       gl.clearColor(0.0,0.0,0.0,1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.clearColor(0.0,0.0,0.0,1.0);
