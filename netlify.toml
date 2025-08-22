@@ -1,6 +1,11 @@
 [build]
-  command = "npm install && npm run build"
-  publish = ".next"
+command = "pnpm build"
+publish = ".next"
+
+[build.environment]
+NODE_VERSION = "18.20.3"
+PNPM_VERSION = "9.12.2"
+NPM_FLAGS = ""
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs"
+package = "@netlify/plugin-nextjs"
