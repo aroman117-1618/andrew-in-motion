@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AIM biophilic palette used by the shader */
+:root {
+  --aim-1: #0b3d2e; /* deep pine */
+  --aim-2: #165a4a; /* dark teal */
+  --aim-3: #2e8b57; /* sea green */
+  --aim-4: #9bd5b0; /* mint */
+  --aim-5: #e8f5f0; /* near-white aqua */
+}
+
+html, body { height: 100%; }
+body { @apply antialiased text-white; background: var(--aim-1); }

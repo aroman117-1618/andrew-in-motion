@@ -14,3 +14,11 @@ pnpm-debug.log*
 *.bak.*
 *.tgz
 .local_backups/
+
+# Local Netlify folder
+.netlify
+
+# local artifacts
+app/pixel.png
+rollback_workspace/
+engine.bin
