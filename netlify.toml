@@ -6,6 +6,7 @@ publish = ".next"
 # Match your local Node (use the same version as .nvmrc)
 NODE_VERSION = "18.20.3"
 PNPM_VERSION = "9.0.0"
+NPM_FLAGS = ""
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
