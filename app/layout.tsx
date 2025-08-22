@@ -1,8 +1,8 @@
 // layout.tsx – Root layout for the Next.js App Router
-import '../styles/globals.css';
+import { DriftBackground } from "../components/drift";
+import './globals.css';
 import type { ReactNode } from 'react';
 import Nav from '../components/Nav';
-import DriftBackground from '../components/DriftBackground';
 import Footer from '../components/Footer';
 
 export const metadata = {
