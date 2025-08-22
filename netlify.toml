@@ -1,6 +1,11 @@
 [build]
-  command = "npm install && npm run build"
-  publish = ".next"
+command = "pnpm build"
+publish = ".next"
+
+[build.environment]
+# Match your local Node (use the same version as .nvmrc)
+NODE_VERSION = "18.20.3"
+PNPM_VERSION = "9.0.0"
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs"
+package = "@netlify/plugin-nextjs"
