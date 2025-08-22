@@ -2,6 +2,10 @@
   "name": "andrew-in-motion",
   "private": true,
   "version": "1.0.0",
+  "engines": {
+    "node": "18.20.3",
+    "pnpm": "9.x"
+  },
   "type": "module",
   "scripts": {
     "dev": "next dev",
