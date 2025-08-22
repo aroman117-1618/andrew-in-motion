@@ -1,11 +1,11 @@
-// next.config.mjs
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   images: {
-    domains: [], // add remote domains here if you use next/image
-  },
-};
-
-export default nextConfig;
+    // Add external sources only if you actually use them
+    remotePatterns: [
+      // { protocol: 'https', hostname: 'res.cloudinary.com' },
+      // { protocol: 'https', hostname: 'images.ctfassets.net' }
+    ]
+  }
+}
+export default nextConfig
