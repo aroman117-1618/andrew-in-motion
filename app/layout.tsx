@@ -1,30 +1,26 @@
-// layout.tsx – Root layout for the Next.js App Router
-import '../styles/globals.css';
-import type { ReactNode } from 'react';
-import Nav from '../components/Nav';
-import DriftBackground from '../components/DriftBackground';
-import Footer from '../components/Footer';
+import type { Metadata } from 'next'
+import './globals.css'
+import NebulaBG from '@/components/NebulaBG'
+import Header from '@/components/Header'
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
 
-export const metadata = {
-  title: 'Andrew in Motion',
-  description: 'Operational advisory and automation services by Andrew Lonati',
-};
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-plusjakarta' })
 
-/**
- * Root layout component. This wraps every page with the navigation bar,
- * animated background and footer. A skip link is provided for
- * accessibility. The main content is layered above the background.
- */
+export const metadata: Metadata = {
+  title: 'Andrew In Motion',
+  description: 'Scale revenue and retention without adding headcount.',
+  manifest: '/manifest.webmanifest',
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-dvh">
-        <DriftBackground />
-        <Nav />
-        {/* add this */}
-        <a href="#content" className="sr-only focus:not-sr-only">Skip to content</a>
-        <main className="pt-16" id="content">{children}</main>
+    <html lang="en" className={`${inter.variable} ${plusJakarta.variable}`}>
+      <body className="bg-black text-white antialiased min-h-screen">
+        <NebulaBG />
+        <Header />
+        <main className="relative">{children}</main>
       </body>
     </html>
-  );
+  )
 }
