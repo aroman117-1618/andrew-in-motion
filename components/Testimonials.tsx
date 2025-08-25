@@ -25,3 +25,16 @@ export default function Testimonials(){
     </section>
   )
 }
+/* testimonials marquee */
+.t-carousel { overflow: hidden; }
+.t-track {
+  display: flex; gap: 1.5rem; width: max-content;
+  animation: marquee 40s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* we’ll duplicate content so -50% loops clean */
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-track { animation: none; }
+}
