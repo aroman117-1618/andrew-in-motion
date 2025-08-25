@@ -31,6 +31,7 @@ body{ @apply antialiased bg-black text-white; }
 
 /* Sticky header */
 .header-blur{ @apply bg-black/30 backdrop-blur supports-[backdrop-filter]:bg-black/20; }
+.brand-name { color: var(--nebula-teal); }
 
 /* Glass cards (subtle) */
 .glass{
