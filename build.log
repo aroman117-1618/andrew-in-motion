@@ -1,0 +1,35 @@
+
+> andrew-in-motion@1.0.0 build /Users/andrewlonati/andrew-in-motion
+> next build
+
+  ▲ Next.js 14.2.31
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+ ⨯ ESLint: Failed to load config "next/typescript" to extend from. Referenced from: /Users/andrewlonati/andrew-in-motion/.eslintrc.json
+   Collecting page data ...
+   Generating static pages (0/9) ...
+   Generating static pages (2/9) 
+   Generating static pages (4/9) 
+   Generating static pages (6/9) 
+ ✓ Generating static pages (9/9)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    40.3 kB         127 kB
+├ ○ /_not-found                          872 B            88 kB
+├ ○ /apple-icon.png                      0 B                0 B
+├ ○ /icon.png                            0 B                0 B
+├ ○ /manifest.webmanifest                0 B                0 B
+├ ○ /robots.txt                          0 B                0 B
+└ ○ /sitemap.xml                         0 B                0 B
++ First Load JS shared by all            87.1 kB
+  ├ chunks/701-c534e8581b40c547.js       31.6 kB
+  ├ chunks/d3ac475d-6ed85c16937369b6.js  53.6 kB
+  └ other shared chunks (total)          1.89 kB
+
+
+○  (Static)  prerendered as static content
+
