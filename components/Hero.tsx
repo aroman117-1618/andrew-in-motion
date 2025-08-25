@@ -10,7 +10,7 @@ export default function Hero() {
       <p className="text-sm uppercase tracking-wider text-white/70">
           I help growth focused teams scale revenue and retain customers through GTM coaching, lifecycle design, and systems automation.
       </p>
-      <div className="mt-8 flex items-center gap-4">
+      <div className="mt-8 flex items-center justify-center gap-4">
         <CTA />
         <a className="btn-ghost" href="/#services">See services</a>
       </div>
