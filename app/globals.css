@@ -2,14 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* AIM biophilic palette used by the shader */
-:root {
-  --aim-1: #0b3d2e; /* deep pine */
-  --aim-2: #165a4a; /* dark teal */
-  --aim-3: #2e8b57; /* sea green */
-  --aim-4: #9bd5b0; /* mint */
-  --aim-5: #e8f5f0; /* near-white aqua */
+/* Tokens */
+:root{
+  --brand-teal-1:#2dd4bf; /* primary */
+  --brand-teal-2:#14b8a6;
+  --accent-gold:#e6d5a3;  /* secondary */
+  --card-bg:rgba(0,0,0,.35);
+  --card-border:rgba(255,255,255,.10);
+}
+html{ scroll-behavior:smooth; }
+body{ @apply antialiased bg-black text-white; }
+
+/* Typography pairing already wired via layout fonts */
+.h-heading{ font-family: var(--font-plusjakarta), ui-sans-serif, system-ui; }
+
+/* Section layout */
+.section{ @apply container mx-auto px-6 py-24; max-width:1100px; }
+.section-title{ @apply h-heading text-3xl md:text-4xl font-semibold tracking-tight; }
+.section-sub{ @apply mt-3 text-white/80; }
+
+/* Sticky header */
+.header-blur{ @apply bg-black/30 backdrop-blur supports-[backdrop-filter]:bg-black/20; }
+
+/* Glass cards (subtle) */
+.glass{
+  background: var(--card-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--card-border);
+  border-radius: 1.25rem; /* ≈ 20px */
+  box-shadow: 0 20px 45px rgba(0,0,0,.30);
+}
+.glass-embed{ /* for inner cards in Services */
+  background: rgba(0,0,0,.30);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  box-shadow: 0 12px 28px rgba(0,0,0,.25);
 }
 
-html, body { height: 100%; }
-body { @apply antialiased text-white; background: var(--aim-1); }
+/* Buttons */
+.btn-primary{
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-medium text-black ring-1 ring-white/20;
+  background-image: linear-gradient(180deg,var(--brand-teal-1),var(--brand-teal-2));
+  box-shadow: 0 16px 30px rgba(0,0,0,.35);
+}
+.btn-primary:hover{ filter:brightness(1.05); }
+.btn-ghost{ @apply inline-flex items-center rounded-full px-5 py-2 ring-1 ring-white/20 text-white/80 hover:bg-white/10; }
+
+/* Gold accent (small touches only) */
+.accent{ color: var(--accent-gold); }
+
+/* Soft separators between sections (no perf hit) */
+.sep-top{ background: linear-gradient(180deg,rgba(0,0,0,.75),transparent); }
+.sep-bottom{ background: linear-gradient(0deg,rgba(0,0,0,.75),transparent); }
