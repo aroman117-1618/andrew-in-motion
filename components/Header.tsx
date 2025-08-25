@@ -20,7 +20,7 @@ export default function Header(){
     <header className={`sticky top-0 z-50 ${scrolled?'header-blur':''}`}>
       <div className="section py-3 md:py-4 flex items-center justify-between">
         {/* Brand: {logo}ndrew Lonati */}
-<Link href="/#top" className="flex items-center gap-2 group">
+<Link href="/#top" className="flex items-center gap-1 group">
   <LogoMark size={36} />
   <span className="h-heading text-lg md:text-xl font-semibold tracking-tight brand-name">
     ndrew <span className="opacity-90">Lonati</span>
