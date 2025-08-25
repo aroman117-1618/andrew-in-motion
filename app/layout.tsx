@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import NebulaBG from '@/components/NebulaBG'   // <-- add this
+import NebulaBG from '@/components/NebulaBG'
 import Header from '@/components/Header'
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
 
@@ -14,19 +14,19 @@ export const metadata = {
   icons: {
     // Versioned querystrings force Safari/Chrome to refresh
     icon: [
-      { url: '/icon.png?v=2' },        // App Router icon
-      { url: '/favicon.ico?v=2' },     // Legacy fallback
+      { url: '/icon.png?v=2' },       
+      { url: '/favicon.ico?v=2' },     
     ],
     apple: '/apple-icon.png?v=2',
   },
-  themeColor: '#0fa7a0',               // nice touch for mobile UI chrome
+  themeColor: '#0fa7a0',           
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${plusJakarta.variable}`}>
       <body className="bg-black text-white antialiased min-h-screen">
-        <NebulaBG />                     {/* <-- and this, near the top of <body> */}
+        <NebulaBG />                
         <Header />
         <main className="relative">{children}</main>
       </body>
