@@ -65,17 +65,20 @@ body{ @apply antialiased bg-black text-white; }
 .sep-top{ background: linear-gradient(180deg,rgba(0,0,0,.75),transparent); }
 .sep-bottom{ background: linear-gradient(0deg,rgba(0,0,0,.75),transparent); }
 
-/* testimonials marquee */
+/* testimonials marquee (full-bleed, 3–4 cards visible) */
 .t-bleed { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; }
-.t-carousel { overflow: hidden; padding-left: 1.5rem; padding-right: 1.5rem; } /* gutters */
+.t-carousel { overflow: hidden; padding-left: 1rem; padding-right: 1rem; }
 .t-track {
-  display: flex; gap: 1.25rem; width: max-content;
-  animation: marquee 70s linear infinite;  /* slower */
+  display: flex; gap: 1rem; width: max-content;
+  animation: marquee 90s linear infinite; /* slower */
 }
 @keyframes marquee {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* content duplicated for loop */
+  to   { transform: translateX(-50%); } /* content duplicated in JSX */
 }
-@media (prefers-reduced-motion: reduce) {
-  .t-track { animation: none; }
-}
+@media (prefers-reduced-motion: reduce) { .t-track { animation: none; } }
+
+/* Card width targets ~3–4 on screen */
+.t-card { min-width: 260px; max-width: 360px; }
+@media (min-width: 768px){ .t-card { min-width: 300px; max-width: 360px; } }
+@media (min-width: 1024px){ .t-card { min-width: 320px; max-width: 380px; } }
