@@ -1,78 +1,27 @@
-"use client";
-
-import { useRef, useEffect, useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import content from '../content-map.json';
-
-const testimonials = (content as any).testimonials;
+const QUOTES = [
+  { q: 'Analytical and impact‑driven. Andrew’s reporting and approach influences not just CSMs—leaders learn from him too.', a: 'Allie Guertin - Senior Manager, Customer Success' },
+  { q: 'Technical acumen + genuine customer care. A culture builder who quickly becomes the go‑to resource.', a: 'Jina Algarin - Director of Business Operations' },
+  { q: 'Built a high‑trust, high‑performing team and broke down information silos with scalable process and enablement.', a: 'Omkar Waghe - Customer Success Engineer' },
+  { q: 'Andrew brought clarity to complex change management—owning handoffs, dashboards, and process templates that simplified the work and raised the bar.', a: 'Rahat Rahman - Senior Strategy Manager' },
+  { q: 'A mentor who creates space to grow. His guidance built confidence and accelerated my development.', a: 'Rob Allen Jr - Principal Customer Success Manager' },
+  { q: 'He bridges customer needs with operational rigor. The billing workflow improvements boosted productivity across teams.', a: 'Natalia Wyatt - Billing Operations Manager' },
+  { q: 'Proactive and relentlessly improvement‑minded. His work reduced unnecessary effort and empowered partner teams.', a: 'Junya Kato - Collections Manager' },
+  { q: 'Significantly improved Sales and CS alignment and collaboration, accelerating team performance and client success. His customer-first strategies, especially in overcoming competitive landmines, were crucial for closing deals.', a: 'RaeAnne English - Sales Operations Manager' },
+]
 
 export default function Testimonials() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const xRef = useRef(0);
-  const lastRef = useRef(0);
-  const pausedRef = useRef(false);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    pausedRef.current = paused;
-  }, [paused]);
-
-  useEffect(() => {
-    let rafId: number;
-    const speed = 40; // px/s
-    const tick = (t: number) => {
-      if (!lastRef.current) lastRef.current = t;
-      const dt = (t - lastRef.current) / 1000;
-      lastRef.current = t;
-      if (!pausedRef.current && trackRef.current) {
-        xRef.current -= speed * dt;
-        const total = trackRef.current.scrollWidth;
-        const half = total / 2;
-        if (Math.abs(xRef.current) >= half) {
-          xRef.current += half;
-        }
-        trackRef.current.style.transform = `translateX(${xRef.current}px)`;
-      }
-      rafId = requestAnimationFrame(tick);
-    };
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
-
-  // duplicate list to loop seamlessly
-  const loop = useMemo(() => [...testimonials, ...testimonials], []);
-
   return (
-    <div className="max-w-6xl mx-auto px-4">
-      <motion.h2
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-2xl sm:text-3xl font-bold mb-6 text-center"
-      >
-        Testimonials
-      </motion.h2>
-      <div
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        className="overflow-hidden relative"
-      >
-        <div ref={trackRef} className="flex gap-8">
-          {loop.map((t, i) => (
-            <div
-              key={i}
-              className="min-w-[280px] max-w-sm flex-shrink-0 bg-background/60 border border-primary/20 rounded-lg p-4 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-white/5 ring-1 ring-white/10 backdrop-blur-md bg-black/30 ring-1 ring-white/10 bg-black/25 backdrop-blur-md ring-1 ring-white/10 max-w-4xl mx-auto"
-            >
-              <p className="italic mb-2">“{t.quote}”</p>
-              <p className="font-medium">
-                {t.name} <span className="text-foreground/70">• {t.title}</span>
-              </p>
-            </div>
-          ))}
-        </div>
-        {/* edge fade gradient */}
+    <section id="testimonials" className="section">
+      <h2 className="h-heading text-3xl md:text-4xl font-semibold tracking-tight">Testimonials</h2>
+      <p className="mt-3 text-white/80">Endorsements from collaborators:</p>
+      <div className="mt-6 grid md:grid-cols-2 gap-6">
+        {QUOTES.map((x, i) => (
+          <figure key={i} className="card p-6">
+            <blockquote className="text-white/90">“{x.q}”</blockquote>
+            <figcaption className="mt-3 text-sm text-white/60">— {x.a}</figcaption>
+          </figure>
+        ))}
       </div>
-    </div>
-  );
+    </section>
+  )
 }
