@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import CTA from './CTA'
+import LogoMark from './LogoMark'
 
 const NAV = [
   { href: '/#about', label: 'About Me' },
@@ -20,7 +21,7 @@ export default function Header(){
       <div className="section py-3 md:py-4 flex items-center justify-between">
         {/* Brand: {logo}ndrew Lonati */}
 <Link href="/#top" className="flex items-center gap-2 group">
-  <Image src="/brand/logo.png" alt="Andrew Lonati logo A" width={36} height={36} priority />
+  <LogoMark size={36} />
   <span className="h-heading text-lg md:text-xl font-semibold tracking-tight brand-name">
     ndrew <span className="opacity-90">Lonati</span>
   </span>
