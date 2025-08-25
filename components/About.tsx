@@ -1,10 +1,29 @@
 export default function About() {
   return (
     <section id="about" className="section">
-      <h2 className="h-heading text-3xl md:text-4xl font-semibold tracking-tight">About Me</h2>
-      <p className="mt-3 text-white/80">
-        Started in fine dining, where success meant collaboration, precision, adaptability. I bring that ethos to tech - engineering GTM systems, across seed-stage startups to public enterprises, that drive revenue, evolve teams, and surface real customer signals.
-      </p>
+      <div className="glass p-8 md:p-10">
+        <h2 className="section-title">About Me</h2>
+        <p className="section-sub">
+          I help growth focused teams scale revenue and retain customers through GTM coaching, lifecycle design, and systems automation.
+        </p>
+
+        <div className="mt-6 grid md:grid-cols-2 gap-8 text-white/85">
+          <div>
+            <p>
+              Started in fine dining, where success meant collaboration, precision, and adaptability. I bring that ethos to tech – coaching GTM teams and engineering systems, across seed‑state startups to public enterprises, that drive revenue, evolve teams, and surface real customer signals.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="h-heading text-xl font-semibold">Core Competencies:</h3>
+            <ul className="mt-3 space-y-2">
+              <li>• <b>Lifecycle Design:</b> programming that drives expansion &amp; retention from pre‑sale through renewal.</li>
+              <li>• <b>System Automation:</b> workflows that accelerate revenue, cut wasted hours, and raise data quality.</li>
+              <li>• <b>Data‑driven Storytelling:</b> turn signals into strategy that scales revenue.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
