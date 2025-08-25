@@ -65,14 +65,16 @@ body{ @apply antialiased bg-black text-white; }
 .sep-top{ background: linear-gradient(180deg,rgba(0,0,0,.75),transparent); }
 .sep-bottom{ background: linear-gradient(0deg,rgba(0,0,0,.75),transparent); }
 
-  .t-carousel { overflow: hidden; }
+/* testimonials marquee */
+.t-bleed { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; }
+.t-carousel { overflow: hidden; padding-left: 1.5rem; padding-right: 1.5rem; } /* gutters */
 .t-track {
-  display: flex; gap: 1.5rem; width: max-content;
-  animation: marquee 40s linear infinite;
+  display: flex; gap: 1.25rem; width: max-content;
+  animation: marquee 70s linear infinite;  /* slower */
 }
 @keyframes marquee {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* we’ll duplicate content so -50% loops clean */
+  to   { transform: translateX(-50%); } /* content duplicated for loop */
 }
 @media (prefers-reduced-motion: reduce) {
   .t-track { animation: none; }
