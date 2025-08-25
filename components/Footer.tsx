@@ -1,9 +1,29 @@
-export default function Footer() {
+import { Github, Linkedin } from 'lucide-react'
+
+export default function Footer(){
   return (
-    <footer className="section pt-0 text-sm text-white/70">
-      <div className="border-t border-white/10 pt-6">
-        <div>Github: <a className="underline hover:text-white" href="https://github.com/aroman117-1618">https://github.com/aroman117-1618</a></div>
-        <div>Linkedin: <a className="underline hover:text-white" href="https://www.linkedin.com/in/andrewroman117/">https://www.linkedin.com/in/andrewroman117/</a></div>
+    <footer className="section pt-10">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-white/75">
+        <p className="text-sm">© {new Date().getFullYear()} Andrew Lonati</p>
+
+        <div className="flex items-center gap-5">
+          <a
+            href="https://github.com/aroman117-1618"
+            target="_blank" rel="noopener"
+            className="inline-flex items-center gap-2 hover:text-white"
+            aria-label="GitHub"
+          >
+            <Github size={18} /> <span>GitHub</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/andrew-lonati/"
+            target="_blank" rel="noopener"
+            className="inline-flex items-center gap-2 hover:text-white"
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={18} /> <span>LinkedIn</span>
+          </a>
+        </div>
       </div>
     </footer>
   )
