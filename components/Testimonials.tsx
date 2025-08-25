@@ -14,7 +14,7 @@ function Row() {
   return (
     <div className="t-track">
       {items.map((x,i)=>(
-        <figure key={i} className="glass-embed p-6 min-w-[320px] md:min-w-[420px]">
+        <figure className="glass-embed p-6 t-card">
           <blockquote className="text-white/90">“{x.q}”</blockquote>
           <figcaption className="mt-3 text-sm text-white/60">— {x.a}</figcaption>
         </figure>
