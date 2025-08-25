@@ -16,14 +16,10 @@ export default function NebulaBG(){
   return (
     <>
       {/* Base video */}
-      <video
-        ref={ref}
-        className="fixed inset-0 -z-20 h-full w-full object-cover"
-        autoPlay loop muted playsInline preload="metadata" poster="/nebula_fallback.jpg"
-      >
-        <source src="/nebula_1080.webm" type="video/webm" />
-        <source src="/nebula_1080.mp4" type="video/mp4" />
-      </video>
+<video autoPlay loop muted playsInline preload="metadata" poster="/drift_poster.jpg" className="fixed inset-0 -z-20 h-full w-full object-cover">
+  <source src="/driftBackground.webm" type="video/webm" />
+  <source src="/driftBackground.mp4"  type="video/mp4" />
+</video>
 
       {/* Brand overlays */}
       <div className="fixed inset-0 -z-10 mix-blend-multiply"
