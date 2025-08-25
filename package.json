@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:links": "node scripts/link-check.js",
+    "test:links": "node scripts/link-check.cjs",
     "preinstall": "corepack enable"
   },
   "dependencies": {
