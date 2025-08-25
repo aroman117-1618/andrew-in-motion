@@ -1,6 +1,5 @@
 import Hero from '@/components/Hero'
 import About from '@/components/About'
-import CoreCompetencies from '@/components/CoreCompetencies'
 import Services from '@/components/Services'
 import Impact from '@/components/Impact'
 import Testimonials from '@/components/Testimonials'
@@ -12,7 +11,6 @@ export default function Page() {
     <>
       <Hero />
       <About />
-      <CoreCompetencies />
       <Services />
       <Impact />
       <Testimonials />
