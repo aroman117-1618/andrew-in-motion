@@ -5,8 +5,8 @@
 /* Tokens */
 :root{
   --space-900:#06080b;       /* deep space */
-  --nebula-teal:#19c7b7;     /* primary */
-  --nebula-teal-2:#0fa7a0;   /* gradient end */
+  --nebula-teal:#2b776a;   /* primary */
+  --nebula-teal-2:#3b9d8b;   /* gradient end */
   --accent-gold:#e6d5a3;     /* secondary */
   --glass-bg:rgba(0,0,0,.35);
   --glass-stroke:rgba(255,255,255,.10);
