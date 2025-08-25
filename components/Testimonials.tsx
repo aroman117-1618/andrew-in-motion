@@ -9,14 +9,14 @@ const QUOTES = [
   { q: 'Significantly improved Sales and CS alignment and collaboration, accelerating team performance and client success. His customer-first strategies, especially in overcoming competitive landmines, were crucial for closing deals.', a: 'RaeAnne English - Sales Operations Manager' },
 ]
 
-export default function Testimonials() {
+export default function Testimonials(){
   return (
     <section id="testimonials" className="section">
-      <h2 className="h-heading text-3xl md:text-4xl font-semibold tracking-tight">Testimonials</h2>
-      <p className="mt-3 text-white/80">Endorsements from collaborators:</p>
+      <h2 className="section-title">Testimonials</h2>
+      <p className="section-sub">Endorsements from collaborators:</p>
       <div className="mt-6 grid md:grid-cols-2 gap-6">
-        {QUOTES.map((x, i) => (
-          <figure key={i} className="card p-6">
+        {QUOTES.map((x,i)=>(
+          <figure key={i} className="glass-embed p-6">
             <blockquote className="text-white/90">“{x.q}”</blockquote>
             <figcaption className="mt-3 text-sm text-white/60">— {x.a}</figcaption>
           </figure>
