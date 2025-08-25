@@ -63,3 +63,16 @@ body{ @apply antialiased bg-black text-white; }
 /* Soft separators between sections (no perf hit) */
 .sep-top{ background: linear-gradient(180deg,rgba(0,0,0,.75),transparent); }
 .sep-bottom{ background: linear-gradient(0deg,rgba(0,0,0,.75),transparent); }
+
+  .t-carousel { overflow: hidden; }
+.t-track {
+  display: flex; gap: 1.5rem; width: max-content;
+  animation: marquee 40s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* we’ll duplicate content so -50% loops clean */
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-track { animation: none; }
+}
