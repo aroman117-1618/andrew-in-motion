@@ -22,7 +22,7 @@ export default function Header(){
         {/* Brand: {logo}ndrew Lonati */}
 <Link href="/#top" className="flex items-center gap-1 group">
   <LogoMark size={36} />
-  <span className="h-heading text-lg md:text-xl font-semibold tracking-tight brand-name">
+  <span className="h-heading text-lg md:text-xl font-semibold tracking-tight brand-name -m1-1">
     ndrew <span className="opacity-90">Lonati</span>
   </span>
 </Link>
