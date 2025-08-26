@@ -32,8 +32,6 @@ export default function Header(){
             <Link key={n.href} href={n.href} className="text-sm text-white/75 hover:text-white">{n.label}</Link>
           ))}
         </nav>
-
-        <div className="ml-4"><CTA /></div>
       </div>
     </header>
   )
