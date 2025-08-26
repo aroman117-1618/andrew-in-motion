@@ -16,7 +16,7 @@ export default function Footer(){
             <Github size={18} /> <span>GitHub</span>
           </a>
           <a
-            href="https://www.linkedin.com/in/andrew-lonati/"
+            href="https://www.linkedin.com/in/andrewroman117"
             target="_blank" rel="noopener"
             className="inline-flex items-center gap-2 hover:text-white"
             aria-label="LinkedIn"
