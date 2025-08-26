@@ -32,8 +32,6 @@ export default function Services(){
                 </ul>
               </div>
             </div>
-
-            <div className="mt-6"><CTA /></div>
           </div>
 
           {/* Card 2 */}
@@ -59,8 +57,6 @@ export default function Services(){
                 </ul>
               </div>
             </div>
-
-            <div className="mt-6"><CTA /></div>
           </div>
         </div>
       </div>
