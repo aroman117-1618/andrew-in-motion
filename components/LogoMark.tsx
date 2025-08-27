@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 export default function LogoMark({ size = 36 }: { size?: number }) {
-  const [src, setSrc] = useState('/favicon.svg') // try SVG first (crisp)
+  const [src, setSrc] = useState('/apple-touch-icon.png')
   return (
     <img
       src={src}
