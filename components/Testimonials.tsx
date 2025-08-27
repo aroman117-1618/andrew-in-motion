@@ -8,7 +8,7 @@ const QUOTES = [
   { q: 'Proactive and relentlessly improvement‑minded. His work reduced unnecessary effort and empowered partner teams.', a: 'Junya Kato — Collections Manager' },
   { q: 'Significantly improved Sales and CS alignment and collaboration… crucial for closing deals.', a: 'RaeAnne English — Sales Ops Manager' },
   { q: 'Andrew is always two steps ahead. His ability to anticipate customer and organizational challenges ensures teams stay aligned with future company initiatives while navigating today’s demands.', a: 'Amanda Twohig — Director of CS' },
-  { q: 'Andrew brings clarity and structure to highly complex challenges. His leadership on BoB balancing, cross-functional coordination, and meticulous documentation not only resolved immediate issues but also built lasting process improvements that will benefit the entire CS org.', a: 'Deedee Fallon — VP of CS' },
+  { q: 'Andrew brings clarity and structure to highly complex challenges. His leadership on Territory assignments, cross-functional coordination, and meticulous documentation not only resolved immediate issues but also built lasting process improvements that will benefit the entire org.', a: 'Deedee Fallon — VP of CS' },
 ]
 
 function Row() {
