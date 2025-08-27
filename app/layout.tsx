@@ -8,28 +8,32 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-plusjakarta' })
 
 export const metadata: Metadata = {
-  title: 'Andrew In Motion',
-  description:
-    'I help growth-stage teams design GTM systems that cut waste, boost velocity, and retain customers.',
+  title: "Andrew in Motion",
+  description: "I help growth-stage teams design GTM systems that cut waste, boost velocity, and retain customers.",
   icons: {
     icon: [
-      { url: '/favicon-32x32.png?v=2', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png?v=2', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon.svg?v=2', type: 'image/svg+xml' },
-      { url: '/favicon.ico?v=2' }
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" }
     ],
-    apple: [
-      { url: '/apple-touch-icon.png?v=2', sizes: '180x180', type: 'image/png' }
-    ],
+    apple: "/apple-touch-icon.png",
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+        color: "#0b3d2e"
+      }
+    ]
   },
-  manifest: '/site.webmanifest',
-  themeColor: '#0fa7a0',
+  manifest: "/site.webmanifest",
+  themeColor: "#0b3d2e",
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'black-translucent',
-    title: 'AIM'
-  },
-}
+    statusBarStyle: "black-translucent",
+    title: "AIM"
+  }
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
