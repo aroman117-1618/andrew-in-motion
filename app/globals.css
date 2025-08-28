@@ -12,8 +12,8 @@
   --glass-stroke:rgba(255,255,255,.10);
 }
 :root{
-  --brand-teal-1:#2dd4bf; /* primary */
-  --brand-teal-2:#14b8a6;
+  --nebula-teal:#2b776a;   /* primary */
+  --nebula-teal-2:#3b9d8b;   /* gradient end */
   --accent-gold:#e6d5a3;  /* secondary */
   --card-bg:rgba(0,0,0,.35);
   --card-border:rgba(255,255,255,.10);
