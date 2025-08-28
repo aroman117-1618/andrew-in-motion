@@ -9,7 +9,7 @@ export default function About() {
 
         <div className="mt-6 grid md:grid-cols-2 gap-8 text-white/85">
           <div>
-            <p>
+            <p className="text-lg">>
               Started in fine dining, where success meant collaboration, precision, and adaptability. I bring that ethos to tech – coaching GTM teams and engineering systems, across seed‑state startups to public enterprises, that drive revenue, evolve teams, and surface real customer signals.
             </p>
           </div>
