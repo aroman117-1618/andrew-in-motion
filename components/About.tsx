@@ -4,7 +4,7 @@ export default function About() {
       <div className="glass p-8 md:p-10">
         <h2 className="section-title">About Me</h2>
         <p className="section-sub">
-          I help growth focused teams scale revenue and retain customers through GTM coaching, lifecycle design, and systems automation.
+          Empowering growth‑focused teams to boost revenue and retention through GTM coaching, lifecycle design & automation.
         </p>
 
         <div className="mt-6 grid md:grid-cols-2 gap-8 text-white/85">
