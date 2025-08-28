@@ -11,7 +11,7 @@ export default function Services(){
           {/* Card 1 */}
           <div className="glass-embed p-6 md:p-8">
             <h3 className="h-heading text-xl font-semibold">Fractional GTM Leadership</h3>
-            <p className="mt-2 text-white/85">Ongoing, high‑leverage growth focused leadership, without the full‑time headcount</p>
+            <p className="mt-2 text-white/85">Senior‑level GTM leadership that accelerates growth, without the full‑time cost.</p>
 
             <div className="mt-4 grid md:grid-cols-2 gap-6">
               <div>
@@ -36,7 +36,7 @@ export default function Services(){
           {/* Card 2 */}
           <div className="glass-embed p-6 md:p-8">
             <h3 className="h-heading text-xl font-semibold">RevOps & Lifecycle Automation</h3>
-            <p className="mt-2 text-white/85">Design, implement, and optimize the systems your team relies on to scale</p>
+            <p className="mt-2 text-white/85">Design, implement, and automate the systems your team relies on to scale</p>
 
             <div className="mt-4 grid md:grid-cols-2 gap-6">
               <div>
