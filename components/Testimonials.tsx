@@ -56,7 +56,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="section">
       <h2 className="section-title">Testimonials</h2>
-      <p className="section-sub font-medium leading-relaxed text-emerald-300 italic">Trusted by leaders and operators: real‑world endorsements.</p>
+      <p className="section-sub font-medium leading-relaxed text-brand-emerald italic">Trusted by leaders and operators: real‑world endorsements.</p>
 
       {/* full-bleed carousel (no parent glass) */}
       <div className="mt-6 t-bleed">
