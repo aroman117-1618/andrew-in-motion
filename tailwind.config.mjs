@@ -8,8 +8,8 @@ export default {
     extend: {
       colors: {
         brand: {
-          emerald: "2b776a",
-          teal: "3b9d8b",
+          emerald: "#2b776a",
+          teal: "#3b9d8b",
         },
       },
     },
