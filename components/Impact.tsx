@@ -39,7 +39,7 @@ export default function Impact() {
     <section id="impact" className="section">
       <div className="glass p-8 md:p-10">
         <h2 className="section-title">Impact & Results</h2>
-        <p className="section-sub font-medium">Turning strategy into measurable outcomes</p>
+        <p className="section-sub font-medium leading-relaxed text-emerald-300 italic ">Turning strategy into measurable outcomes</p>
 
         <div className="mt-6 grid md:grid-cols-2 gap-6">
           <div className="glass-embed p-6 md:p-8">
