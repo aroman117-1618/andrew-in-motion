@@ -3,10 +3,6 @@ export default function About() {
     <section id="about" className="section">
       <div className="glass p-8 md:p-10">
         <h2 className="section-title">About Me</h2>
-        <p className="section-sub font-medium leading-relaxed text-brand-emerald italic">
-          Empowering growth‑focused teams to boost revenue and retention through GTM coaching, lifecycle design & automation.
-        </p>
-
         <div className="mt-6 grid md:grid-cols-2 gap-8 text-white/85">
           <div>
             <p className="text-lg">
