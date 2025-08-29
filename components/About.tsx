@@ -1,4 +1,5 @@
 import Image from "next/image";
+import profilePhoto from "@/public/profilePhoto.jpeg"; 
 
 export default function About() {
   return (
