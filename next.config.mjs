@@ -3,11 +3,10 @@ import path from 'path'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    // Prevent Netlify/CI from failing the build on lint errors
     ignoreDuringBuilds: true,
+    images: { unoptimized: true }
   },
   webpack: (config) => {
-    // Ensure @ alias resolves the same on Linux/macOS/Netlify
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       '@': path.resolve(process.cwd(), '.'),
