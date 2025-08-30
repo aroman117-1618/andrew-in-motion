@@ -1,4 +1,5 @@
 import { Github, Linkedin } from 'lucide-react'
+import DeepLink from '@/components/DeepLink'
 
 export default function Footer(){
   return (
@@ -7,22 +8,23 @@ export default function Footer(){
         <p className="text-sm">© {new Date().getFullYear()} Andrew Lonati</p>
 
         <div className="flex items-center gap-5">
-          <a
-            href="https://github.com/aroman117-1618"
-            target="_blank" rel="noopener"
+          <DeepLink
+            webUrl="https://github.com/aroman117-1618"
+            iosSchemeUrl="github://user?login=aroman117-1618"
+            androidIntentUrl="intent://user?login=aroman117-1618#Intent;scheme=github;package=com.github.android;end"
             className="inline-flex items-center gap-2 hover:text-white"
-            aria-label="GitHub"
           >
             <Github size={18} /> <span>GitHub</span>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/andrewroman117"
-            target="_blank" rel="noopener"
+          </DeepLink>
+
+          <DeepLink
+            webUrl="https://www.linkedin.com/in/andrewroman117"
+            iosSchemeUrl="linkedin://in/andrewroman117"
+            androidIntentUrl="intent://in/andrewroman117#Intent;scheme=linkedin;package=com.linkedin.android;end"
             className="inline-flex items-center gap-2 hover:text-white"
-            aria-label="LinkedIn"
           >
             <Linkedin size={18} /> <span>LinkedIn</span>
-          </a>
+          </DeepLink>
         </div>
       </div>
     </footer>
