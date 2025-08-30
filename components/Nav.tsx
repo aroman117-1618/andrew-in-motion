@@ -18,7 +18,20 @@ const NAV_ITEMS = [
 
 export default function Nav() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-4 backdrop-blur-md bg-transparent text-white bg-gradient-to-b from-black/95 via-black/80 to-black/40 backdrop-blur-md z-20">
+			<nav
+  className="
+    fixed top-0 left-0 right-0 z-20
+    flex items-center justify-between
+    px-4 md:px-6
+    py-2 md:py-4
+    h-12 md:h-16
+    pt-[max(env(safe-area-inset-top),0.25rem)]
+    bg-gradient-to-b
+    from-black/80 via-black/50 to-transparent
+    supports-[backdrop-filter]:backdrop-blur-[2px]
+    md:supports-[backdrop-filter]:backdrop-blur-md
+    border-b border-white/10 md:border-white/5
+    text-white">
       <Link href="/" className="flex items-center space-x-2">
         <Image unoptimized src="/logo-32.png" alt="Andrew in Motion logo" width={32} height={32} priority />
         <span className="hidden md:inline font-semibold">Andrew Lonati</span>
