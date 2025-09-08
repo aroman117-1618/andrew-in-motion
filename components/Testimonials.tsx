@@ -13,8 +13,8 @@ const QUOTES: Quote[] = [
   { q: 'He bridges customer needs with operational rigor. The billing workflow improvements boosted productivity across teams.', a: 'Natalia Wyatt: Billing Ops Manager' },
   { q: 'Proactive and relentlessly improvement-minded. His work reduced unnecessary effort and empowered partner teams.', a: 'Junya Kato: Collections Manager' },
   { q: 'Significantly improved Sales and CS alignment and collaboration… crucial for closing deals.', a: 'RaeAnne English: Sales Ops Manager' },
-  { q: 'Andrew is always two steps ahead, anticipating challenges and keeping teams aligned with future initiatives while navigating today’s demands.', a: 'Amanda Twohig: Director of CS' },
-  { q: 'Andrew brings clarity to complex challenges. His leadership on Territory planning and cross-functional coordination built lasting process improvements for the GTM org.', a: 'Deedee Fallon: VP of CS' },
+  // { q: 'Andrew is always two steps ahead, anticipating challenges and keeping teams aligned with future initiatives while navigating today’s demands.', a: 'Amanda Twohig: Director of CS' },
+  // { q: 'Andrew brings clarity to complex challenges. His leadership on Territory planning and cross-functional coordination built lasting process improvements for the GTM org.', a: 'Deedee Fallon: VP of CS' },
 ];
 
 // Fisher–Yates shuffle
