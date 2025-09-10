@@ -12,11 +12,13 @@ export default function SolutionsResults() {
         key: 'gtm',
         label: 'GTM Programming',
         node: (
-        <FigmaFrame
-          title="GTM Programming"
-          height={820} // or bump to 900 if you want more breathing room
-          src="https://www.figma.com/proto/9C4klx9VsDGmvNZmbvAlUl/andrewinmotion?page-id=0%3A1&node-id=55-327&starting-point-node-id=55%3A327&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=0"
-        />
+          <FigmaFrame
+            title="GTM Programming"
+            minHeight={720}
+            src={
+              'https://www.figma.com/proto/9C4klx9VsDGmvNZmbvAlUl/andrewinmotion?page-id=0%3A1&node-id=55-327&starting-point-node-id=55%3A327&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=0'
+            }
+          />
         ),
       },
       {
@@ -26,10 +28,10 @@ export default function SolutionsResults() {
           <div className="prose prose-invert max-w-none">
             <h3 className="text-xl font-semibold mb-2">RevOps Automation</h3>
             <p className="opacity-90">
-              Swap this placeholder with a short summary, or drop a static image card.
+              Replace this placeholder with a concise description or static image.
             </p>
             <img
-              src="/revops-card.png"
+              src="/images/revops-card.png"
               alt="RevOps Automation"
               className="rounded-xl border border-white/10"
             />
@@ -40,11 +42,13 @@ export default function SolutionsResults() {
         key: 'lifecycle',
         label: 'Lifecycle Automation',
         node: (
-      <FigmaFrame
-        title="Lifecycle Automation"
-        height={820} // temp, until we do dynamic
-        src="https://www.figma.com/proto/9C4klx9VsDGmvNZmbvAlUl/andrewinmotion?page-id=0%3A1&node-id=55-405&starting-point-node-id=55%3A395&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=0"
-      />
+          <FigmaFrame
+            title="Lifecycle Automation"
+            minHeight={720}
+            src={
+              'https://www.figma.com/proto/9C4klx9VsDGmvNZmbvAlUl/andrewinmotion?page-id=0%3A1&node-id=55-405&starting-point-node-id=55%3A395&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=0'
+            }
+          />
         ),
       },
     ],
@@ -75,7 +79,6 @@ export default function SolutionsResults() {
 
         <div className="min-h-[320px] md:min-h-[420px]">{active.node}</div>
 
-        {/* single bottom-center toggle, same placement as the flip */}
         <button
           onClick={next}
           className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-sm font-medium shadow-md backdrop-blur supports-[backdrop-filter]:backdrop-blur-md hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/40"
