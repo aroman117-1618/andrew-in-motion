@@ -1,66 +1,54 @@
-export default function Impact() {
-  const track = [
-    <>
-      • <strong>Nift (Seed)</strong>: Built first GTM systems for early traction.
-    </>,
-    <>
-      • <strong>Robin (Series A/B/C)</strong>: Implemented post-sale Lifecycle systems, scaled automation, and lifted retention.
-    </>,
-    <>
-      • <strong>Klaviyo (Series D/IPO)</strong>: Accelerated pipeline velocity, quote-to-cash automation, and elevated NRR.
-    </>,
-    <>
-      • <strong>Datadog (Public)</strong>: FedGov & At-Scale Lifecycle Automation.
-    </>,
-  ]
+import Image from "next/image";
+import profilePhoto from "@/public/profilePhoto.jpeg";
 
-  const verified = [
-    <>
-      • <strong>8x lift</strong> in qualified bookings
-    </>,
-    <>
-      • <strong>42% decrease</strong> in Closed Lost rates
-    </>,
-    <>
-      • <strong>+18 point increase</strong> in buyer confidence
-    </>,
-    <>
-      • <strong>34% decrease</strong> in Deal cycle duration
-    </>,
-    <>
-      • <strong>+$3.6M ARR unlocked</strong> via expansion
-    </>,
-    <>
-      • <strong>15+ hours/week/rep</strong> freed from Admin
-    </>,
-  ]
-
+// ✅ content-only: no <section>, no outer "glass"
+export function AboutFace() {
   return (
-    <section id="impact" className="section">
-      <div className="glass p-8 md:p-10">
-        <h2 className="section-title">Impact & Results</h2>
-        <p className="section-sub font-medium leading-relaxed text-brand-emerald italic ">Turning strategy into measurable outcomes</p>
+    <>
+      <h2 className="section-title">About Me</h2>
+      <div className="mt-6 grid gap-8 md:grid-cols-2 text-white/85">
+        <div className="space-y-6">
+          <p className="text-lg">
+            Started in fine dining, where success meant collaboration, precision, and
+            adaptability. I bring that ethos to tech—coaching GTM teams and engineering
+            systems, across seed-state startups to public enterprises, that drive revenue,
+            accelerate teams, and surface real customer signals.
+          </p>
 
-        <div className="mt-6 grid md:grid-cols-2 gap-6">
-          <div className="glass-embed p-6 md:p-8">
-            <div className="font-medium">Track Record:</div>
-            <ul className="mt-2 space-y-2 text-white/85">
-              {track.map((t, i) => (
-                <li key={i}>{t}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="glass-embed p-6 md:p-8">
-            <div className="font-medium">Verified Outcomes:</div>
-            <ul className="mt-2 space-y-2 text-white/85">
-              {verified.map((v, i) => (
-                <li key={i}>{v}</li>
-              ))}
+          <div>
+            <h3 className="h-heading text-xl font-semibold">Core Competencies:</h3>
+            <ul className="mt-3 space-y-2">
+              <li>• <b>Lifecycle Design:</b> programming that drives expansion &amp; retention from pre-sale through renewal.</li>
+              <li>• <b>System Automation:</b> workflows that accelerate revenue, cut wasted hours, and raise data quality.</li>
+              <li>• <b>Data-driven Storytelling:</b> turn signals into strategy that scales revenue.</li>
             </ul>
           </div>
         </div>
+
+        <div className="flex items-center justify-center md:justify-end">
+          <div className="relative w-full max-w-[420px] aspect-[4/5]">
+            <Image
+              src="/profilePhoto.jpeg"
+              alt="Andrew Roman Lonati — profile portrait"
+              fill
+              priority
+              sizes="(min-width: 768px) 420px, 100vw"
+              className="rounded-2xl object-cover shadow-xl ring-1 ring-white/10"
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// (kept for anywhere else you use About as a full-width section)
+export default function About() {
+  return (
+    <section id="about" className="section">
+      <div className="glass p-8 md:p-10">
+        <AboutFace />
       </div>
     </section>
-  )
+  );
 }
