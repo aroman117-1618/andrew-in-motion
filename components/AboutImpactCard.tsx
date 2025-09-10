@@ -11,35 +11,35 @@ export default function AboutImpactCard() {
 
   return (
     // Higher z so the next section can’t sit on top of this one
-    <section id="about" className="section pb-14 md:pb-28 relative z-20">
+    <section id="about" className="section pb-24 md:pb-32 relative z-20">
       <div className="relative max-w-[1040px] mx-auto">
         {/* Glass card */}
         <div className="glass rounded-2xl overflow-hidden">
           {/* Extra bottom padding so content never hides behind the toggle */}
-          <div className="p-6 md:p-8 pb-16 md:pb-20">
+          <div className="p-6 md:p-8 pb-16 md:pb-24">
             <FlipCard
-              // Keep the container as tall as the About face (prevents headshot/text cropping)
-              lockToFrontHeight={true}
+              // Keep the container as tall as the About face (prevents headshot cropping)
               isFlipped={isRight}
-              onToggle={() => setIsRight(v => !v)}
+              onToggle={() => setIsRight(prev => !prev)}
+              lockToFrontHeight={true}
               front={<AboutFace />}
               back={<TrackRecord />}
             />
           </div>
         </div>
 
-        {/* Toggle:
-            - mobile: normal flow (relative + mt-4) so it’s always tappable
-            - md+: float at the visual bottom edge of the card */}
-        <div className="
+        {/* Toggle: mobile – in-flow; md+ – floated at the visual bottom edge */}
+        <div
+          className="
             relative mt-4 z-40 flex justify-center pointer-events-auto
-            md:mt-0 md:absolute md:inset-x-0 md:-bottom-6
-          ">
+            md:mt-0 md:absolute md:inset-x-0 md:-bottom-8
+          "
+        >
           <FlipToggle
             leftLabel="About Me"
             rightLabel="Track Record"
             isRight={isRight}
-            onChange={() => setIsRight(v => !v)}
+            onChange={() => setIsRight(prev => !prev)}
           />
         </div>
       </div>
