@@ -20,14 +20,14 @@ export default function AboutTrackRecordCard() {
             back={<TrackRecord />}
           />
 
-          <div className="mt-4 flex justify-center">
-            <FlipToggle
-              isOn={showTrack}
-              onToggle={() => setShowTrack(v => !v)}
-              offLabel="About Me"
-              onLabel="Track Record"
-            />
-          </div>
+     <div className="mt-4 flex justify-center">
+  <FlipToggle
+    left="About Me"
+    right="Track Record"
+    on={showTrack}
+    onChange={setShowTrack}
+  />
+</div>
         </div>
       </div>
     </section>
