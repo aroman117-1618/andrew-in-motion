@@ -1,37 +1,37 @@
-// components/AboutImpactCard.tsx
+// components/AboutTrackRecordCard.tsx  (you can keep the original filename if you like)
 'use client';
 import { useState } from 'react';
 import FlipCard from './FlipCard';
-import { AboutFace } from './About';
-import { ImpactFace } from './Impact';
+import { AboutFace } from './About';          // your existing About face
+import TrackRecord from './TrackRecord';      // new face
 import FlipToggle from './ui/FlipToggle';
 
 export default function AboutImpactCard() {
-  const [showImpact, setShowImpact] = useState(false);
+  const [showTrack, setShowTrack] = useState(false);
 
   return (
+    // extra bottom padding so the control never overlaps the next section
     <section id="about" className="section pb-16 md:pb-20">
       <div className="relative">
-        <div className="glass rounded-2xl">
-          <div className="p-6 md:p-8 pb-14 md:pb-16">
-            <FlipCard
-              isFlipped={showImpact}
-              onToggle={() => setShowImpact(v => !v)}
-              lockToFrontHeight={true}   // lock to About height
-              minHeight={520}
-              front={<AboutFace />}      // content-only
-              back={<ImpactFace />}      // content-only
-            />
-          </div>
-        </div>
+        {/* ONE glass wrapper around the whole card */}
+        <div className="glass p-6 md:p-8 pb-12 md:pb-14 rounded-2xl">
+          <FlipCard
+            isFlipped={showTrack}
+            onToggle={() => setShowTrack(v => !v)}
+            lockToFrontHeight={true}
+            front={<AboutFace />}
+            back={<TrackRecord />}
+            frontLabel="About"
+            backLabel="Track Record"
+          />
 
-        <div className="pointer-events-none absolute inset-x-0 -bottom-6 flex justify-center">
-          <div className="pointer-events-auto">
+          {/* toggle lives outside so it doesn’t get clipped */}
+          <div className="mt-4 flex justify-center">
             <FlipToggle
-              left="About"
-              right="Impact"
-              on={showImpact}
-              onChange={setShowImpact}
+              isOn={showTrack}
+              onToggle={() => setShowTrack(v => !v)}
+              offLabel="About"
+              onLabel="Track Record"
             />
           </div>
         </div>
