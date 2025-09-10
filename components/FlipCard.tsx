@@ -1,7 +1,7 @@
 // components/FlipCard.tsx
 'use client';
 
-import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ReactNode, useLayoutEffect, useRef, useState } from 'react';
 
 type Props = {
   front: ReactNode;
@@ -9,7 +9,8 @@ type Props = {
   isFlipped: boolean;
   onToggle: () => void;
   className?: string;
-  /** If true, container height is locked to the FRONT face (About) height */
+  /** If true, container height is locked to the FRONT face (About) height.
+   *  If false, container height adapts to the ACTIVE face (About/Track Record). */
   lockToFrontHeight?: boolean;
   /** Fallback min height if we can’t measure yet */
   minHeight?: number;
@@ -25,25 +26,42 @@ export default function FlipCard({
   minHeight = 520,
 }: Props) {
   const frontRef = useRef<HTMLDivElement>(null);
-  const [containerH, setContainerH] = useState<number>(minHeight);
+  const backRef  = useRef<HTMLDivElement>(null);
 
-  // Measure the front (About) face and lock container to that height
+  const [frontH, setFrontH] = useState<number>(minHeight);
+  const [backH,  setBackH]  = useState<number>(minHeight);
+  const activeH = Math.max(minHeight, isFlipped ? backH : frontH);
+  const lockedH = Math.max(minHeight, frontH);
+  const containerH = lockToFrontHeight ? lockedH : activeH;
+
+  // Measure FRONT
   useLayoutEffect(() => {
-    if (!lockToFrontHeight || !frontRef.current) return;
+    if (!frontRef.current) return;
     const el = frontRef.current;
-
-    const set = () => setContainerH(Math.max(minHeight, el.offsetHeight));
-    set(); // initial
-
+    const set = () => setFrontH(Math.max(minHeight, el.offsetHeight));
+    set();
     const ro = new ResizeObserver(set);
     ro.observe(el);
     return () => ro.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lockToFrontHeight, minHeight]);
+  }, [minHeight]);
+
+  // Measure BACK
+  useLayoutEffect(() => {
+    if (!backRef.current) return;
+    const el = backRef.current;
+    const set = () => setBackH(Math.max(minHeight, el.offsetHeight));
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [minHeight]);
 
   return (
     <div className={`relative w-full ${className}`}>
-      <div className="mx-auto" style={{ height: containerH }}>
+      {/* Smoothly animate to the desired height */}
+      <div className="mx-auto transition-[height] duration-300" style={{ height: containerH }}>
         <div className="[perspective:1200px] h-full w-full">
           <div
             className={[
@@ -68,6 +86,7 @@ export default function FlipCard({
 
             {/* BACK */}
             <div
+              ref={backRef}
               className={[
                 'absolute inset-0 p-0',
                 '[transform:rotateY(180deg)]',
@@ -82,7 +101,7 @@ export default function FlipCard({
         </div>
       </div>
 
-      {/* Bottom-center action (optional; AboutImpactCard will supply its own control) */}
+      {/* Optional SR flip button; AboutImpactCard provides the visible toggle */}
       <button
         type="button"
         onClick={onToggle}
