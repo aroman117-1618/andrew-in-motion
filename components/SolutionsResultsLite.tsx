@@ -42,12 +42,7 @@ export default function SolutionsResultsLite() {
       {
         key: 'lifecycle',
         label: 'Lifecycle Automation',
-        node: (
-          <VideoCard
-            src="/solutions/lifecycle.webm"
-            alt="Lifecycle Automation demo"
-          />
-        ),
+        node: <VideoCard src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />,
       },
     ],
     []
@@ -59,8 +54,8 @@ export default function SolutionsResultsLite() {
   const upcoming = cards[(idx + 1) % cards.length];
 
   return (
-    // Extra top margin so it never tangles with the About card/toggle.
-    <section id="solutions" className="section mt-16 md:mt-20 relative z-10">
+    // z-10 keeps it below About; extra top margin avoids any contact on mobile
+    <section id="solutions" className="section mt-16 md:mt-24 relative z-10">
       <div className="relative max-w-[1040px] mx-auto rounded-2xl border border-white/10 bg-black/30 p-4 md:p-6 pb-6 md:pb-16 supports-[backdrop-filter]:backdrop-blur-md">
         {/* Header */}
         <header className="mb-3 flex items-center justify-between gap-2">
@@ -83,8 +78,7 @@ export default function SolutionsResultsLite() {
 
         <div className="max-w-[960px] mx-auto">{active.node}</div>
 
-        {/* MOBILE: in-flow with margin-top so it never overlaps.
-           DESKTOP: float just below the card edge. */}
+        {/* MOBILE: in-flow; DESKTOP: float just below the card edge */}
         <button
           onClick={next}
           type="button"
