@@ -42,14 +42,15 @@ const COMPANIES: Company[] = [
 ];
 
 export default function TrackRecord() {
+
   return (
-    <div className="space-y-6 md:space-y-8">
-      <header className="text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold">Track Record</h2>
-        <p className="mt-1 text-sm md:text-base text-white/70">
-          A quick read on the companies I've impacted and my areas of focus.
-        </p>
-      </header>
+  <div className="space-y-6 md:space-y-8">
+    <header className="text-left">
+      <h2 className="text-2xl md:text-3xl font-semibold">Track Record</h2>
+      <p className="mt-1 text-sm md:text-base text-white/70">
+        A quick read on the companies I’ve impacted and my areas of focus.
+      </p>
+    </header>
 
       {/* grid of company tiles */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
