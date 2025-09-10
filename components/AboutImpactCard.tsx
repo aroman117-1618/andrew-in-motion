@@ -14,7 +14,7 @@ export default function AboutImpactCard() {
     <section id="about" className="section pb-16 md:pb-20">
       <div className="relative">
         {/* ONE glass wrapper around the whole card */}
-        <div className="glass p-6 md:p-8 rounded-2xl">
+        <div className="glass p-6 md:p-8 pb-12 md:pb-14 rounded-2xl">
           <FlipCard
             isFlipped={showImpact}
             onToggle={() => setShowImpact(v => !v)}
