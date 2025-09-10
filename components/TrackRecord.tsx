@@ -47,7 +47,7 @@ export default function TrackRecord() {
       <header className="text-center">
         <h2 className="text-2xl md:text-3xl font-semibold">Track Record</h2>
         <p className="mt-1 text-sm md:text-base text-white/70">
-          A quick read on company stage and the systems I built or scaled.
+          A quick read on the companies I've impacted and my areas of focus.
         </p>
       </header>
 
