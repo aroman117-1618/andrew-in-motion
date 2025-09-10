@@ -51,19 +51,16 @@ export default function SolutionsResultsLite() {
   const [idx, setIdx] = useState(0);
   const next = () => setIdx(i => (i + 1) % cards.length);
   const active = cards[idx];
-  const upcoming = cards[(idx + 1) % cards.length];
+  const upcoming = cards[(idx + 1) % cards.length);
 
   return (
-    // z-10 keeps it below About; extra top margin avoids any contact on mobile
-    <section id="solutions" className="section mt-16 md:mt-24 relative z-10">
+    // z-10 keeps it below About; larger margin avoids contact on mobile
+    <section id="solutions" className="section mt-20 md:mt-28 relative z-10">
       <div className="relative max-w-[1040px] mx-auto rounded-2xl border border-white/10 bg-black/30 p-4 md:p-6 pb-6 md:pb-16 supports-[backdrop-filter]:backdrop-blur-md">
-        {/* Header */}
         <header className="mb-3 flex items-center justify-between gap-2">
           <div className="text-left">
             <h2 className="text-2xl md:text-3xl font-semibold">Solutions &amp; Results</h2>
-            <p className="text-sm md:text-base text-white/70">
-              Turning strategy into measurable outcomes
-            </p>
+            <p className="text-sm md:text-base text-white/70">Turning strategy into measurable outcomes</p>
           </div>
           <div className="flex items-center gap-2">
             {cards.map((c, i) => (
