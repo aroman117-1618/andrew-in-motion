@@ -57,6 +57,9 @@ export default function SolutionsResultsLite() {
       <div className="relative max-w-[1040px] mx-auto rounded-2xl border border-white/10 bg-black/30 p-4 md:p-6 supports-[backdrop-filter]:backdrop-blur-md">
         <div className="mb-3 flex items-center justify-between gap-2">
           <h2 className="text-2xl md:text-3xl font-semibold">Solutions &amp; Results</h2>
+                <p className="section-sub font-medium leading-relaxed text-brand-emerald italic">
+        Turning strategy into measurable outcomes
+      </p>
           <div className="flex items-center gap-2">
             {cards.map((c, i) => (
               <span key={c.key} title={c.label} className={`h-2 w-2 rounded-full ${i === idx ? 'bg-white' : 'bg-white/30'}`} />
