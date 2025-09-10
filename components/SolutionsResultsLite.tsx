@@ -60,7 +60,7 @@ export default function SolutionsResultsLite() {
 
   return (
     <section id="solutions" className="section mt-12 md:mt-16">
-      <div className="relative max-w-[1040px] mx-auto rounded-2xl border border-white/10 bg-black/30 p-4 md:p-6 supports-[backdrop-filter]:backdrop-blur-md">
+      <div className="relative max-w-[1040px] mx-auto rounded-2xl border border-white/10 bg-black/30 p-4 md:p-6 pb-14 md:pb-16 supports-[backdrop-filter]:backdrop-blur-md">
         {/* Left-aligned header + tagline */}
         <header className="mb-3 flex items-center justify-between gap-2">
           <div className="text-left">
