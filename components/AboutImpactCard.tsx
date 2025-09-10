@@ -21,7 +21,7 @@ export default function AboutImpactCard() {
             lockToFrontHeight={true}
             front={<AboutFace />}
             back={<TrackRecord />}
-            frontLabel="About"
+            frontLabel="About Me"
             backLabel="Track Record"
           />
 
