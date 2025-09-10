@@ -14,7 +14,8 @@ export default function SolutionsResults() {
         node: (
           <FigmaFrame
             title="GTM Programming"
-            minHeight={720}
+  minHeight={720}
+  maxWidthClass="max-w-[960px]"
             src={
               'https://www.figma.com/proto/9C4klx9VsDGmvNZmbvAlUl/andrewinmotion?page-id=0%3A1&node-id=55-327&starting-point-node-id=55%3A327&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=0'
             }
@@ -44,7 +45,8 @@ export default function SolutionsResults() {
         node: (
           <FigmaFrame
             title="Lifecycle Automation"
-            minHeight={720}
+  minHeight={720}
+  maxWidthClass="max-w-[960px]"
             src={
               'https://www.figma.com/proto/9C4klx9VsDGmvNZmbvAlUl/andrewinmotion?page-id=0%3A1&node-id=55-405&starting-point-node-id=55%3A395&scaling=scale-down&content-scaling=fixed&show-proto-sidebar=0'
             }
