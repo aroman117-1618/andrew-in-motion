@@ -9,10 +9,10 @@ type Props = {
   isFlipped: boolean;
   onToggle: () => void;
   className?: string;
-  /** If true, container height is locked to the FRONT face (About) height.
-   *  If false, container height adapts to the ACTIVE face (About/Track Record). */
+  /** true  -> lock to FRONT (About) height
+   *  false -> adapt to ACTIVE face height (About or Track Record) */
   lockToFrontHeight?: boolean;
-  /** Fallback min height if we can’t measure yet */
+  /** Fallback min height before we can measure */
   minHeight?: number;
 };
 
@@ -22,45 +22,57 @@ export default function FlipCard({
   isFlipped,
   onToggle,
   className = '',
-  lockToFrontHeight = true,
+  lockToFrontHeight = false, // ← default to adaptive for your use case
   minHeight = 520,
 }: Props) {
-  const frontRef = useRef<HTMLDivElement>(null);
-  const backRef  = useRef<HTMLDivElement>(null);
+  // Visible host (we’ll mirror its width for accurate off-screen measuring)
+  const hostRef = useRef<HTMLDivElement>(null);
 
-  const [frontH, setFrontH] = useState<number>(minHeight);
-  const [backH,  setBackH]  = useState<number>(minHeight);
-  const activeH = Math.max(minHeight, isFlipped ? backH : frontH);
-  const lockedH = Math.max(minHeight, frontH);
-  const containerH = lockToFrontHeight ? lockedH : activeH;
+  // Off-screen measurement refs
+  const frontMeasureRef = useRef<HTMLDivElement>(null);
+  const backMeasureRef  = useRef<HTMLDivElement>(null);
 
-  // Measure FRONT
+  const [measureW, setMeasureW] = useState<number | null>(null);
+  const [frontH, setFrontH] = useState(minHeight);
+  const [backH,  setBackH]  = useState(minHeight);
+
+  // Mirror the visible width so the off-screen clones wrap text the same way
   useLayoutEffect(() => {
-    if (!frontRef.current) return;
-    const el = frontRef.current;
-    const set = () => setFrontH(Math.max(minHeight, el.offsetHeight));
+    const el = hostRef.current;
+    if (!el) return;
+    const set = () => setMeasureW(el.clientWidth);
     set();
+
     const ro = new ResizeObserver(set);
     ro.observe(el);
     return () => ro.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Measure front/back natural heights from the off-screen clones
+  useLayoutEffect(() => {
+    const f = frontMeasureRef.current;
+    const b = backMeasureRef.current;
+    if (!f || !b) return;
+
+    const setF = () => setFrontH(Math.max(minHeight, f.scrollHeight));
+    const setB = () => setBackH (Math.max(minHeight, b.scrollHeight));
+
+    setF(); setB();
+
+    const roF = new ResizeObserver(setF);
+    const roB = new ResizeObserver(setB);
+    roF.observe(f);
+    roB.observe(b);
+    return () => { roF.disconnect(); roB.disconnect(); };
   }, [minHeight]);
 
-  // Measure BACK
-  useLayoutEffect(() => {
-    if (!backRef.current) return;
-    const el = backRef.current;
-    const set = () => setBackH(Math.max(minHeight, el.offsetHeight));
-    set();
-    const ro = new ResizeObserver(set);
-    ro.observe(el);
-    return () => ro.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [minHeight]);
+  const activeH = isFlipped ? backH : frontH;
+  const lockedH = frontH;
+  const containerH = Math.max(minHeight, lockToFrontHeight ? lockedH : activeH);
 
   return (
-    <div className={`relative w-full ${className}`}>
-      {/* Smoothly animate to the desired height */}
+    <div ref={hostRef} className={`relative w-full ${className}`}>
+      {/* Height we control/animate */}
       <div className="mx-auto transition-[height] duration-300" style={{ height: containerH }}>
         <div className="[perspective:1200px] h-full w-full">
           <div
@@ -71,9 +83,8 @@ export default function FlipCard({
               isFlipped ? '[transform:rotateY(180deg)]' : '',
             ].join(' ')}
           >
-            {/* FRONT */}
+            {/* FRONT (absolute overlay) */}
             <div
-              ref={frontRef}
               className={[
                 'absolute inset-0 p-0',
                 '[backface-visibility:hidden]',
@@ -84,9 +95,8 @@ export default function FlipCard({
               {front}
             </div>
 
-            {/* BACK */}
+            {/* BACK (absolute overlay) */}
             <div
-              ref={backRef}
               className={[
                 'absolute inset-0 p-0',
                 '[transform:rotateY(180deg)]',
@@ -101,7 +111,17 @@ export default function FlipCard({
         </div>
       </div>
 
-      {/* Optional SR flip button; AboutImpactCard provides the visible toggle */}
+      {/* Off-screen measurement clones (don’t affect layout) */}
+      <div
+        aria-hidden
+        className="fixed -left-[9999px] top-0 z-[-1] pointer-events-none"
+        style={measureW ? { width: `${measureW}px` } : undefined}
+      >
+        <div ref={frontMeasureRef} className="p-0">{front}</div>
+        <div ref={backMeasureRef}  className="p-0">{back}</div>
+      </div>
+
+      {/* SR-only button (AboutImpactCard renders the visible toggle) */}
       <button
         type="button"
         onClick={onToggle}
