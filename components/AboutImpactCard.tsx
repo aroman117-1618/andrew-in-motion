@@ -9,11 +9,11 @@ export default function AboutImpactCard() {
   const [showImpact, setShowImpact] = useState(false);
 
   return (
-    // extra bottom padding so the floating toggle never overlaps the next section
+    // Extra bottom padding so the floating toggle never overlaps the next section
     <section id="about" className="section pb-24 md:pb-28">
       <div className="relative">
-        {/* ONE glass wrapper around the whole card */}
-        <div className="glass rounded-2xl overflow-hidden">
+        {/* One glass wrapper around the whole card */}
+        <div className="glass rounded-2xl overflow-hidden z-10">
           {/* Card content */}
           <div className="p-6 md:p-8">
             <FlipCard
