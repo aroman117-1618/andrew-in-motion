@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import FlipCard from '../FlipCard';
-import FlipToggle from '../ui/FlipToggle';
 
 function FractionalFront() {
   return (
@@ -39,14 +38,13 @@ function GtmProgrammingBack() {
   return (
     <div className="glass-embed p-6 md:p-8 rounded-2xl">
       <h3 className="h-heading text-xl font-semibold">GTM Programming</h3>
-      {/* Using the same demo asset your slider uses */}
       <div className="mt-4">
         <video
           className="w-full rounded-xl border border-white/10"
           src="/solutions/gtm.webm"
           autoPlay
           loop
-            muted
+          muted
           playsInline
           preload="auto"
           aria-label="GTM Programming demo"
@@ -62,7 +60,7 @@ export default function FractionalGtmCard() {
   return (
     <section id="service-fractional" className="section pb-16 md:pb-20">
       <div className="relative">
-        <div className="glass p-6 md:p-8 pb-12 md:pb-14 rounded-2xl">
+        <div className="glass p-6 md:p-8 pb-16 md:pb-18 rounded-2xl">
           <FlipCard
             isFlipped={isBack}
             onToggle={() => setIsBack(v => !v)}
@@ -71,14 +69,41 @@ export default function FractionalGtmCard() {
             back={<GtmProgrammingBack />}
           />
 
-          {/* Bottom-center toggle */}
+          {/* Bottom/center segmented control (replaces FlipToggle) */}
           <div className="absolute inset-x-0 -bottom-5 md:-bottom-6 flex justify-center">
-            <FlipToggle
-              isOn={isBack}
-              onToggle={() => setIsBack(v => !v)}
-              leftLabel="Fractional GTM Leadership"
-              rightLabel="GTM Programming"
-            />
+            <div
+              className="
+                inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/40
+                supports-[backdrop-filter]:backdrop-blur-[1.5px]
+                md:supports-[backdrop-filter]:backdrop-blur-md
+                p-1
+              "
+              role="tablist"
+              aria-label="Service mode"
+            >
+              <button
+                role="tab"
+                aria-selected={!isBack}
+                onClick={() => setIsBack(false)}
+                className={`
+                  px-3 md:px-4 py-1.5 rounded-full text-sm md:text-base transition
+                  ${!isBack ? 'bg-white/15 font-semibold' : 'hover:bg-white/10'}
+                `}
+              >
+                Fractional GTM Leadership
+              </button>
+              <button
+                role="tab"
+                aria-selected={isBack}
+                onClick={() => setIsBack(true)}
+                className={`
+                  px-3 md:px-4 py-1.5 rounded-full text-sm md:text-base transition
+                  ${isBack ? 'bg-white/15 font-semibold' : 'hover:bg-white/10'}
+                `}
+              >
+                GTM Programming
+              </button>
+            </div>
           </div>
         </div>
       </div>
