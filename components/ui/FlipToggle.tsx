@@ -1,15 +1,10 @@
 'use client';
 
 export type Props = {
-  /** Text for the left option (e.g., "About Me") */
-  leftLabel: string;
-  /** Text for the right option (e.g., "Track Record") */
-  rightLabel: string;
-  /** If true, right option is selected; if false, left option is selected */
-  isRight: boolean;
-  /** Toggle handler (flip left/right) */
+  leftLabel: string;   // e.g., "About Me"
+  rightLabel: string;  // e.g., "Track Record"
+  isRight: boolean;    // true = right selected, false = left selected
   onChange: () => void;
-  /** Optional extra classes on the wrapper */
   className?: string;
 };
 
@@ -20,6 +15,16 @@ export default function FlipToggle({
   onChange,
   className = '',
 }: Props) {
+  // Click left tab -> flip only when we're currently on the right
+  const flipToLeft = () => {
+    if (isRight) onChange();
+  };
+
+  // Click right tab -> flip only when we're currently on the left
+  const flipToRight = () => {
+    if (!isRight) onChange();
+  };
+
   return (
     <div
       className={
@@ -31,12 +36,11 @@ export default function FlipToggle({
       role="tablist"
       aria-label={`${leftLabel} / ${rightLabel} toggle`}
     >
-      {/* Clicking the left button flips only when we’re currently on the right */}
       <button
         type="button"
         role="tab"
         aria-selected={!isRight}
-        onClick={() => isRight && onChange()}
+        onClick={flipToLeft}
         className={
           `rounded-full px-3 py-1 font-medium transition ` +
           `${!isRight ? 'bg-white text-black' : 'text-white/80 hover:text-white'}`
@@ -44,12 +48,12 @@ export default function FlipToggle({
       >
         {leftLabel}
       </button>
-      {/* Clicking the right button flips only when we’re currently on the left */}
+
       <button
         type="button"
         role="tab"
         aria-selected={isRight}
-        onClick={() => !isRight && onChange()}
+        onClick={flipToRight}
         className={
           `rounded-full px-3 py-1 font-medium transition ` +
           `${isRight ? 'bg-white text-black' : 'text-white/80 hover:text-white'}`
