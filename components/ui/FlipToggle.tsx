@@ -29,13 +29,14 @@ export default function FlipToggle({
         `${className}`
       }
       role="tablist"
-      aria-label="About / Track Record toggle"
+      aria-label={`${leftLabel} / ${rightLabel} toggle`}
     >
+      {/* Clicking the left button flips only when we’re currently on the right */}
       <button
         type="button"
         role="tab"
         aria-selected={!isRight}
-        onClick={() => !isRight && onChange()}
+        onClick={() => isRight && onChange()}
         className={
           `rounded-full px-3 py-1 font-medium transition ` +
           `${!isRight ? 'bg-white text-black' : 'text-white/80 hover:text-white'}`
@@ -43,11 +44,12 @@ export default function FlipToggle({
       >
         {leftLabel}
       </button>
+      {/* Clicking the right button flips only when we’re currently on the left */}
       <button
         type="button"
         role="tab"
         aria-selected={isRight}
-        onClick={() => isRight && onChange()}
+        onClick={() => !isRight && onChange()}
         className={
           `rounded-full px-3 py-1 font-medium transition ` +
           `${isRight ? 'bg-white text-black' : 'text-white/80 hover:text-white'}`
