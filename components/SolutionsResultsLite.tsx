@@ -59,9 +59,10 @@ export default function SolutionsResultsLite() {
   const upcoming = cards[(idx + 1) % cards.length];
 
   return (
-    <section id="solutions" className="section mt-12 md:mt-16">
-      <div className="relative max-w-[1040px] mx-auto rounded-2xl border border-white/10 bg-black/30 p-4 md:p-6 pb-14 md:pb-16 supports-[backdrop-filter]:backdrop-blur-md">
-        {/* Left-aligned header + tagline */}
+    // Extra top margin so it never tangles with the About card/toggle.
+    <section id="solutions" className="section mt-16 md:mt-20 relative z-10">
+      <div className="relative max-w-[1040px] mx-auto rounded-2xl border border-white/10 bg-black/30 p-4 md:p-6 pb-6 md:pb-16 supports-[backdrop-filter]:backdrop-blur-md">
+        {/* Header */}
         <header className="mb-3 flex items-center justify-between gap-2">
           <div className="text-left">
             <h2 className="text-2xl md:text-3xl font-semibold">Solutions &amp; Results</h2>
@@ -82,9 +83,19 @@ export default function SolutionsResultsLite() {
 
         <div className="max-w-[960px] mx-auto">{active.node}</div>
 
+        {/* MOBILE: in-flow with margin-top so it never overlaps.
+           DESKTOP: float just below the card edge. */}
         <button
           onClick={next}
-          className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-sm font-medium shadow-md backdrop-blur supports-[backdrop-filter]:backdrop-blur-md hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/40"
+          type="button"
+          className="
+            relative mt-4
+            md:mt-0 md:absolute md:-bottom-4 md:left-1/2 md:-translate-x-1/2
+            rounded-full border border-white/15 bg-black/60 px-3 py-1.5
+            text-sm font-medium shadow-md backdrop-blur
+            supports-[backdrop-filter]:backdrop-blur-md
+            hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/40
+          "
           aria-label={`Next: ${upcoming.label}`}
         >
           Next: {upcoming.label}
