@@ -1,5 +1,7 @@
+// components/FlipCard.tsx
 'use client';
-import { ReactNode } from 'react';
+
+import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 type Props = {
   front: ReactNode;
@@ -7,7 +9,10 @@ type Props = {
   isFlipped: boolean;
   onToggle: () => void;
   className?: string;
-  heightClass?: string; // let you tweak height per use
+  /** If true, container height is locked to the FRONT face (About) height */
+  lockToFrontHeight?: boolean;
+  /** Fallback min height if we can’t measure yet */
+  minHeight?: number;
 };
 
 export default function FlipCard({
@@ -16,40 +21,75 @@ export default function FlipCard({
   isFlipped,
   onToggle,
   className = '',
-  heightClass = 'min-h-[380px] md:min-h-[460px]',
+  lockToFrontHeight = true,
+  minHeight = 520,
 }: Props) {
+  const frontRef = useRef<HTMLDivElement>(null);
+  const [containerH, setContainerH] = useState<number>(minHeight);
+
+  // Measure the front (About) face and lock container to that height
+  useLayoutEffect(() => {
+    if (!lockToFrontHeight || !frontRef.current) return;
+    const el = frontRef.current;
+
+    const set = () => setContainerH(Math.max(minHeight, el.offsetHeight));
+    set(); // initial
+
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lockToFrontHeight, minHeight]);
+
   return (
     <div className={`relative w-full ${className}`}>
-      <div className={`mx-auto ${heightClass} [perspective:1200px]`}>
-        <div
-          className={[
-            'relative h-full w-full rounded-2xl border border-white/10',
-            'bg-black/30 supports-[backdrop-filter]:backdrop-blur-md',
-            'transition-transform duration-500 [transform-style:preserve-3d]',
-            'motion-reduce:transition-none',
-            isFlipped ? '[transform:rotateY(180deg)]' : '',
-          ].join(' ')}
-        >
-          <div className="absolute inset-0 p-4 md:p-6 [backface-visibility:hidden]">
-            {front}
-          </div>
+      <div className="mx-auto" style={{ height: containerH }}>
+        <div className="[perspective:1200px] h-full w-full">
+          <div
+            className={[
+              'relative h-full w-full',
+              '[transform-style:preserve-3d]',
+              'transition-transform duration-500 motion-reduce:transition-none',
+              isFlipped ? '[transform:rotateY(180deg)]' : '',
+            ].join(' ')}
+          >
+            {/* FRONT */}
+            <div
+              ref={frontRef}
+              className={[
+                'absolute inset-0 p-0',
+                '[backface-visibility:hidden]',
+                'transition-opacity duration-300',
+                isFlipped ? 'opacity-0' : 'opacity-100',
+              ].join(' ')}
+            >
+              {front}
+            </div>
 
-          <div className="absolute inset-0 p-4 md:p-6 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-            {back}
+            {/* BACK */}
+            <div
+              className={[
+                'absolute inset-0 p-0',
+                '[transform:rotateY(180deg)]',
+                '[backface-visibility:hidden]',
+                'transition-opacity duration-300',
+                isFlipped ? 'opacity-100' : 'opacity-0',
+              ].join(' ')}
+            >
+              {back}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* bottom-center toggle */}
+      {/* Bottom-center action (optional; AboutImpactCard will supply its own control) */}
       <button
         type="button"
         onClick={onToggle}
-        className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-sm font-medium shadow-md backdrop-blur supports-[backdrop-filter]:backdrop-blur-md hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/40"
+        className="sr-only"
         aria-pressed={isFlipped}
         aria-label="Flip card"
-      >
-        {isFlipped ? 'Show About' : 'Show Impact'}
-      </button>
+      />
     </div>
   );
 }
