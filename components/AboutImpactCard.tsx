@@ -30,7 +30,7 @@ export default function AboutImpactCard() {
             <FlipToggle
               isOn={showTrack}
               onToggle={() => setShowTrack(v => !v)}
-              offLabel="About"
+              offLabel="About Me"
               onLabel="Track Record"
             />
           </div>
