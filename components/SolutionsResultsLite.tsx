@@ -42,31 +42,46 @@ export default function SolutionsResultsLite() {
       {
         key: 'lifecycle',
         label: 'Lifecycle Automation',
-        node: <VideoCard src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />,
+        node: (
+          <VideoCard
+            src="/solutions/lifecycle.webm"
+            alt="Lifecycle Automation demo"
+          />
+        ),
       },
     ],
     []
   );
+
   const [idx, setIdx] = useState(0);
-  const next = () => setIdx((i) => (i + 1) % cards.length);
+  const next = () => setIdx(i => (i + 1) % cards.length);
   const active = cards[idx];
   const upcoming = cards[(idx + 1) % cards.length];
 
   return (
-  <>
-    <header className="text-left">
-      <h2 className="section-title">Solutions &amp; Results</h2>
-      <p className="section-sub font-medium leading-relaxed text-brand-emerald italic">
-        Turning strategy into measurable outcomes
-      </p>
-    </header>
+    <section id="solutions" className="section mt-12 md:mt-16">
+      <div className="relative max-w-[1040px] mx-auto rounded-2xl border border-white/10 bg-black/30 p-4 md:p-6 supports-[backdrop-filter]:backdrop-blur-md">
+        {/* Left-aligned header + tagline */}
+        <header className="mb-3 flex items-center justify-between gap-2">
+          <div className="text-left">
+            <h2 className="text-2xl md:text-3xl font-semibold">Solutions &amp; Results</h2>
+            <p className="text-sm md:text-base text-white/70">
+              Turning strategy into measurable outcomes
+            </p>
+          </div>
           <div className="flex items-center gap-2">
             {cards.map((c, i) => (
-              <span key={c.key} title={c.label} className={`h-2 w-2 rounded-full ${i === idx ? 'bg-white' : 'bg-white/30'}`} />
+              <span
+                key={c.key}
+                title={c.label}
+                className={`h-2 w-2 rounded-full ${i === idx ? 'bg-white' : 'bg-white/30'}`}
+              />
             ))}
           </div>
-        </div>
+        </header>
+
         <div className="max-w-[960px] mx-auto">{active.node}</div>
+
         <button
           onClick={next}
           className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-sm font-medium shadow-md backdrop-blur supports-[backdrop-filter]:backdrop-blur-md hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/40"
