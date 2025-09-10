@@ -50,7 +50,7 @@ export default function SolutionsResultsLite() {
   const [idx, setIdx] = useState(0);
   const next = () => setIdx((i) => (i + 1) % cards.length);
   const active = cards[idx];
-  const upcoming = cards[(idx + 1) % cards.length);
+  const upcoming = cards[(idx + 1) % cards.length];
 
   return (
     <section id="solutions" className="section mt-12 md:mt-16">
