@@ -1,21 +1,21 @@
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import Services from '@/components/Services'
-import Impact from '@/components/Impact'
-import Testimonials from '@/components/Testimonials'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
+import Hero from '@/components/Hero';
+import AboutImpactCard from '@/components/AboutImpactCard';
+import SolutionsResults from '@/components/SolutionsResults';
+import Services from '@/components/Services';
+import Testimonials from '@/components/Testimonials';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 export default function Page() {
   return (
     <>
       <Hero />
-      <About />
-      <Impact />
+      <AboutImpactCard />
+      <SolutionsResults />
       <Testimonials />
       <Services />
       <Contact />
       <Footer />
     </>
-  )
+  );
 }
