@@ -1,6 +1,6 @@
 import Hero from '@/components/Hero';
 import AboutImpactCard from '@/components/AboutImpactCard';
-import SolutionsResults from '@/components/SolutionsResults';
+import SolutionsResults from '@/components/SolutionsResultsLite';
 import Services from '@/components/Services';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
@@ -11,7 +11,7 @@ export default function Page() {
     <>
       <Hero />
       <AboutImpactCard />
-      <SolutionsResults />
+      <SolutionsResultsLite />
       <Testimonials />
       <Services />
       <Contact />
