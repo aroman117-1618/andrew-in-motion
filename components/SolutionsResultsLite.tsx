@@ -51,7 +51,7 @@ export default function SolutionsResultsLite() {
   const [idx, setIdx] = useState(0);
   const next = () => setIdx(i => (i + 1) % cards.length);
   const active = cards[idx];
-  const upcoming = cards[(idx + 1) % cards.length);
+  const upcoming = cards[(idx + 1) % cards.length];
 
   return (
     // z-10 keeps it below About; larger margin avoids contact on mobile
