@@ -1,99 +1,79 @@
-// components/services/SystemsAutomationCard.tsx
 'use client';
-
 import { useState } from 'react';
 
-type Mode = 'revops' | 'lifecycle';
-
-/** Re-uses your existing Services copy verbatim */
-function SystemsBody() {
+function VideoCard({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="mt-2">
-      <p className="mt-2 text-white/85">
-        Design, implement, and automate the systems your team relies on to scale
-      </p>
-
-      <div className="mt-4 grid md:grid-cols-2 gap-6">
-        <div>
-          <div className="font-medium">Expected Results:</div>
-          <ul className="mt-2 space-y-2 text-white/85">
-            <li>• 10–20 hours/rep/week saved</li>
-            <li>• SLA Compliance &amp; customer satisfaction gains</li>
-            <li>• Real-time data for faster decision-making</li>
-          </ul>
-        </div>
-        <div>
-          <div className="font-medium">What I Deliver:</div>
-          <ul className="mt-2 space-y-2 text-white/85">
-            <li>• End-to-end GTM architecture</li>
-            <li>• Cross-system automations for data integrity and reporting</li>
-            <li>• AI Integration across GTM tooling &amp; workflows</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <video
+      className="w-full rounded-xl border border-white/10"
+      src={src}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      aria-label={alt}
+    />
   );
 }
 
 export default function SystemsAutomationCard() {
-  const [mode, setMode] = useState<Mode>('revops');
+  const [tab, setTab] = useState<'Overview' | 'Example'>('Overview');
 
   return (
-    <section id="service-systems-automation" className="section pb-16 md:pb-20">
-      <div className="relative">
-        <div className="glass p-6 md:p-8 pb-16 md:pb-18 rounded-2xl">
-          <header className="mb-4 md:mb-6">
-            <h3 className="h-heading text-3xl md:text-4xl font-semibold tracking-tight">
-              Systems Automation
-            </h3>
-            <p className="section-sub mt-2 opacity-90">
-              Explore the two core modes: RevOps and Lifecycle
-            </p>
-          </header>
+    <div className="glass rounded-2xl p-6 md:p-8 flex flex-col gap-6">
+      <h3 className="text-xl md:text-2xl font-semibold">Systems Automation</h3>
 
-          {/* Content stays identical to your existing “RevOps & Lifecycle Automation” card copy */}
-          <div className="min-h-[220px] md:min-h-[260px]">
-            <SystemsBody />
-          </div>
+      {tab === 'revops' ? (
+        <div className="text-sm md:text-base text-white/70 space-y-4">
+          <p>
+            Design, implement, and automate the systems your team relies on to scale.
+          </p>
 
-          {/* Bottom-center segmented control */}
-          <div className="absolute inset-x-0 -bottom-5 md:-bottom-6 flex justify-center">
-            <div
-              className="
-                inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/40
-                supports-[backdrop-filter]:backdrop-blur-[1.5px]
-                md:supports-[backdrop-filter]:backdrop-blur-md
-                p-1
-              "
-              role="tablist"
-              aria-label="Systems Automation Modes"
-            >
-              <button
-                role="tab"
-                aria-selected={mode === 'revops'}
-                onClick={() => setMode('revops')}
-                className={`
-                  px-3 md:px-4 py-1.5 rounded-full text-sm md:text-base transition
-                  ${mode === 'revops' ? 'bg-white/15 font-semibold' : 'hover:bg-white/10'}
-                `}
-              >
-                RevOps
-              </button>
-              <button
-                role="tab"
-                aria-selected={mode === 'lifecycle'}
-                onClick={() => setMode('lifecycle')}
-                className={`
-                  px-3 md:px-4 py-1.5 rounded-full text-sm md:text-base transition
-                  ${mode === 'lifecycle' ? 'bg-white/15 font-semibold' : 'hover:bg-white/10'}
-                `}
-              >
-                Lifecycle
-              </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-semibold mb-1">Expected Results:</h4>
+              <ul className="list-disc list-inside space-y-1">
+                <li>10–20 hours/rep/week saved</li>
+                <li>SLA Compliance &amp; customer satisfaction gains</li>
+                <li>Real-time data for faster decision-making</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-1">What I Deliver:</h4>
+              <ul className="list-disc list-inside space-y-1">
+                <li>End-to-end GTM architecture</li>
+                <li>Cross-system automations for data integrity and reporting</li>
+                <li>AI integration across GTM tooling &amp; workflows</li>
+              </ul>
             </div>
           </div>
         </div>
+      ) : (
+        <VideoCard src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />
+      )}
+
+      <div className="flex justify-center gap-3 pt-4">
+        <button
+          onClick={() => setTab('Overview')}
+          className={`px-3 py-1 rounded-full border text-sm font-medium ${
+            tab === 'Overview'
+              ? 'bg-white text-black border-white'
+              : 'bg-black/40 border-white/20 text-white/70 hover:text-white'
+          }`}
+        >
+          Overview
+        </button>
+        <button
+          onClick={() => setTab('Example')}
+          className={`px-3 py-1 rounded-full border text-sm font-medium ${
+            tab === 'Example'
+              ? 'bg-white text-black border-white'
+              : 'bg-black/40 border-white/20 text-white/70 hover:text-white'
+          }`}
+        >
+          Example
+        </button>
       </div>
-    </section>
+    </div>
   );
 }
