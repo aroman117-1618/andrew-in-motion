@@ -6,22 +6,24 @@ import TrackRecord from './TrackRecord';
 import FlipToggle from './ui/FlipToggle';
 
 export default function AboutImpactCard() {
-  // false = About (left) showing by default
+  // false = About Me (left) by default
   const [isRight, setIsRight] = useState(false);
 
   return (
-    // Reserve room below for the floating toggle; keep this stack above the next section
+    // Reserve space for the floating toggle; keep this above the next section
     <section id="about" className="section pb-28 md:pb-36 relative z-20">
       <div className="relative max-w-[1040px] mx-auto">
         {/* Glass card */}
         <div className="glass rounded-2xl overflow-hidden">
-          {/* Internal padding; extra bottom so nothing collides with the toggle */}
-          <div className="p-6 md:p-8 pb-16 md:pb-24">
+          {/* Internal padding; a bit of bottom room so content never kisses the toggle */}
+          <div className="p-6 md:p-8 pb-14 md:pb-20">
             <FlipCard
               isFlipped={isRight}
-              onToggle={() => setIsRight(prev => !prev)}
-              // ADAPTIVE: container height will equal the ACTIVE face height
+              onToggle={() => setIsRight(v => !v)}
+              // ADAPT to the active face (About or Track Record)
               lockToFrontHeight={false}
+              // Allow the container to shrink when Track Record is shorter than About
+              minHeight={360}
               front={<AboutFace />}
               back={<TrackRecord />}
             />
@@ -34,7 +36,7 @@ export default function AboutImpactCard() {
             leftLabel="About Me"
             rightLabel="Track Record"
             isRight={isRight}
-            onChange={() => setIsRight(prev => !prev)}
+            onChange={() => setIsRight(v => !v)}
           />
         </div>
       </div>
