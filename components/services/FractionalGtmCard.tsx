@@ -1,83 +1,80 @@
 'use client';
-
 import { useState } from 'react';
-import FlipCard from '../FlipCard';
-import FlipToggle from '../ui/FlipToggle';
 
-function FractionalFront() {
+function VideoCard({ src, alt }: { src: string; alt: string }) {
   return (
-    <div>
-      <h3 className="h-heading text-xl font-semibold">Fractional GTM Leadership</h3>
-      <p className="mt-2 text-white/85">
-        Senior-level GTM leadership that accelerates growth, without the full-time cost.
-      </p>
-
-      <div className="mt-4 grid md:grid-cols-2 gap-6">
-        <div>
-          <div className="font-medium">Expected Results:</div>
-          <ul className="mt-2 space-y-2 text-white/85">
-            <li>• Immediate lift in qualified bookings</li>
-            <li>• Increased pipeline velocity and ACV</li>
-            <li>• Predictable, scalable lifecycle operations</li>
-          </ul>
-        </div>
-        <div>
-          <div className="font-medium">What I Deliver:</div>
-          <ul className="mt-2 space-y-2 text-white/85">
-            <li>• Strategic planning &amp; programming support</li>
-            <li>• GTM coaching &amp; playbook development</li>
-            <li>• Renewal &amp; expansion programming</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <video
+      className="w-full rounded-xl border border-white/10"
+      src={src}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      aria-label={alt}
+    />
   );
 }
 
-function GtmProgrammingBack() {
-  return (
-    <div>
-      <div className="mt-4">
-        <video
-          className="w-full rounded-xl border border-white/10"
-          src="/solutions/gtm.webm"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          aria-label="GTM Programming demo"
-        />
-      </div>
-    </div>
-  );
-}
-
-export default function FractionalGtmCard() {
-  const [isBack, setIsBack] = useState(false);
+export default function FractionalGTMCard() {
+  const [tab, setTab] = useState<'overview' | 'example'>('overview');
 
   return (
-    <section id="service-fractional" className="section pb-16 md:pb-20">
-      <div className="relative">
-        <div className="glass p-6 md:p-8 pb-16 md:pb-18 rounded-2xl">
-          <FlipCard
-            isFlipped={isBack}
-            onToggle={() => setIsBack(v => !v)}
-            lockToFrontHeight={false}
-            front={<FractionalFront />}
-            back={<GtmProgrammingBack />}
-          />
+    <div className="glass rounded-2xl p-6 md:p-8 flex flex-col gap-6">
+      <h3 className="text-xl md:text-2xl font-semibold">Fractional GTM</h3>
 
-          <div className="absolute inset-x-0 -bottom-5 md:-bottom-6 flex justify-center">
-            <FlipToggle
-              isRight={isBack}
-              onChange={() => setIsBack(v => !v)}
-              leftLabel="Overview"
-              rightLabel="Example"
-            />
+      {tab === 'overview' ? (
+        <div className="text-sm md:text-base text-white/70 space-y-4">
+          <p>
+            Design and lead your GTM program with the right operating cadence, cross-functional rituals,
+            and analytics to drive growth from first touch through renewal.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="font-semibold mb-1">Expected Results:</h4>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Clear GTM priorities and execution rhythm</li>
+                <li>Shorter time-to-impact on initiatives</li>
+                <li>Higher conversion and retention lift across the funnel</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-1">What I Deliver:</h4>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Program design with measurable KPIs</li>
+                <li>Cross-team operating model and reviews</li>
+                <li>Enablement, dashboards, and experiment loops</li>
+              </ul>
+            </div>
           </div>
         </div>
+      ) : (
+        <VideoCard src="/solutions/gtm.webm" alt="GTM Programming demo" />
+      )}
+
+      <div className="flex justify-center gap-3 pt-4">
+        <button
+          onClick={() => setTab('overview')}
+          className={`px-3 py-1 rounded-full border text-sm font-medium ${
+            tab === 'overview'
+              ? 'bg-white text-black border-white'
+              : 'bg-black/40 border-white/20 text-white/70 hover:text-white'
+          }`}
+        >
+          Overview
+        </button>
+        <button
+          onClick={() => setTab('example')}
+          className={`px-3 py-1 rounded-full border text-sm font-medium ${
+            tab === 'example'
+              ? 'bg-white text-black border-white'
+              : 'bg-black/40 border-white/20 text-white/70 hover:text-white'
+          }`}
+        >
+          Example
+        </button>
       </div>
-    </section>
+    </div>
   );
 }
