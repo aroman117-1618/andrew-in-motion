@@ -50,7 +50,7 @@ export default function Hero() {
               bg-white text-black
               font-semibold shadow-md
               transition
-              hover:bg-sky-200
+              hover:bg-cyan-200
               focus:outline-none focus:ring-2 focus:ring-sky-300/60
             "
             aria-label="Book a Session"
@@ -67,7 +67,7 @@ export default function Hero() {
               bg-white/5 text-white
               font-semibold shadow-md backdrop-blur
               transition
-              hover:bg-white/10
+              hover:bg-white/50
               focus:outline-none focus:ring-2 focus:ring-white/40
             "
             aria-label="See Services"
