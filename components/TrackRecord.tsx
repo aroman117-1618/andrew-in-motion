@@ -19,18 +19,18 @@ const COMPANIES: Company[] = [
     scope: 'Built first GTM systems for early traction.',
   },
   {
-    key: 'robin',
-    name: 'Robin',
-    logoSrc: '/robin.png',
-    stage: 'Growth (Series A → B → C)',
-    scope: 'Implemented post-sale Lifecycle systems, scaled automation, and lifted retention.',
-  },
-  {
     key: 'datadog',
     name: 'Datadog',
     logoSrc: '/datadog.png',
     stage: 'Post-IPO',
     scope: 'FedGov & At-Scale Lifecycle Automation.',
+  },
+  {
+    key: 'robin',
+    name: 'Robin',
+    logoSrc: '/robin.png',
+    stage: 'Growth (Series A → B → C)',
+    scope: 'Implemented post-sale Lifecycle systems, scaled automation, and lifted retention.',
   },
   {
     key: 'klaviyo',
