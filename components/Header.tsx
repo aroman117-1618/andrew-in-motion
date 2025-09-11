@@ -6,10 +6,9 @@ import CTA from './CTA'
 import LogoMark from './LogoMark'
 
 const NAV = [
-  { href: '/#about', label: 'About Me' },
-  { href: '/#impact', label: 'Impact' },
   { href: '/#services', label: 'Services' },
   { href: '/#testimonials', label: 'Testimonials' },
+  { href: '/#about', label: 'About Me' },
   { href: '/#contact', label: 'Contact' },
 ]
 
