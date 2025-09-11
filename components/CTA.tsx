@@ -12,7 +12,7 @@ export default function CTA({
   className?: string
 }) {
   return (
-    <Link href={'https://calendar.app.google/X5QaScUxD18ovu9a9'} className={`btn-primary ${className}`} aria-label={label}>
+    <Link href={'https://calendar.app.google/8F6LemfCSRon7vpDA'} className={`btn-primary ${className}`} aria-label={label}>
       {label}
     </Link>
   )
