@@ -14,7 +14,6 @@ const QUOTES: Quote[] = [
   { q: 'Proactive and relentlessly improvement-minded. His work reduced unnecessary effort and empowered partner teams.', a: 'Junya Kato: Collections Manager' },
   { q: 'Significantly improved Sales and CS alignment and collaboration… crucial for closing deals.', a: 'RaeAnne English: Sales Ops Manager' },
   { q: 'Andrew combines strategic leadership with hands-on coaching - driving customer engagement, guiding CSMs through challenges, and building scalable enablement that elevates the team.', a: 'Lauren Squier: Director of CS' },
-  // { q: 'Andrew brings clarity to complex challenges. His leadership on Territory planning and cross-functional coordination built lasting process improvements for the GTM org.', a: 'Deedee Fallon: VP of CS' },
 ];
 
 // Fisher–Yates shuffle
