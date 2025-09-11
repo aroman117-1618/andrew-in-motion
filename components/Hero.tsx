@@ -46,11 +46,19 @@ export default function Hero() {
           className="flex justify-center gap-4 mt-6 flex-col sm:flex-row w-full sm:w-auto"
         >
           <Link
-            href="#contact"
-            className="px-6 py-3 rounded-full bg-white text-black font-semibold shadow-md transition hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-300/60 text-center"
-          >
-            Book a Session
-          </Link>
+  href="#contact"
+  className="
+    px-6 py-3 rounded-full
+    bg-white text-black
+    font-semibold shadow-md
+    transition
+    hover:bg-[#3b9d8b] hover:text-white
+    focus:outline-none focus:ring-2 focus:ring-[#3b9d8b]/60
+    text-center
+  "
+>
+  Book a Session
+</Link>
           <Link
             href="#services"
             className="px-6 py-3 rounded-full border border-white/25 bg-white/5 text-white font-semibold shadow-md backdrop-blur transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/40 text-center"
