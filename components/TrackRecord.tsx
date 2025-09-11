@@ -29,7 +29,7 @@ const COMPANIES: Company[] = [
     key: 'datadog',
     name: 'Datadog',
     logoSrc: '/datadog.png',
-    stage: 'IPO',
+    stage: 'Post-IPO',
     scope: 'FedGov & At-Scale Lifecycle Automation.',
   },
   {
