@@ -40,7 +40,7 @@ export default function Contact() {
 
           {/* Optional secondary action */}
           <a
-            href="mailto:you@yourdomain.com"
+            href="mailto:hello@andrewinmotion.com"
             className="w-full px-6 py-3 rounded-full border border-white/25 bg-white/5 text-white font-semibold shadow-md backdrop-blur transition hover:bg-white/10 text-center"
           >
             Message Me Directly
