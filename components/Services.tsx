@@ -12,7 +12,6 @@ export default function Services() {
           <FractionalGtmCard />
           <SystemsAutomationCard />
         </div>
-      </div>
     </section>
   );
 }
