@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import FlipCard from '@/components/FlipCard';
-import FlipToggle from '@/components/ui/FlipToggle';
+import FlipToggle from '@/components/ui/FlipToggle'; // used for 2-state; we’ll add a third button inline
 
 function OverviewFace() {
   return (
@@ -30,48 +30,87 @@ function OverviewFace() {
   );
 }
 
-function ExampleFace() {
+function Video({ src, alt }: { src: string; alt: string }) {
   return (
     <video
       className="w-full rounded-xl border border-white/10"
-      src="/solutions/lifecycle.webm"
+      src={src}
       autoPlay
       loop
       muted
       playsInline
       preload="auto"
-      aria-label="Lifecycle Automation demo"
+      aria-label={alt}
     />
   );
 }
 
 export default function SystemsAutomationCard() {
-  // false = Overview, true = Example
-  const [isRight, setIsRight] = useState(false);
+  // tabs: overview | ex1 | ex2
+  const [tab, setTab] = useState<'overview' | 'ex1' | 'ex2'>('overview');
+
+  // Flip when leaving/entering Overview; stay on back face while switching ex1<->ex2
+  const isRight = tab !== 'overview';
+
+  const backFace = useMemo(() => {
+    if (tab === 'ex2') {
+      return <Video src="/solutions/revops.webm" alt="RevOps Automation demo" />;
+    }
+    // default to Example 1
+    return <Video src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />;
+  }, [tab]);
 
   return (
     <div className="glass rounded-2xl relative">
-      <div className="p-6 md:p-8 pb-16">
+      <div className="p-6 md:p-8 pb-20">
         <h3 className="text-xl md:text-2xl font-semibold mb-4">Systems Automation</h3>
 
         <FlipCard
           isFlipped={isRight}
-          onToggle={() => setIsRight(v => !v)}
+          onToggle={() =>
+            setTab(prev => (prev === 'overview' ? 'ex1' : 'overview'))
+          }
           lockToFrontHeight={false}
-          minHeight={225}
+          minHeight={320}
           front={<OverviewFace />}
-          back={<ExampleFace />}
+          back={backFace}
         />
       </div>
 
-      {/* Toggle pinned to bottom edge of the card */}
+      {/* 3-option pill pinned to the bottom edge */}
       <div className="absolute inset-x-0 -bottom-6 z-20 flex justify-center">
-        <FlipToggle
-          leftLabel="Overview"
-          rightLabel="Example"
-          isRight={isRight}
-          onChange={() => setIsRight(v => !v)}
-        />
+        <div className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/60 px-1 py-1 text-sm shadow-md backdrop-blur supports-[backdrop-filter]:backdrop-blur-md">
+          <button
+            type="button"
+            onClick={() => setTab('overview')}
+            className={`rounded-full px-3 py-1 font-medium transition ${
+              tab === 'overview' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
+            }`}
+            aria-pressed={tab === 'overview'}
+          >
+            Overview
+          </button>
+          <button
+            type="button"
+            onClick={() => setTab('ex1')}
+            className={`rounded-full px-3 py-1 font-medium transition ${
+              tab === 'ex1' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
+            }`}
+            aria-pressed={tab === 'ex1'}
+          >
+            Example 1
+          </button>
+          <button
+            type="button"
+            onClick={() => setTab('ex2')}
+            className={`rounded-full px-3 py-1 font-medium transition ${
+              tab === 'ex2' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
+            }`}
+            aria-pressed={tab === 'ex2'}
+          >
+            Example 2
+          </button>
+        </div>
       </div>
     </div>
   );
