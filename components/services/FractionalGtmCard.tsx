@@ -72,8 +72,8 @@ export default function FractionalGtmCard() {
             <FlipToggle
               isRight={isBack}
               onChange={() => setIsBack(v => !v)}
-              leftLabel="Fractional GTM Leadership"
-              rightLabel="GTM Programming"
+              leftLabel="Overview"
+              rightLabel="Example"
             />
           </div>
         </div>
