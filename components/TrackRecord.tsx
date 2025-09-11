@@ -17,7 +17,7 @@ const COMPANIES: Company[] = [
     name: 'Nift',
     logoSrc: '/nift.png',
     stage: 'Early-stage (Seed)',
-    // growth: 'Built first GTM engine; early traction foundation.',
+    growth: '0 → ~$1M Revenue Foundation',
     scope: 'Built first GTM systems for early traction.',
   },
   {
@@ -25,7 +25,7 @@ const COMPANIES: Company[] = [
     name: 'Datadog',
     logoSrc: '/datadog.png',
     stage: 'Post-IPO',
-    growth: '~63% YoY Revenue Growth',
+    growth: '$1B+ Revenue Scale',
     scope: 'FedGov & At-Scale Lifecycle Automation.',
   },
   {
@@ -33,7 +33,7 @@ const COMPANIES: Company[] = [
     name: 'Robin',
     logoSrc: '/robin.png',
     stage: 'Growth (Series A → B → C)',
-    // growth: 'Scaled ARR significantly across Series funding rounds.',
+    growth: 'Scaled Toward ~$10M ARR',
     scope: 'Implemented post-sale Lifecycle systems, scaled automation, and lifted retention.',
   },
   {
@@ -41,7 +41,7 @@ const COMPANIES: Company[] = [
     name: 'Klaviyo',
     logoSrc: '/klaviyo.png',
     stage: 'Series D → Post-IPO',
-    growth: '~$472M → $1.08B in Revenue',
+    growth: '~$500M → $1B+ Revenue',
     scope: 'Accelerated pipeline velocity, quote-to-cash automation, and elevated NRR.',
   },
 ];
@@ -52,7 +52,7 @@ export default function TrackRecord() {
       <header className="text-left">
         <h2 className="text-2xl md:text-3xl font-semibold">Track Record</h2>
         <p className="mt-1 text-sm md:text-base text-white/70">
-          A quick read on the companies I’ve impacted and my areas of focus.
+          A quick read on the companies I’ve impacted and my areas of focus — spanning growth from early traction to $1B+ ARR.
         </p>
       </header>
 
