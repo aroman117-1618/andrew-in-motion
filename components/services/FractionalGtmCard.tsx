@@ -37,7 +37,6 @@ function FractionalFront() {
 function GtmProgrammingBack() {
   return (
     <div>
-      <h3 className="h-heading text-xl font-semibold">GTM Programming</h3>
       <div className="mt-4">
         <video
           className="w-full rounded-xl border border-white/10"
