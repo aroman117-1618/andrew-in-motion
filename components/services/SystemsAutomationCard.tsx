@@ -58,7 +58,7 @@ export default function SystemsAutomationCard() {
           isFlipped={isRight}
           onToggle={() => setIsRight(v => !v)}
           lockToFrontHeight={false}
-          minHeight={320}
+          minHeight={275}
           front={<OverviewFace />}
           back={<ExampleFace />}
         />
