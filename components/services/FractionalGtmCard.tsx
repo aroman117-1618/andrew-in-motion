@@ -61,7 +61,7 @@ export default function FractionalGTMCard() {
           isFlipped={isRight}
           onToggle={() => setIsRight(v => !v)}
           lockToFrontHeight={false}
-          minHeight={275}
+          minHeight={225}
           front={<OverviewFace />}
           back={<ExampleFace />}
         />
