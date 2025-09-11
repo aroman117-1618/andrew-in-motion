@@ -17,13 +17,13 @@ function VideoCard({ src, alt }: { src: string; alt: string }) {
 }
 
 export default function SystemsAutomationCard() {
-  const [tab, setTab] = useState<'Overview' | 'Example'>('Overview');
+  const [tab, setTab] = useState<'overview' | 'example'>('overview');
 
   return (
     <div className="glass rounded-2xl p-6 md:p-8 flex flex-col gap-6">
       <h3 className="text-xl md:text-2xl font-semibold">Systems Automation</h3>
 
-      {tab === 'revops' ? (
+      {tab === 'overview' ? (
         <div className="text-sm md:text-base text-white/70 space-y-4">
           <p>
             Design, implement, and automate the systems your team relies on to scale.
@@ -54,9 +54,9 @@ export default function SystemsAutomationCard() {
 
       <div className="flex justify-center gap-3 pt-4">
         <button
-          onClick={() => setTab('Overview')}
+          onClick={() => setTab('overview')}
           className={`px-3 py-1 rounded-full border text-sm font-medium ${
-            tab === 'Overview'
+            tab === 'overview'
               ? 'bg-white text-black border-white'
               : 'bg-black/40 border-white/20 text-white/70 hover:text-white'
           }`}
@@ -64,9 +64,9 @@ export default function SystemsAutomationCard() {
           Overview
         </button>
         <button
-          onClick={() => setTab('Example')}
+          onClick={() => setTab('example')}
           className={`px-3 py-1 rounded-full border text-sm font-medium ${
-            tab === 'Example'
+            tab === 'example'
               ? 'bg-white text-black border-white'
               : 'bg-black/40 border-white/20 text-white/70 hover:text-white'
           }`}
