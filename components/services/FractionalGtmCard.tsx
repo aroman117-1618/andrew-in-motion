@@ -55,7 +55,7 @@ export default function FractionalGTMCard() {
   return (
     <div className="glass rounded-2xl relative">
       <div className="p-6 md:p-8 pb-16">
-        <h3 className="text-xl md:text-2xl font-semibold mb-4">Fractional GTM</h3>
+        <h3 className="text-xl md:text-2xl font-semibold mb-4">Fractional GTM Leadership</h3>
 
         <FlipCard
           isFlipped={isRight}
