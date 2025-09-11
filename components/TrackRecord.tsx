@@ -7,6 +7,7 @@ type Company = {
   name: string;
   logoSrc: string;       // in /public
   stage: string;         // “Seed”, “Series B → D”, etc.
+  growth: string;        // new: quick revenue growth tagline
   scope: string;         // short blurb of what you owned/delivered
 };
 
@@ -16,6 +17,7 @@ const COMPANIES: Company[] = [
     name: 'Nift',
     logoSrc: '/nift.png',
     stage: 'Early-stage (Seed)',
+    // growth: 'Built first GTM engine; early traction foundation.',
     scope: 'Built first GTM systems for early traction.',
   },
   {
@@ -23,6 +25,7 @@ const COMPANIES: Company[] = [
     name: 'Datadog',
     logoSrc: '/datadog.png',
     stage: 'Post-IPO',
+    growth: '~63% YoY Revenue Growth',
     scope: 'FedGov & At-Scale Lifecycle Automation.',
   },
   {
@@ -30,6 +33,7 @@ const COMPANIES: Company[] = [
     name: 'Robin',
     logoSrc: '/robin.png',
     stage: 'Growth (Series A → B → C)',
+    // growth: 'Scaled ARR significantly across Series funding rounds.',
     scope: 'Implemented post-sale Lifecycle systems, scaled automation, and lifted retention.',
   },
   {
@@ -37,20 +41,20 @@ const COMPANIES: Company[] = [
     name: 'Klaviyo',
     logoSrc: '/klaviyo.png',
     stage: 'Series D → Post-IPO',
+    growth: '~$472M → $1.08B in Revenue',
     scope: 'Accelerated pipeline velocity, quote-to-cash automation, and elevated NRR.',
   },
 ];
 
 export default function TrackRecord() {
-
   return (
-  <div className="space-y-6 md:space-y-8">
-    <header className="text-left">
-      <h2 className="text-2xl md:text-3xl font-semibold">Track Record</h2>
-      <p className="mt-1 text-sm md:text-base text-white/70">
-        A quick read on the companies I’ve impacted and my areas of focus.
-      </p>
-    </header>
+    <div className="space-y-6 md:space-y-8">
+      <header className="text-left">
+        <h2 className="text-2xl md:text-3xl font-semibold">Track Record</h2>
+        <p className="mt-1 text-sm md:text-base text-white/70">
+          A quick read on the companies I’ve impacted and my areas of focus.
+        </p>
+      </header>
 
       {/* grid of company tiles */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
@@ -80,6 +84,9 @@ export default function TrackRecord() {
                     {c.stage}
                   </span>
                 </div>
+                <p className="mt-0.5 text-xs md:text-sm text-emerald-400">
+                  {c.growth}
+                </p>
                 <p className="mt-1 text-sm md:text-base leading-relaxed text-white/80">
                   {c.scope}
                 </p>
