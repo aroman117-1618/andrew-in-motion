@@ -9,10 +9,7 @@ export function AboutFace() {
       <div className="mt-6 grid gap-8 md:grid-cols-2 text-white/85">
         <div className="space-y-6">
           <p className="text-lg">
-            Started in fine dining, where success meant collaboration, precision, and
-            adaptability. I bring that ethos to tech—coaching GTM teams and engineering
-            systems, across seed-state startups to public enterprises, that drive revenue,
-            accelerate teams, and surface real customer signals.
+            My career started in fine dining, where collaboration, precision, and adaptability defined success. Today, that same discipline drives how I build in tech. I coach GTM teams and engineer systems that fuel revenue, accelerate execution, and reveal real customer signals — from seed-stage startups to public enterprises.
           </p>
 
           <div>
