@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import type { ReactNode } from 'react';
 import FlipCard from '@/components/FlipCard';
-import FlipToggle from '@/components/ui/FlipToggle'; // used for 2-state; we’ll add a third button inline
 
 function OverviewFace() {
   return (
@@ -45,20 +45,50 @@ function Video({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+type Tab = 'overview' | 'ex1' | 'ex2';
+
 export default function SystemsAutomationCard() {
-  // tabs: overview | ex1 | ex2
-  const [tab, setTab] = useState<'overview' | 'ex1' | 'ex2'>('overview');
+  // Which tab the user has selected
+  const [active, setActive] = useState<Tab>('overview');
 
-  // Flip when leaving/entering Overview; stay on back face while switching ex1<->ex2
-  const isRight = tab !== 'overview';
+  // Which side is currently visible (false = left/front, true = right/back)
+  const [isRight, setIsRight] = useState(false);
 
-  const backFace = useMemo(() => {
-    if (tab === 'ex2') {
-      return <Video src="/solutions/revops.webm" alt="RevOps Automation demo" />;
+  // The actual React nodes sitting on each face right now
+  const [leftFace, setLeftFace] = useState<ReactNode>(<OverviewFace />);
+  const [rightFace, setRightFace] = useState<ReactNode>(<Video src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />);
+
+  // Factory to render a tab's content
+  const renderTab = useMemo(
+    () => (tab: Tab): ReactNode => {
+      switch (tab) {
+        case 'overview':
+          return <OverviewFace />;
+        case 'ex2':
+          return <Video src="/solutions/revops.webm" alt="RevOps Automation demo" />;
+        case 'ex1':
+        default:
+          return <Video src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />;
+      }
+    },
+    []
+  );
+
+  // Handle a tab click so that EVERY change triggers a flip
+  const selectTab = (next: Tab) => {
+    if (next === active) return;
+
+    const willShowRight = !isRight; // because we flip immediately
+    if (willShowRight) {
+      setRightFace(renderTab(next));
+    } else {
+      setLeftFace(renderTab(next));
     }
-    // default to Example 1
-    return <Video src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />;
-  }, [tab]);
+
+    // flip the card (3D rotation)
+    setIsRight(prev => !prev);
+    setActive(next);
+  };
 
   return (
     <div className="glass rounded-2xl relative">
@@ -67,46 +97,38 @@ export default function SystemsAutomationCard() {
 
         <FlipCard
           isFlipped={isRight}
-          onToggle={() =>
-            setTab(prev => (prev === 'overview' ? 'ex1' : 'overview'))
-          }
-          lockToFrontHeight={false}
-          minHeight={320}
-          front={<OverviewFace />}
-          back={backFace}
+          onToggle={() => setIsRight(v => !v)}   // not used by the pill, but keeps a11y path
+          lockToFrontHeight={false}              // adapt to whichever face is visible
+          minHeight={225}                        // requested minimum height
+          front={leftFace}
+          back={rightFace}
         />
       </div>
 
-      {/* 3-option pill pinned to the bottom edge */}
+      {/* Three-option pill pinned below the card */}
       <div className="absolute inset-x-0 -bottom-6 z-20 flex justify-center">
         <div className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/60 px-1 py-1 text-sm shadow-md backdrop-blur supports-[backdrop-filter]:backdrop-blur-md">
           <button
             type="button"
-            onClick={() => setTab('overview')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
-              tab === 'overview' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
-            }`}
-            aria-pressed={tab === 'overview'}
+            onClick={() => selectTab('overview')}
+            className={`rounded-full px-3 py-1 font-medium transition ${active === 'overview' ? 'bg-white text-black' : 'text-white/80 hover:text-white'}`}
+            aria-pressed={active === 'overview'}
           >
             Overview
           </button>
           <button
             type="button"
-            onClick={() => setTab('ex1')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
-              tab === 'ex1' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
-            }`}
-            aria-pressed={tab === 'ex1'}
+            onClick={() => selectTab('ex1')}
+            className={`rounded-full px-3 py-1 font-medium transition ${active === 'ex1' ? 'bg-white text-black' : 'text-white/80 hover:text-white'}`}
+            aria-pressed={active === 'ex1'}
           >
             Example 1
           </button>
           <button
             type="button"
-            onClick={() => setTab('ex2')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
-              tab === 'ex2' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
-            }`}
-            aria-pressed={tab === 'ex2'}
+            onClick={() => selectTab('ex2')}
+            className={`rounded-full px-3 py-1 font-medium transition ${active === 'ex2' ? 'bg-white text-black' : 'text-white/80 hover:text-white'}`}
+            aria-pressed={active === 'ex2'}
           >
             Example 2
           </button>
