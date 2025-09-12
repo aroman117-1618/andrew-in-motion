@@ -48,7 +48,7 @@ function Video({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-type Tab = 'overview' | 'ex1' | 'ex2';
+type Tab = 'overview' | 'example';
 
 export default function FractionalGTMCard() {
   const [active, setActive] = useState<Tab>('overview');
@@ -59,23 +59,15 @@ export default function FractionalGTMCard() {
   );
 
   const renderTab = useMemo(
-    () => (tab: Tab): ReactNode => {
-      switch (tab) {
-        case 'ex2':
-          return <Video src="/solutions/gtm.webm" alt="Alternate GTM Example demo" />;
-        case 'ex1':
-          return <Video src="/solutions/gtm.webm" alt="GTM Programming demo" />;
-        case 'overview':
-        default:
-          return <OverviewFace />;
-      }
-    },
+    () => (tab: Tab): ReactNode =>
+      tab === 'overview' ? <OverviewFace /> : <Video src="/solutions/gtm.webm" alt="GTM Programming demo" />,
     []
   );
 
+  // Flip on every change between overview <-> example
   const selectTab = (next: Tab) => {
     if (next === active) return;
-    const willShowRight = !isRight;
+    const willShowRight = !isRight; // we flip immediately
     if (willShowRight) setRightFace(renderTab(next));
     else setLeftFace(renderTab(next));
     setIsRight(prev => !prev);
@@ -113,23 +105,13 @@ export default function FractionalGTMCard() {
           </button>
           <button
             type="button"
-            onClick={() => selectTab('ex1')}
+            onClick={() => selectTab('example')}
             className={`rounded-full px-3 py-1 font-medium transition ${
-              active === 'ex1' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
+              active === 'example' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
             }`}
-            aria-pressed={active === 'ex1'}
+            aria-pressed={active === 'example'}
           >
-            Example 1
-          </button>
-          <button
-            type="button"
-            onClick={() => selectTab('ex2')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
-              active === 'ex2' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
-            }`}
-            aria-pressed={active === 'ex2'}
-          >
-            Example 2
+            Example
           </button>
         </div>
       </div>
