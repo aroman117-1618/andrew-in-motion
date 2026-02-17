@@ -117,7 +117,7 @@ export default function SystemsAutomationCard() {
             }`}
             aria-pressed={active === 'ex1'}
           >
-            Example 1
+            Lifecycle
           </button>
           <button
             type="button"
@@ -127,7 +127,7 @@ export default function SystemsAutomationCard() {
             }`}
             aria-pressed={active === 'ex2'}
           >
-            Example 2
+            RevOps
           </button>
           <button
             type="button"
@@ -137,7 +137,7 @@ export default function SystemsAutomationCard() {
             }`}
             aria-pressed={active === 'ex3'}
           >
-            Athena
+            AI Strategist
           </button>
         </div>
       </div>
