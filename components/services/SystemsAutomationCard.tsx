@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import FlipCard from '@/components/FlipCard';
+import AthenaExampleContent from './AthenaExampleContent';
 
 function OverviewFace() {
   return (
@@ -45,7 +46,7 @@ function Video({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-type Tab = 'overview' | 'ex1' | 'ex2';
+type Tab = 'overview' | 'ex1' | 'ex2' | 'ex3';
 
 export default function SystemsAutomationCard() {
   const [active, setActive] = useState<Tab>('overview');
@@ -58,6 +59,8 @@ export default function SystemsAutomationCard() {
   const renderTab = useMemo(
     () => (tab: Tab): ReactNode => {
       switch (tab) {
+        case 'ex3':
+          return <AthenaExampleContent />;
         case 'ex2':
           return <Video src="/solutions/revops.webm" alt="RevOps Automation demo" />;
         case 'ex1':
@@ -99,7 +102,7 @@ export default function SystemsAutomationCard() {
           <button
             type="button"
             onClick={() => selectTab('overview')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
+            className={`rounded-full px-2 md:px-3 py-1 text-xs md:text-sm font-medium transition ${
               active === 'overview' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
             }`}
             aria-pressed={active === 'overview'}
@@ -109,7 +112,7 @@ export default function SystemsAutomationCard() {
           <button
             type="button"
             onClick={() => selectTab('ex1')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
+            className={`rounded-full px-2 md:px-3 py-1 text-xs md:text-sm font-medium transition ${
               active === 'ex1' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
             }`}
             aria-pressed={active === 'ex1'}
@@ -119,12 +122,22 @@ export default function SystemsAutomationCard() {
           <button
             type="button"
             onClick={() => selectTab('ex2')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
+            className={`rounded-full px-2 md:px-3 py-1 text-xs md:text-sm font-medium transition ${
               active === 'ex2' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
             }`}
             aria-pressed={active === 'ex2'}
           >
             Example 2
+          </button>
+          <button
+            type="button"
+            onClick={() => selectTab('ex3')}
+            className={`rounded-full px-2 md:px-3 py-1 text-xs md:text-sm font-medium transition ${
+              active === 'ex3' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
+            }`}
+            aria-pressed={active === 'ex3'}
+          >
+            Athena
           </button>
         </div>
       </div>
