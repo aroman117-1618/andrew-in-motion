@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 type Company = {
-  key: 'nift' | 'robin' | 'datadog' | 'klaviyo';
+  key: 'nift' | 'robin' | 'datadog' | 'klaviyo' | 'postman';
   name: string;
   logoSrc: string;       // in /public
   stage: string;         // “Seed”, “Series B → D”, etc.
@@ -44,6 +44,14 @@ const COMPANIES: Company[] = [
     growth: '~$500M → $1B+ Revenue',
     scope: 'Accelerated pipeline velocity, quote-to-cash automation, and elevated NRR.',
   },
+  {
+    key: 'postman',
+    name: 'Postman',
+    logoSrc: '/postman-orange-logo.svg',
+    stage: 'Post-IPO',
+    growth: '$200M+ ARR Scale',
+    scope: 'Built AI-powered CS agent platform, automated Intel pipelines, and scaled hybrid CS operations.',
+  },
 ];
 
 export default function TrackRecord() {
@@ -58,10 +66,12 @@ export default function TrackRecord() {
 
       {/* grid of company tiles */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-        {COMPANIES.map((c) => (
+        {COMPANIES.map((c, index) => (
           <li
             key={c.key}
-            className="rounded-xl border border-white/10 bg-black/30 p-4 md:p-5 supports-[backdrop-filter]:backdrop-blur-md"
+            className={`rounded-xl border border-white/10 bg-black/30 p-4 md:p-5 supports-[backdrop-filter]:backdrop-blur-md ${
+              c.key === 'postman' ? 'sm:col-span-2 sm:mx-auto sm:max-w-md' : ''
+            }`}
           >
             <div className="flex items-center gap-3 md:gap-4">
               <div className="shrink-0 rounded-lg border border-white/10 bg-black/40 p-2 md:p-3">

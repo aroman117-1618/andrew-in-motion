@@ -37,8 +37,6 @@ export const metadata: Metadata = {
 
 <head>
   <link rel="preload" href="/solutions/gtm.webm" as="video" />
-  <link rel="preload" href="/solutions/lifecycle.webm" as="video" />
-  <link rel="preload" href="/solutions/revops.png" as="image" />
 </head>
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

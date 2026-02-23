@@ -1,5 +1,7 @@
 'use client';
 
+import { LogoPill, MetricBlock, QuoteLine } from './ExampleHelpers';
+
 function AthenaIcon() {
   return (
     <svg
@@ -27,28 +29,16 @@ function AthenaIcon() {
   );
 }
 
-function LogoPill({ label }: { label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium text-white/70 ring-1 ring-white/10 bg-white/5">
-      {label}
-    </span>
-  );
-}
-
-function MetricBlock({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="text-center">
-      <div className="text-lg md:text-xl font-bold text-white">{value}</div>
-      <div className="text-[10px] md:text-xs text-white/50 mt-0.5">{label}</div>
-    </div>
-  );
-}
-
 export default function AthenaExampleContent() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative">
+      <QuoteLine
+        quote="The AI agent transformed how our team prepares for every customer interaction — hours of manual work replaced by instant, contextualized intelligence."
+        attribution="Hybrid CS Team, Postman"
+      />
+      
       {/* Title row */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 pr-[260px] md:pr-[300px]">
         <AthenaIcon />
         <div>
           <h4 className="text-lg md:text-xl font-semibold text-white leading-tight">
