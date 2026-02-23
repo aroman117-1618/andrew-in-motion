@@ -3,6 +3,9 @@
 import { useState, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import FlipCard from '@/components/FlipCard';
+import AthenaExampleContent from './AthenaExampleContent';
+import LifecycleExampleContent from './LifecycleExampleContent';
+import RevOpsExampleContent from './RevOpsExampleContent';
 
 function OverviewFace() {
   return (
@@ -30,38 +33,25 @@ function OverviewFace() {
   );
 }
 
-function Video({ src, alt }: { src: string; alt: string }) {
-  return (
-    <video
-      className="w-full rounded-xl border border-white/10"
-      src={src}
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="auto"
-      aria-label={alt}
-    />
-  );
-}
-
-type Tab = 'overview' | 'ex1' | 'ex2';
+type Tab = 'overview' | 'ex1' | 'ex2' | 'ex3';
 
 export default function SystemsAutomationCard() {
   const [active, setActive] = useState<Tab>('overview');
   const [isRight, setIsRight] = useState(false);
   const [leftFace, setLeftFace] = useState<ReactNode>(<OverviewFace />);
   const [rightFace, setRightFace] = useState<ReactNode>(
-    <Video src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />
+    <LifecycleExampleContent />
   );
 
   const renderTab = useMemo(
     () => (tab: Tab): ReactNode => {
       switch (tab) {
+        case 'ex3':
+          return <AthenaExampleContent />;
         case 'ex2':
-          return <Video src="/solutions/revops.webm" alt="RevOps Automation demo" />;
+          return <RevOpsExampleContent />;
         case 'ex1':
-          return <Video src="/solutions/lifecycle.webm" alt="Lifecycle Automation demo" />;
+          return <LifecycleExampleContent />;
         case 'overview':
         default:
           return <OverviewFace />;
@@ -99,7 +89,7 @@ export default function SystemsAutomationCard() {
           <button
             type="button"
             onClick={() => selectTab('overview')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
+            className={`rounded-full px-2 md:px-3 py-1 text-xs md:text-sm font-medium transition ${
               active === 'overview' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
             }`}
             aria-pressed={active === 'overview'}
@@ -109,22 +99,32 @@ export default function SystemsAutomationCard() {
           <button
             type="button"
             onClick={() => selectTab('ex1')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
+            className={`rounded-full px-2 md:px-3 py-1 text-xs md:text-sm font-medium transition ${
               active === 'ex1' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
             }`}
             aria-pressed={active === 'ex1'}
           >
-            Example 1
+            Lifecycle
           </button>
           <button
             type="button"
             onClick={() => selectTab('ex2')}
-            className={`rounded-full px-3 py-1 font-medium transition ${
+            className={`rounded-full px-2 md:px-3 py-1 text-xs md:text-sm font-medium transition ${
               active === 'ex2' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
             }`}
             aria-pressed={active === 'ex2'}
           >
-            Example 2
+            RevOps
+          </button>
+          <button
+            type="button"
+            onClick={() => selectTab('ex3')}
+            className={`rounded-full px-2 md:px-3 py-1 text-xs md:text-sm font-medium transition ${
+              active === 'ex3' ? 'bg-white text-black' : 'text-white/80 hover:text-white'
+            }`}
+            aria-pressed={active === 'ex3'}
+          >
+            Strategist
           </button>
         </div>
       </div>

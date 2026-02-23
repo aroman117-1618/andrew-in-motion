@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import FlipCard from '@/components/FlipCard';
+import GtmExampleContent from './GtmExampleContent';
 
 function OverviewFace() {
   return (
@@ -33,34 +34,17 @@ function OverviewFace() {
   );
 }
 
-function Video({ src, alt }: { src: string; alt: string }) {
-  return (
-    <video
-      className="w-full rounded-xl border border-white/10"
-      src={src}
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="auto"
-      aria-label={alt}
-    />
-  );
-}
-
 type Tab = 'overview' | 'example';
 
 export default function FractionalGTMCard() {
   const [active, setActive] = useState<Tab>('overview');
   const [isRight, setIsRight] = useState(false);
   const [leftFace, setLeftFace] = useState<ReactNode>(<OverviewFace />);
-  const [rightFace, setRightFace] = useState<ReactNode>(
-    <Video src="/solutions/gtm.webm" alt="GTM Programming demo" />
-  );
+  const [rightFace, setRightFace] = useState<ReactNode>(<GtmExampleContent />);
 
   const renderTab = useMemo(
     () => (tab: Tab): ReactNode =>
-      tab === 'overview' ? <OverviewFace /> : <Video src="/solutions/gtm.webm" alt="GTM Programming demo" />,
+      tab === 'overview' ? <OverviewFace /> : <GtmExampleContent />,
     []
   );
 
