@@ -48,9 +48,9 @@ const COMPANIES: Company[] = [
     key: 'postman',
     name: 'Postman',
     logoSrc: '/postman-orange-logo.svg',
-    stage: 'Post-IPO',
+    stage: 'Pre-IPO',
     growth: '$200M+ ARR Scale',
-    scope: 'Built AI-powered CS agent platform, automated Intel pipelines, and scaled hybrid CS operations.',
+    scope: 'Built AI-powered CS agent platform, automated intelligence pipelines, and scaled CS operations.',
   },
 ];
 
