@@ -124,7 +124,7 @@ export default function SystemsAutomationCard() {
             }`}
             aria-pressed={active === 'ex3'}
           >
-            AI Strategist
+            Strategist
           </button>
         </div>
       </div>
