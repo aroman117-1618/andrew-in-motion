@@ -1,6 +1,9 @@
 'use client';
 
 import { LogoPill, MetricBlock, QuoteLine } from './ExampleHelpers';
+import { getTestimonialForService } from '@/data/testimonials';
+
+const LIFECYCLE_QUOTE = getTestimonialForService('lifecycle');
 
 function LifecycleIcon() {
   return (
@@ -107,8 +110,8 @@ export default function LifecycleExampleContent() {
   return (
     <div className="space-y-4 relative">
       <QuoteLine
-        quote="Andrew unites product, revenue, and customer success — strengthening retention, fueling growth, and improving systems that scale across the org."
-        attribution="Director of Customer Success, Datadog/Robin"
+        quote={LIFECYCLE_QUOTE.quote}
+        attribution={`${LIFECYCLE_QUOTE.name}, ${LIFECYCLE_QUOTE.title}`}
       />
       
       {/* Title row */}
