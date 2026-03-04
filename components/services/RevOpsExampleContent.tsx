@@ -1,6 +1,9 @@
 'use client';
 
 import { LogoPill, MetricBlock, QuoteLine } from './ExampleHelpers';
+import { getTestimonialForService } from '@/data/testimonials';
+
+const REVOPS_QUOTE = getTestimonialForService('revops');
 
 function RevOpsIcon() {
   return (
@@ -92,8 +95,8 @@ export default function RevOpsExampleContent() {
   return (
     <div className="space-y-4 relative">
       <QuoteLine
-        quote="He bridges customer need with operational rigor. The billing workflow improvements boosted productivity across teams."
-        attribution="Senior Billing Manager, Datadog/Klaviyo"
+        quote={REVOPS_QUOTE.quote}
+        attribution={`${REVOPS_QUOTE.name}, ${REVOPS_QUOTE.title}`}
       />
       
       {/* Title row */}

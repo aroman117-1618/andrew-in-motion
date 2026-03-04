@@ -1,6 +1,9 @@
 'use client';
 
 import { LogoPill, MetricBlock, QuoteLine } from './ExampleHelpers';
+import { getTestimonialForService } from '@/data/testimonials';
+
+const AI_QUOTE = getTestimonialForService('ai-strategist');
 
 function AthenaIcon() {
   return (
@@ -33,8 +36,8 @@ export default function AthenaExampleContent() {
   return (
     <div className="space-y-4 relative">
       <QuoteLine
-        quote="The AI agent transformed how our team prepares for every customer interaction — hours of manual work replaced by instant, contextualized intelligence."
-        attribution="Hybrid CS Team, Postman"
+        quote={AI_QUOTE.quote}
+        attribution={`${AI_QUOTE.name}, ${AI_QUOTE.title}`}
       />
       
       {/* Title row */}

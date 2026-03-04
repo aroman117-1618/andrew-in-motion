@@ -1,6 +1,9 @@
 'use client';
 
 import { LogoPill, MetricBlock, QuoteLine } from './ExampleHelpers';
+import { getTestimonialForService } from '@/data/testimonials';
+
+const GTM_QUOTE = getTestimonialForService('gtm');
 
 function GtmIcon() {
   return (
@@ -103,8 +106,8 @@ export default function GtmExampleContent() {
   return (
     <div className="space-y-4 relative">
       <QuoteLine
-        quote="Andrew brought structure and clarity to our GTM execution. The operating rhythm he designed keeps us aligned and moving fast."
-        attribution="VP of Sales, Early-Stage SaaS"
+        quote={GTM_QUOTE.quote}
+        attribution={`${GTM_QUOTE.name}, ${GTM_QUOTE.title}`}
       />
       
       {/* Title row */}
