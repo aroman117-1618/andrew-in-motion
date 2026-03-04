@@ -33,7 +33,7 @@ const COMPANIES: Company[] = [
     name: 'Robin',
     logoSrc: '/robin.png',
     stage: 'Growth (Series A → B → C)',
-    growth: 'Scaled Toward ~$10M ARR',
+    growth: 'Scaled Toward ~$20M ARR',
     scope: 'Implemented post-sale Lifecycle systems, scaled automation, and lifted retention.',
   },
   {
